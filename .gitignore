@@ -6,3 +6,5 @@ clearml.conf
 examples/generated/
 dashboard/generated/
 *.egg-info/
+node_modules/
+*.tgz

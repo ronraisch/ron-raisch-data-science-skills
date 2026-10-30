@@ -1,0 +1,49 @@
+{
+  "name": "ron-raisch-data-science-skills",
+  "version": "0.2.0",
+  "description": "Composable research skills, runtime verification and research continuity",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "ron-raisch-data-science-skills": "bin/cli.mjs"
+  },
+  "files": [
+    "bin/",
+    "skills/",
+    "templates/",
+    "workflows/",
+    "examples/README.md",
+    "examples/__init__.py",
+    "examples/demo.py",
+    "examples/sensor-study/",
+    "docs/",
+    "LICENSES/",
+    "THIRD_PARTY_NOTICES.md",
+    "pyproject.toml",
+    "dashboard/**/*.py",
+    "dashboard/**/*.md",
+    "dashboard/Containerfile",
+    "dashboard/openshift/template.yaml",
+    "tools/**/*.py",
+    "tools/clearml/clearml.conf.example"
+  ],
+  "scripts": {
+    "test": "node --test tests/node/*.test.mjs",
+    "start": "node bin/cli.mjs serve --demo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronraisch/ron-raisch-data-science-skills.git"
+  },
+  "homepage": "https://github.com/ronraisch/ron-raisch-data-science-skills#readme",
+  "keywords": [
+    "agent-skills",
+    "research",
+    "data-science",
+    "codex",
+    "claude"
+  ]
+}

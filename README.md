@@ -27,6 +27,33 @@ A small collection of practical, reusable research skills for data scientists, M
 
 Each skill follows the [open Agent Skills format](https://agentskills.io/specification): a `SKILL.md` with name/description and optional bundled assets/references. Read it as a human, ask an agent to follow it, or copy selected directories into your harness' skill location. Skills are independently usable; full-checkout Python tools are optional and deliberately scoped.
 
+## Install with npm / npx
+
+Node 18+ is enough to install the skills. Run from your target project:
+
+```bash
+npx --yes github:ronraisch/ron-raisch-data-science-skills list
+npx --yes github:ronraisch/ron-raisch-data-science-skills install research-resume --agent codex
+# Claude Code:
+npx --yes github:ronraisch/ron-raisch-data-science-skills install research-grill --agent claude
+# All skills, or a custom location:
+npx --yes github:ronraisch/ron-raisch-data-science-skills install all --destination ./my-skills
+```
+
+The installer includes referenced skills, preserves their assets, and refuses existing directories. It has no runtime dependencies, Python requirement or install hooks. The package is available from GitHub; it has **not** been published to the npm registry. Pin a Git commit with `github:ronraisch/ron-raisch-data-science-skills#COMMIT` for repeatable installation.
+
+Optional dashboard commands use the same package, but require Python 3.11+ (`PYTHON` selects the executable); OpenShift also requires `oc`:
+
+```bash
+npx --yes github:ronraisch/ron-raisch-data-science-skills serve --demo
+npx --yes github:ronraisch/ron-raisch-data-science-skills serve /path/to/my-study
+npx --yes github:ronraisch/ron-raisch-data-science-skills deploy /path/to/my-study
+```
+
+For offline transfer, run `npm pack` in a connected checkout, transfer the `.tgz`, then `npm install --global --offline ./ron-raisch-data-science-skills-0.2.0.tgz`. Run `ron-raisch-data-science-skills install ...` locally. The tarball includes the skills, licenses and optional Python tools; no external packages need fetching. GitHub-based npx needs Git and network on first use.
+
+From a source checkout, `npm test` tests the Node CLI and `npm start` opens the demo host (Python required). Existing Python commands remain supported.
+
 ## Start locally
 
 Python 3.11+ and Git are enough. Core tooling has **zero third-party dependencies**. With uv:
