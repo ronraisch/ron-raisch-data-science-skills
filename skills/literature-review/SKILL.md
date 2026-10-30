@@ -1,34 +1,29 @@
 ---
 name: literature-review
-description: "Search, screen, compare, and trace scientific literature, including local papers offline. Use for evidence synthesis, method selection, baselines, and research gaps."
+description: "Review scientific literature, compare methods and trace claims. Supports local papers offline."
 ---
-
-# Literature Review
 
 ## Inputs
 
-A scoped question, inclusion/exclusion criteria, local papers or authorized search access, and time cutoff.
+A scoped question, search cutoff, and available papers or search access.
 
 ## Procedure
 
-1. Fix the question, date range, eligible populations/tasks, and review type (bounded narrative, scoping, systematic). Do not label a quick web scan systematic.
-2. Record each database/query/date/result count in sources/search-log.csv. Offline: enumerate local files and SHA-256 hashes, record extraction commands, and explicitly bound coverage to that collection.
-3. Screen titles and full texts separately; record exclusion reasons. Link preprint/journal versions as one study; do not double count benchmarks or cohorts.
-4. Extract method, data/version/split, pretraining, supervision, metric definition, compute, uncertainty, and source page/table into sources/evidence.csv. Mark missing full text and inaccessible results.
-5. Separate author-reported results, results checked against supplied artifacts, and independently reproduced results. A valid DOI verifies identity, not the result.
-6. Compare only aligned evaluation protocols. Explain differences in task, leakage risk, labels, and compute before declaring a method stronger. Distinguish an unsearched area from an established research gap.
-7. Recommend baselines and discriminating experiments. Keep unresolved contradictions. Follow the curated upstream references for domain searches and systematic-review details; do not invoke optional paid services by default.
+1. Define review type and eligibility before searching. Do not call a quick scan systematic.
+2. Log source, query, date and counts. Offline: inventory local papers and hashes; state corpus limits.
+3. Screen abstracts, then full texts. Record exclusions and unavailable papers; link versions of the same study.
+4. Extract method, data/split, pretraining, metric, compute, uncertainty and page/table. Distinguish reported, artifact-checked and independently reproduced findings.
+5. Compare protocols before scores. Preserve contradictions; no search hits does not establish novelty.
+6. Check citations against actual papers. Recommend baselines and experiments; use curated upstream resources for specialist searches.
 
 ## Outputs and evidence
 
-literature.md; sources/search-log.csv; sources/evidence.csv; local-paper hashes and a method comparison with source locations.
-
-Use stable project/hypothesis/experiment/run IDs and relative evidence paths. Preserve failed attempts. Never fabricate missing measurements, citations or verification. Keep observed facts separate from interpretation.
+literature.md, sources/search-log.csv, sources/evidence.csv and local-paper hashes.
 
 ## Completion criteria
 
-Every substantive finding has a source location and evidence level; screening/coverage limits are clear; missing papers and competing explanations remain visible.
+Claims have source locations and evidence levels; coverage and inaccessible evidence are explicit.
 
 ## Resources
 
-Read [the record contract](references/record-contract.md) for durable outputs and [the skill template](assets/output.md) to start the deliverable. These are bundled so the skill remains usable when copied alone. Full-checkout tools and examples are optional; humans or other local tools may produce the same record format.
+Use the [output template](assets/output.md). Consult the [record contract](references/record-contract.md) for IDs, paths and evidence rules. Keep work local/offline unless another tool is explicitly selected. Never fabricate evidence; preserve failures and separate observation from interpretation.

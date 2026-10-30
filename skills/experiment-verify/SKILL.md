@@ -1,36 +1,29 @@
 ---
 name: experiment-verify
-description: "Check whether the intended experiment actually executed, using runtime observations and artifacts. Use before expensive runs, at runtime, and after execution; never trust config alone."
+description: "Check intended versus actual execution using runtime evidence and artifacts."
 ---
-
-# Experiment Verify
 
 ## Inputs
 
-Experiment spec, data and split manifests, instrumented runtime evidence, predictions, checkpoint/artifact files, code/environment provenance.
+Spec, actual data/splits, runtime hooks, predictions, artifacts and code/environment provenance.
 
 ## Procedure
 
-1. Read docs/verification.md in the full checkout, or this skill's references/runtime-contract.md if installed alone. Locate the reusable Python verifier; copy the checkout for executable support if absent.
-2. Validate the spec. Before training, hash actual data and split files; check row IDs, content/entity overlap, coverage, and labels used by preprocessing. Halt on leakage or wrong identity.
-3. Observe live objects after checkpoint loading and trainer/framework overrides: model structure, named parameters/requires_grad, optimizer groups, scheduler state and effective hyperparameters. Record source hook and stage for each observation; do not copy expected values into observations.
-4. Check checkpoint bytes and loading outcome (missing/unexpected keys, strictness); compare trainable names and counts, not only total parameters. A supplied path or hash cannot prove weights were loaded.
-5. Capture preprocessing from executed transform objects and representative transformed batches; log fitted statistics and fit IDs. Capture runtime values at start and end; instrument per-step changes when needed.
-6. Record actual completed steps, update counts, termination, checkpoint hashes, evaluation sample IDs and predictions. Recompute supported metrics from predictions and actual labels; for custom metrics supply an audited adapter and record its source digest.
-7. Run `python -m tools.experiment_verification verify SPEC RUN --root PROJECT --output REPORT`. Retain nonzero exit reports. Investigate failures without deleting the original evidence.
-8. Assign every requirement verified, partially_verified, failed, or unverifiable. Missing observations are unverifiable; descriptive assertions without executable evidence are partial; contradictions are failures. Aggregate conservatively.
-9. Report residual limits: runtime telemetry is instrumented evidence, not cryptographic proof of honest execution; data hashes do not prove label correctness; no universal hook proves all preprocessing or distributed execution semantics.
+1. Read [runtime-contract.md](references/runtime-contract.md). Validate intent; preflight actual data/split hashes, ID coverage and entity leakage before training.
+2. Observe live preprocessing and fit IDs, transformed batches, instantiated model and named trainable/frozen parameters. Capture after trainer overrides; never copy expected values into observations.
+3. Hash actual pretrained weights and record the real loader result, missing/unexpected keys and strictness. A path or digest does not prove loading.
+4. Capture effective optimizer groups, scheduler/LR, hyperparameters, consumed data, completed updates, termination and checkpoints. Start/end snapshots cannot establish every intermediate step.
+5. Read artifact bytes and prediction IDs/targets. Recompute supported metrics; custom protocols need audited adapters. Capture Git revision, dirty/source hashes and dependencies.
+6. Run `python -m tools.experiment_verification verify SPEC RUN --root PROJECT --output REPORT`. Retain failures. Mark each check verified, partially_verified, failed or unverifiable; block promotion unless all required checks verify.
 
 ## Outputs and evidence
 
-verification.json and verification.md with expected/observed values, source locations, status, limitations and remedial actions.
-
-Use stable project/hypothesis/experiment/run IDs and relative evidence paths. Preserve failed attempts. Never fabricate missing measurements, citations or verification. Keep observed facts separate from interpretation.
+verification.json/.md: expected, observed, source, status, limitations and remediation.
 
 ## Completion criteria
 
-Every required check is accounted for; failures block promotion; partial/unverifiable results cannot be called fully verified; original evidence remains accessible.
+Every requirement is accounted for. Missing evidence stays unknown; instrumented telemetry is not independent proof of honest execution or label correctness.
 
 ## Resources
 
-Read [the record contract](references/record-contract.md) for durable outputs and [the skill template](assets/output.md) to start the deliverable. These are bundled so the skill remains usable when copied alone. Full-checkout tools and examples are optional; humans or other local tools may produce the same record format.
+Use the [output template](assets/output.md). Consult the [record contract](references/record-contract.md) for IDs, paths and evidence rules. Keep work local/offline unless another tool is explicitly selected. Never fabricate evidence; preserve failures and separate observation from interpretation.

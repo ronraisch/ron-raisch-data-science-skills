@@ -1,34 +1,29 @@
 ---
 name: ablation-review
-description: "Compare completed experiments fairly, quantify uncertainty, and bound conclusions. Use for ablations, model selection, baseline comparisons and result promotion."
+description: "Compare experiments fairly, quantify uncertainty and bound conclusions."
 ---
-
-# Ablation Review
 
 ## Inputs
 
-Run specs, verification reports, prediction artifacts, metrics, seed/unit metadata and predeclared decision rule.
+Specs, process/verification states, predictions, seed/unit metadata and decision rules.
 
 ## Procedure
 
-1. Check verification status and completion independently. Exclude failed/unverifiable runs from best-verified claims, but include their existence and reasons in the review.
-2. Construct comparison cohorts from dataset digest, split digest, preprocessing/evaluation protocol, metric/split/direction, training budget and allowed varying factors. Use best_runs for strict metric/evaluation cohorts, then manually audit experimental controls.
-3. List every changed factor. When multiple factors differ, attribute only to the bundle; do not call it a controlled ablation. Equal epochs may hide unequal updates, examples, compute or pretraining.
-4. Compute paired differences on matched seeds or independent units. Use a justified interval/test; resample patients/scenes rather than correlated rows when applicable. State seed variance and sampling variance separately.
-5. Compare effect size and uncertainty against the minimum useful effect, not only p-values. Disclose multiple comparisons, validation selection, and test reuse. One run cannot establish robustness.
-6. Mark each hypothesis supported, rejected, or inconclusive using its predeclared rule. Missing evidence stays inconclusive. Do not rank incomparable metrics together.
-7. Update best-results by cohort with report/artifact links and limitations. Preserve negative results and the next decisive experiment.
+1. Revalidate evidence. Exclude invalid runs from best-verified claims, but retain their existence and failure reasons.
+2. Group by data/split digests, evaluation implementation/protocol and metric/split/direction. Use best_runs for these cohorts; audit controls separately.
+3. List every changed factor: preprocessing, pretraining, budget, seeds, architecture and settings. Multiple changes support only a bundle-level conclusion; epochs alone do not equal compute.
+4. Compute paired effects and justified uncertainty. Resample independent patients/scenes/groups, not correlated rows. Separate seed and sampling variance.
+5. Apply the predeclared useful-effect rule. Disclose multiplicity, selection and test reuse; one run cannot establish robustness.
+6. Mark hypotheses supported, rejected or inconclusive. Save best results per cohort, negative findings, limitations and the next decisive test.
 
 ## Outputs and evidence
 
-ablation-review.md; cohort comparison table with changed factors, deltas/intervals, evidence and bounded conclusions; project finding updates.
-
-Use stable project/hypothesis/experiment/run IDs and relative evidence paths. Preserve failed attempts. Never fabricate missing measurements, citations or verification. Keep observed facts separate from interpretation.
+ablation-review.md, comparison/cohort table, effect sizes/intervals and evidence-linked conclusions.
 
 ## Completion criteria
 
-No unsupported causal attribution or incomparable winner; uncertainty and exclusions are visible; each conclusion links to runs.
+No incomparable winner or unsupported attribution; uncertainty and exclusions remain visible.
 
 ## Resources
 
-Read [the record contract](references/record-contract.md) for durable outputs and [the skill template](assets/output.md) to start the deliverable. These are bundled so the skill remains usable when copied alone. Full-checkout tools and examples are optional; humans or other local tools may produce the same record format.
+Use the [output template](assets/output.md). Consult the [record contract](references/record-contract.md) for IDs, paths and evidence rules. Keep work local/offline unless another tool is explicitly selected. Never fabricate evidence; preserve failures and separate observation from interpretation.
