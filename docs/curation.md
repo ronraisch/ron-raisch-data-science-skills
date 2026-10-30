@@ -1,23 +1,18 @@
-# Curation decisions — reviewed 2026-10-30
+# Source selection
 
-Read the pinned upstream skill files in upstream-sources.json, their root licenses, and Kalaris' third-party notices. Revisions are audit snapshots, not promises that later upstream behavior stays the same.
+Nine skills use pinned upstream methods, bundled with supporting scripts, references and assets. Their short SKILL.md entry points select relevant sections and define local outputs. Read one method section at a time; do not load the whole collection. The seven remaining skills own execution verification, failure investigation and durable research records.
 
-| Local skills | Existing source | Reuse / deliberate change |
+| Entry points | Method authority | Local adaptation |
 | --- | --- | --- |
-| literature-review | K-Dense literature-review | Adapt search/screen/extract/synthesize/citation workflow; retain reported-versus-reproduced distinction. Reference upstream for discipline-specific queries and systematic reviews. Omit paid search and generated schematics. |
-| eda | K-Dense exploratory-data-analysis | Adapt local profiling, independent units, missingness/leakage and sampling limits. Reference its format-specific inspectors rather than rebuilding broad format support. Local demo is CSV only. |
-| hypothesis-generation | K-Dense hypothesis-generation | Adapt rival predictions, operationalization and falsification. Use a small record contract instead of bundling its complete schema/tool suite. |
-| scientific-visualization | K-Dense scientific-visualization | Retain reproducible source tables, accessible figures and uncertainty. Reference upstream for specialized publication layouts and plotting ecosystems. |
-| experiment-design, ablation-review | Kalaris experimental-design and scientific-critical-thinking | Adapt randomization/blocking, independent replication and bias critique; specialize for ML splits, runtime settings and comparable cohorts. Use upstream for factorial DOE matrices and study-design tools. Kalaris credits K-Dense for these scientific materials. |
-| research-grill, research-wayfinder, research-retro | Matt Pocock grilling, wayfinder, retro | Adapt focused questioning, evolving decision records and executable guardrails. Avoid mandatory harness commands, relentless interviewing or a platform dependency. |
-| experiment-verify/run and continuity skills | New implementation for this collection | Add instrumented observations versus intent, local records, evidence revalidation and pause/resume reconstruction. |
+| eda, literature-review, hypothesis-generation, scientific-visualization | K-Dense Scientific Agent Skills | Offline inputs, evidence boundaries, deliverables |
+| experiment-design, ablation-review | Kalaris Research Agent Skills | Machine-readable specs and comparable ML protocols |
+| research-grill, research-wayfinder, research-retro | Matt Pocock Skills | Research decisions, Markdown records, harness-independent execution |
+| experiment-verify, experiment-run, failure-analysis, research-summary, research-blog, research-handoff, research-resume | This collection | Runtime evidence and research continuity |
 
-Use the pinned repository/path URLs in upstream-sources.json to inspect specialized tooling. Review per-file licenses and dependencies before copying anything new; retain notices and document modifications. Avoid installing both upstream and local skills with the same trigger name unless the harness supports explicit selection.
+`upstream-sources.json` pins repositories and commits. `upstream-files.json` records every bundled source file and SHA-256. Bundles preserve file contents, with SKILL.md renamed METHOD.md to avoid duplicate discovery. MIT notices travel with each installed bundle. Updates require license review, hash regeneration and installation checks.
 
-Optional services are not part of the offline workflow. Literature reviews in an offline environment must describe local-corpus coverage and cutoff rather than claim current or exhaustive search.
+Local entry points control execution: no paid service, external skill, delegation or tracker is required. Upstream methods supply scientific procedures; local deliverables and stop rules remain mandatory. Optional packages are installed only when the chosen operation needs them. Offline literature searches report local-corpus coverage and cutoff.
 
-## Point-of-use attribution and composition
+This selection favors existing methods and keeps the entry points small. It is a deployment choice, not a measured performance claim for any local model.
 
-Each adapted SKILL.md links directly to its reviewed upstream file and commit. Original local workflows name their role instead of implying upstream implementation reuse. Root MIT notices and LICENSES/ remain unchanged.
-
-Each skill owns one task. Comparison rules belong to ablation-review, runtime checks to experiment-verify, evidence synthesis to research-summary, and figure production to scientific-visualization. Other skills link to these owners. The portable record contract lives only in research-summary/references/; the installer follows sibling links so offline installations resolve.
+The record contract lives once in research-summary/references/. Both installers include linked sibling skills. Bundled upstream resources stay inside each skill, so copied skills and npm installations work offline without symlinks.

@@ -1,0 +1,596 @@
+[
+  {
+    "path": "skills/eda/references/upstream/METHOD.md",
+    "upstream_path": "skills/exploratory-data-analysis/SKILL.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "955c4cefa49106dd03b55cbd62603bab2d2fb678e627dd452ba62040c7128484"
+  },
+  {
+    "path": "skills/eda/references/upstream/assets/report_template.md",
+    "upstream_path": "skills/exploratory-data-analysis/assets/report_template.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "c6cd0644dbefeb64c77e84935509f52a92d45256daf2cd4be84012e99e4d7d44"
+  },
+  {
+    "path": "skills/eda/references/upstream/references/bioinformatics_genomics_formats.md",
+    "upstream_path": "skills/exploratory-data-analysis/references/bioinformatics_genomics_formats.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "b3594673cbe22e29fd5bc2681c1b53d4f8b02b48ff17fc9ffaf5a09d1d885be3"
+  },
+  {
+    "path": "skills/eda/references/upstream/references/chemistry_molecular_formats.md",
+    "upstream_path": "skills/exploratory-data-analysis/references/chemistry_molecular_formats.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "3ff937541ebf0396d4c2304016cebc42d405110300df7379f59c40953fc8ed41"
+  },
+  {
+    "path": "skills/eda/references/upstream/references/general_scientific_formats.md",
+    "upstream_path": "skills/exploratory-data-analysis/references/general_scientific_formats.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "42bcf3389bbd78e426dd41139208517f3f78bdc17e068a1eb3a984d2f2487320"
+  },
+  {
+    "path": "skills/eda/references/upstream/references/microscopy_imaging_formats.md",
+    "upstream_path": "skills/exploratory-data-analysis/references/microscopy_imaging_formats.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "c96bb7291ded320a106800c1132191683aa3028f2240c5fcf954079f1a26c382"
+  },
+  {
+    "path": "skills/eda/references/upstream/references/proteomics_metabolomics_formats.md",
+    "upstream_path": "skills/exploratory-data-analysis/references/proteomics_metabolomics_formats.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "66d9493fe14c717f5e8e60500e8fa7bfe1f619084e23b643a767f0952a35efd7"
+  },
+  {
+    "path": "skills/eda/references/upstream/references/spectroscopy_analytical_formats.md",
+    "upstream_path": "skills/exploratory-data-analysis/references/spectroscopy_analytical_formats.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "102a68c212ef5447815c889cf06668f3cb5bd8644f018354d6e98d1a15101a0f"
+  },
+  {
+    "path": "skills/eda/references/upstream/scripts/__init__.py",
+    "upstream_path": "skills/exploratory-data-analysis/scripts/__init__.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "87539288ce5d4caf24fc9fca14e5d70c41730c9d4285106ac4db0c4b5cefd60c"
+  },
+  {
+    "path": "skills/eda/references/upstream/scripts/_capabilities.py",
+    "upstream_path": "skills/exploratory-data-analysis/scripts/_capabilities.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "93fd42bcc6940db0a6cad364dab42a52f0867e782f7e93c9b27c4185249edc06"
+  },
+  {
+    "path": "skills/eda/references/upstream/scripts/_common.py",
+    "upstream_path": "skills/exploratory-data-analysis/scripts/_common.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "f363af255cc78ea63864e0da9f679f57a9e71efd36b6813332f3d2c419b30d51"
+  },
+  {
+    "path": "skills/eda/references/upstream/scripts/_structured.py",
+    "upstream_path": "skills/exploratory-data-analysis/scripts/_structured.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "8cb23c8552339acc926f4dc84e1ec032c79152515098e1fd97f2326b84b4ead9"
+  },
+  {
+    "path": "skills/eda/references/upstream/scripts/_tabular.py",
+    "upstream_path": "skills/exploratory-data-analysis/scripts/_tabular.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "5d1db825890dd035c30e51ac1c11aee56e1e1dca6ffd238ee87ae7d51d8df2f0"
+  },
+  {
+    "path": "skills/eda/references/upstream/scripts/capability_manifest.py",
+    "upstream_path": "skills/exploratory-data-analysis/scripts/capability_manifest.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "1e52e1db668ebce919751a75b53ad959c36749e4b1695f59d8ac2d6c8eda4abf"
+  },
+  {
+    "path": "skills/eda/references/upstream/scripts/distribution_sensitivity.py",
+    "upstream_path": "skills/exploratory-data-analysis/scripts/distribution_sensitivity.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "ca6e9f3dd59cfb382b1ff0874e709933c136ec942085a0437d4000bbf7f1f3c8"
+  },
+  {
+    "path": "skills/eda/references/upstream/scripts/eda_analyzer.py",
+    "upstream_path": "skills/exploratory-data-analysis/scripts/eda_analyzer.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "6532b28ad3f28dd9f58acecb54361c8271d2755584a54ecb0be34da74d1e5d20"
+  },
+  {
+    "path": "skills/eda/references/upstream/scripts/image_inspector.py",
+    "upstream_path": "skills/exploratory-data-analysis/scripts/image_inspector.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "79c21b35d01376929ff0edf26a3bb25923b9e75458c586e0f5721cec356fe639"
+  },
+  {
+    "path": "skills/eda/references/upstream/scripts/missingness_leakage_audit.py",
+    "upstream_path": "skills/exploratory-data-analysis/scripts/missingness_leakage_audit.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "28458714e80ee31db636c0265ba21e1623ba27816d31e236fdc9b873a5b78ffc"
+  },
+  {
+    "path": "skills/eda/references/upstream/scripts/report_scaffold.py",
+    "upstream_path": "skills/exploratory-data-analysis/scripts/report_scaffold.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "4d745592384bfceb0ec7384eecfc5e8ba49ebfa4ec55be75a99ce7c7e102f60b"
+  },
+  {
+    "path": "skills/eda/references/upstream/scripts/sequence_inspector.py",
+    "upstream_path": "skills/exploratory-data-analysis/scripts/sequence_inspector.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "11ca2fa3a0d660192631b9b562f362b0fd120c9e54639bfb049c600c6920be28"
+  },
+  {
+    "path": "skills/eda/references/upstream/scripts/tabular_profile.py",
+    "upstream_path": "skills/exploratory-data-analysis/scripts/tabular_profile.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "78cd139292c18e31d17de882762948db7b51fdc3278546f994270a287d0149db"
+  },
+  {
+    "path": "skills/literature-review/references/upstream/METHOD.md",
+    "upstream_path": "skills/literature-review/SKILL.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "16a9e85bcdcb9bb859e1646bf836e51b22900445ba2e367d8d75be05b5a5cba8"
+  },
+  {
+    "path": "skills/literature-review/references/upstream/assets/review_template.md",
+    "upstream_path": "skills/literature-review/assets/review_template.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "08671516976d01a7004f8ae7c944a50c253877504720c15d5fa24eed90889819"
+  },
+  {
+    "path": "skills/literature-review/references/upstream/references/citation_styles.md",
+    "upstream_path": "skills/literature-review/references/citation_styles.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "2a50e43b18c2fff781e04406deb66186ba8f91ed28af32004aba63c63dcc1789"
+  },
+  {
+    "path": "skills/literature-review/references/upstream/references/core_workflow.md",
+    "upstream_path": "skills/literature-review/references/core_workflow.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "4d63f1087c98efeec7c7bf622bed6e0456a9c7c3defe584995917f2de6f2c601"
+  },
+  {
+    "path": "skills/literature-review/references/upstream/references/database_strategies.md",
+    "upstream_path": "skills/literature-review/references/database_strategies.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "24b56cd88128a9016520ed6b5e2abb79e19dc9b86cbf064927e9056aa1504f48"
+  },
+  {
+    "path": "skills/literature-review/references/upstream/references/example_workflow.md",
+    "upstream_path": "skills/literature-review/references/example_workflow.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "86336c42f78ff282430a6cdd2282a99562cc9d5e46b62e70a33bd839f9ab726a"
+  },
+  {
+    "path": "skills/literature-review/references/upstream/references/search_and_citation.md",
+    "upstream_path": "skills/literature-review/references/search_and_citation.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "f33d671351989ee86066b9a21bdbf630a1f60001ada92fda4c942006d37b74fe"
+  },
+  {
+    "path": "skills/literature-review/references/upstream/scripts/generate_pdf.py",
+    "upstream_path": "skills/literature-review/scripts/generate_pdf.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "0ba1b16b196b64d4966e5f055a289f0c17e3579a84254abe47ff63be95b4f136"
+  },
+  {
+    "path": "skills/literature-review/references/upstream/scripts/generate_schematic.py",
+    "upstream_path": "skills/literature-review/scripts/generate_schematic.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "0c81ce099d5ab9aa3d3c486aa9bd3e81ee1117e18a54db14bb0a68de61eaa4bc"
+  },
+  {
+    "path": "skills/literature-review/references/upstream/scripts/generate_schematic_ai.py",
+    "upstream_path": "skills/literature-review/scripts/generate_schematic_ai.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "7316f2df92f442b8c60a5dd2bd8b504e17449d4be89352e5af24be2239700046"
+  },
+  {
+    "path": "skills/literature-review/references/upstream/scripts/search_databases.py",
+    "upstream_path": "skills/literature-review/scripts/search_databases.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "76f47fd18ca28df4985ffc6d30d5ad659e67c8058bb3de8f385c2443752f4eaf"
+  },
+  {
+    "path": "skills/literature-review/references/upstream/scripts/verify_citations.py",
+    "upstream_path": "skills/literature-review/scripts/verify_citations.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "4c8e8377718ddd47e9cd7cef706935b04910af5d13bfd920970dcf41d4ef3706"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/METHOD.md",
+    "upstream_path": "skills/hypothesis-generation/SKILL.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "5bccec0437d96d61821ec2095e7e32b61e8634cd8c02f11f42da953121e92719"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/assets/evidence_ledger_template.csv",
+    "upstream_path": "skills/hypothesis-generation/assets/evidence_ledger_template.csv",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "1ec5cc4ada96e05041c67865bcdfd3bb0a4f7cc92f24ca1ce7a826028a41d3de"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/assets/falsification_controls_template.json",
+    "upstream_path": "skills/hypothesis-generation/assets/falsification_controls_template.json",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "beea4e2be3b5abdad1014934a7c2fe1f9f00f07b3270119cfeb8134a94603e26"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/assets/hypothesis_record_template.json",
+    "upstream_path": "skills/hypothesis-generation/assets/hypothesis_record_template.json",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "73f080a6696c415f228b38100bb7b0f6bc89ad2c7997bf50d62b585b0bc8fe0c"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/assets/operationalization_template.json",
+    "upstream_path": "skills/hypothesis-generation/assets/operationalization_template.json",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "36ecdbd91c022554e60db646b548f5694d8409277a5b15fdf309d86f8c1e3070"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/assets/prediction_rival_matrix_template.csv",
+    "upstream_path": "skills/hypothesis-generation/assets/prediction_rival_matrix_template.csv",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "ccf6cb53c048a9f4d60788a8ec73c5d683ec549dab7df95b30282f6c0963653a"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/assets/preregistration_scaffold_template.md",
+    "upstream_path": "skills/hypothesis-generation/assets/preregistration_scaffold_template.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "fa577c7413435054ed927a9a925abc2f3a99373e55431eb6407425670276d87b"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/assets/search_boundary_template.json",
+    "upstream_path": "skills/hypothesis-generation/assets/search_boundary_template.json",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "b885d4e252c0df7010d8fca3dab7e3fef49e9f386b7a1b15240531ce374bf6ec"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/assets/source_ledger.csv",
+    "upstream_path": "skills/hypothesis-generation/assets/source_ledger.csv",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "9543f313b9cffec9bd2cf39376edca86d39c10635b447fa7689147931d8c4813"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/references/causal_inference_and_claims.md",
+    "upstream_path": "skills/hypothesis-generation/references/causal_inference_and_claims.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "0162cd131dd12c6235a3b78c033c685abd80e98d5f40f9fb297b4d8104f85122"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/references/concepts_and_workflow.md",
+    "upstream_path": "skills/hypothesis-generation/references/concepts_and_workflow.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "a86a8f464fb555212e79bf13e307f3c129e9c853069856eb3c93c3c8a60bb7fc"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/references/ethics_safety_and_ai.md",
+    "upstream_path": "skills/hypothesis-generation/references/ethics_safety_and_ai.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "81d5691cd46d646ead2db50635bdcc07755e5f738b040c2ad707ac3b0eda034d"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/references/experimental_design_patterns.md",
+    "upstream_path": "skills/hypothesis-generation/references/experimental_design_patterns.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "83c0c75c7b1edadc92e4ae23607624277c19955fc6a71ee0313b6efc51e4e939"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/references/hypothesis_quality_criteria.md",
+    "upstream_path": "skills/hypothesis-generation/references/hypothesis_quality_criteria.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "12698b549f77a6ee64807b959093f39628fe3d47aa9a00a9b235681bf0b09269"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/references/literature_search_strategies.md",
+    "upstream_path": "skills/hypothesis-generation/references/literature_search_strategies.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "2a34fa0645f854093aea2d867059bae563c795f1935ba4b9c6d494bdc389fdcb"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/references/preregistration_and_open_science.md",
+    "upstream_path": "skills/hypothesis-generation/references/preregistration_and_open_science.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "33788e3cd4eeb62e80e9fb952e3bfb532320d373e7b00ed7c0a75b4200ccdbf4"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/references/security_validation.md",
+    "upstream_path": "skills/hypothesis-generation/references/security_validation.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "71acbc8d040588f1ab879cafeb0e7d491cbed99359bde011c645d289446ba38a"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/references/source_ledger.md",
+    "upstream_path": "skills/hypothesis-generation/references/source_ledger.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "b0281b810134599210f905f967267f0b44638676f673fca7528275f8e5042e55"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/references/tool_reference.md",
+    "upstream_path": "skills/hypothesis-generation/references/tool_reference.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "db2c2f8fefc4093c0e235a309de3ee5767c672519d8c8b681e65f7ac6a9ff5d7"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/scripts/_common.py",
+    "upstream_path": "skills/hypothesis-generation/scripts/_common.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "7a41a5f9b97092ee188d45959f38f92a4215d4f298dd04fd0f2817e9f607e74e"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/scripts/audit_evidence_ledger.py",
+    "upstream_path": "skills/hypothesis-generation/scripts/audit_evidence_ledger.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "18fc0a947fec34ea573eb824f540ce6ccb351aed5e08fc80ae476c2150aef2bb"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/scripts/check_falsification_controls.py",
+    "upstream_path": "skills/hypothesis-generation/scripts/check_falsification_controls.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "e56f67b92d15c93cbe9eb1b9fb89253239b6ac81328fb56fc96d9e2c3ec3ba32"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/scripts/check_operationalization.py",
+    "upstream_path": "skills/hypothesis-generation/scripts/check_operationalization.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "efc093f4b58b23e095238e60badef04d34dfb012b7958e1326a1f7d58ed5edd6"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/scripts/generate_preregistration_scaffold.py",
+    "upstream_path": "skills/hypothesis-generation/scripts/generate_preregistration_scaffold.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "12df2ad3bcd47ef172b3284e9c8c543ef01ba415d3ab21ffe3ead079cdc454da"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/scripts/lint_causal_claims.py",
+    "upstream_path": "skills/hypothesis-generation/scripts/lint_causal_claims.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "561186e71f7c0b573f7ba45ef0009460c1398048929ed55fad53a65cda56dafe"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/scripts/validate_hypothesis_schema.py",
+    "upstream_path": "skills/hypothesis-generation/scripts/validate_hypothesis_schema.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "63bc1b7752d20042c2845ecb2457448ec8e2d9bc8fe1337003b222f8f4620608"
+  },
+  {
+    "path": "skills/hypothesis-generation/references/upstream/scripts/validate_prediction_matrix.py",
+    "upstream_path": "skills/hypothesis-generation/scripts/validate_prediction_matrix.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "3888802496f4e6ece5955b4fe28d6b2e6d810c5107ce6ca45ebbd70acceed317"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/METHOD.md",
+    "upstream_path": "skills/scientific-visualization/SKILL.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "8cbde7cdc10d959cf72cfd08335cc8ce996247eee6ebdb900eb64a4cb0ff34a3"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/assets/color_palettes.py",
+    "upstream_path": "skills/scientific-visualization/assets/color_palettes.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "98ee4aa4b9bbb010996d55144ea6bf45a0ab294009b9bb0ef6d9c5ec9fed5154"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/assets/nature.mplstyle",
+    "upstream_path": "skills/scientific-visualization/assets/nature.mplstyle",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "f37a361cdda8846da0794fd879cc8173402094f110239d57e0227fdd8299a4f6"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/assets/presentation.mplstyle",
+    "upstream_path": "skills/scientific-visualization/assets/presentation.mplstyle",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "d0e5a768e5965aa3893b12c0f7decd4c3b09502044391a840ebdee37dfea44da"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/assets/publication.mplstyle",
+    "upstream_path": "skills/scientific-visualization/assets/publication.mplstyle",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "eba3001f346649a9e41d9ac1d56101abbae10aefecdad3be9530f4c9cd9269b3"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/assets/publisher_profiles.json",
+    "upstream_path": "skills/scientific-visualization/assets/publisher_profiles.json",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "1e1b1b5a4e0e3dfc57877f2abf1e96888fe6b65617234b078f193b8f76e0ebe9"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/references/color_palettes.md",
+    "upstream_path": "skills/scientific-visualization/references/color_palettes.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "c9b6a596dd1dd1e08050fdcbb304a0268ee515bce2120a9bbd3fba31cd7fa119"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/references/journal_requirements.md",
+    "upstream_path": "skills/scientific-visualization/references/journal_requirements.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "f7c4b6660eb70f7c5778d13908409e1dc690f00e3dfc8314f430feb89781740c"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/references/matplotlib_examples.md",
+    "upstream_path": "skills/scientific-visualization/references/matplotlib_examples.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "74fd5977ce57b09b476285309559bbcbe3b1748943b719844b28a6b61378c041"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/references/publication_guidelines.md",
+    "upstream_path": "skills/scientific-visualization/references/publication_guidelines.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "5f70c6b22dbb5e0fae18b0f1197b8794896bf7afc059874bcf7afbd5aa86bbe5"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/references/sources.md",
+    "upstream_path": "skills/scientific-visualization/references/sources.md",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "3ff34759c0fed3baf33286a8005fd81f0c3466a554c8b0d45f43ad30b1e5b505"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/scripts/_common.py",
+    "upstream_path": "skills/scientific-visualization/scripts/_common.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "e4eea2c2e5f5d8cfa544c6bed152cdb88a3d7c7952df99bcd74b45077fd6f707"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/scripts/export_plan.py",
+    "upstream_path": "skills/scientific-visualization/scripts/export_plan.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "c20962bf4c624b9939c80bd16815fc0a18fe2be285f0654a6a53704c663add0e"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/scripts/figure_export.py",
+    "upstream_path": "skills/scientific-visualization/scripts/figure_export.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "fe9c77878da61297ce55224b67282d128631deb628d930aa1929c9eb7330bf79"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/scripts/image_metadata.py",
+    "upstream_path": "skills/scientific-visualization/scripts/image_metadata.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "45f79cefd99b8e5dabcbfd1a29b7346363f383411cc43540bf9f73e67fed634e"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/scripts/palette_audit.py",
+    "upstream_path": "skills/scientific-visualization/scripts/palette_audit.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "3a90b3c9a4a39dde6a341dc3de7b99cd2bca4773c66564fc90cdc2706a5a8165"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/scripts/style_presets.py",
+    "upstream_path": "skills/scientific-visualization/scripts/style_presets.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "8413cfae7f2cbc4a5dd9d4301d74b051fd8eb0c7a4b3375ae59e1da91db3a985"
+  },
+  {
+    "path": "skills/scientific-visualization/references/upstream/scripts/style_preview.py",
+    "upstream_path": "skills/scientific-visualization/scripts/style_preview.py",
+    "revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+    "sha256": "ca14e714dc2fb32541ff80292db97b3acbac074a65c4f2fb290f38354f880ba7"
+  },
+  {
+    "path": "skills/experiment-design/references/upstream/METHOD.md",
+    "upstream_path": "skills/experimental-design/SKILL.md",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "f2a6f3bef5ddac313ca4b739119cd8e03a464b133b637e5fbb4561230200028d"
+  },
+  {
+    "path": "skills/experiment-design/references/upstream/references/design_types.md",
+    "upstream_path": "skills/experimental-design/references/design_types.md",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "8c00ac63142f91db9e010082d491b0af25019aba0f161c72497a5df2c6ff8c55"
+  },
+  {
+    "path": "skills/experiment-design/references/upstream/references/factorial_and_doe.md",
+    "upstream_path": "skills/experimental-design/references/factorial_and_doe.md",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "2db506065a0fd36b699ad70063ce6a099055b9e676efc36790e098ed43319e0e"
+  },
+  {
+    "path": "skills/experiment-design/references/upstream/references/randomization_and_blocking.md",
+    "upstream_path": "skills/experimental-design/references/randomization_and_blocking.md",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "b4298ef74a5c744fa986507e158fa48044f0c762c3b404c0a0b063a0dbac3dca"
+  },
+  {
+    "path": "skills/experiment-design/references/upstream/references/sequential_and_adaptive.md",
+    "upstream_path": "skills/experimental-design/references/sequential_and_adaptive.md",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "bfffc806da8d84116535c4fd2f3b50f94e16e7addd38cca0b502c19df368b475"
+  },
+  {
+    "path": "skills/experiment-design/references/upstream/scripts/doe_designs.py",
+    "upstream_path": "skills/experimental-design/scripts/doe_designs.py",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "df000591b2b6fbe10c432376ecb5eba969f3e41197c6e18b02228bcad50dfbad"
+  },
+  {
+    "path": "skills/experiment-design/references/upstream/scripts/randomization.py",
+    "upstream_path": "skills/experimental-design/scripts/randomization.py",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "b97ddb8add2ddfffcacadb2da9bb5ca3885379f0032da95367539a991205aec2"
+  },
+  {
+    "path": "skills/ablation-review/references/upstream/METHOD.md",
+    "upstream_path": "skills/scientific-critical-thinking/SKILL.md",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "41d802aad7c73c2977ae66af6ef2c134056c557873a9f60cc7d15854e22d460c"
+  },
+  {
+    "path": "skills/ablation-review/references/upstream/references/common_biases.md",
+    "upstream_path": "skills/scientific-critical-thinking/references/common_biases.md",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "99f608c86075f1a1ab115a1cf4ecd54fe482266cb5e47761172894f21829f6cf"
+  },
+  {
+    "path": "skills/ablation-review/references/upstream/references/core_capabilities.md",
+    "upstream_path": "skills/scientific-critical-thinking/references/core_capabilities.md",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "ed5e62032737893ef7eda9f60f6b3355f9081daa91bbfddb9340194bc8253351"
+  },
+  {
+    "path": "skills/ablation-review/references/upstream/references/evidence_hierarchy.md",
+    "upstream_path": "skills/scientific-critical-thinking/references/evidence_hierarchy.md",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "e58b6fbbd080938719c1c1ed08acb3b4c056e12e8ed9ef2ff250b8e9ebf9b74c"
+  },
+  {
+    "path": "skills/ablation-review/references/upstream/references/experimental_design.md",
+    "upstream_path": "skills/scientific-critical-thinking/references/experimental_design.md",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "99023cfb10e455349f5e57fff75d34f80f3bba8842c48f5385ad7d0586f01b11"
+  },
+  {
+    "path": "skills/ablation-review/references/upstream/references/logical_fallacies.md",
+    "upstream_path": "skills/scientific-critical-thinking/references/logical_fallacies.md",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "7911abe82bc05c8f513591e9b00572f21e5a631783cc00cd9dbf644b5eae28ce"
+  },
+  {
+    "path": "skills/ablation-review/references/upstream/references/scientific_method.md",
+    "upstream_path": "skills/scientific-critical-thinking/references/scientific_method.md",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "09e709bdc7919a2b21825175aff5e0f9c26117a02ec654bfdb347fc8fa7ad0b7"
+  },
+  {
+    "path": "skills/ablation-review/references/upstream/references/statistical_pitfalls.md",
+    "upstream_path": "skills/scientific-critical-thinking/references/statistical_pitfalls.md",
+    "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+    "sha256": "c525ed590c36eef9dfca95c9c8bc2ab3e228e9247aa476a2c2ddcf07ffc62172"
+  },
+  {
+    "path": "skills/research-grill/references/upstream/METHOD.md",
+    "upstream_path": "skills/productivity/grilling/SKILL.md",
+    "revision": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa",
+    "sha256": "a146842ed93ca43d833550fa9adf02e58cb63c83fea9d4b4522995b82242d4e2"
+  },
+  {
+    "path": "skills/research-grill/references/upstream/agents/openai.yaml",
+    "upstream_path": "skills/productivity/grilling/agents/openai.yaml",
+    "revision": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa",
+    "sha256": "1411d7df7d99b7e621a1ff8283c8133cc2464be63d064e52d8ce169c6800ee9b"
+  },
+  {
+    "path": "skills/research-wayfinder/references/upstream/METHOD.md",
+    "upstream_path": "skills/engineering/wayfinder/SKILL.md",
+    "revision": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa",
+    "sha256": "0c9fa96791aebf3b7d654cf35c6aadde97d81f57c17b07d13b27c14d9c46561f"
+  },
+  {
+    "path": "skills/research-wayfinder/references/upstream/agents/openai.yaml",
+    "upstream_path": "skills/engineering/wayfinder/agents/openai.yaml",
+    "revision": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa",
+    "sha256": "88bc81a11a6d52ac67aeaa76b8b619e387020d47c5133a4dd4927fd15c4ad073"
+  },
+  {
+    "path": "skills/research-retro/references/upstream/METHOD.md",
+    "upstream_path": "skills/engineering/retro/SKILL.md",
+    "revision": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa",
+    "sha256": "33fbc28568e3146f20fd908b12998bc0ab30aa4f4c87288199a40793efa94696"
+  },
+  {
+    "path": "skills/research-retro/references/upstream/agents/openai.yaml",
+    "upstream_path": "skills/engineering/retro/agents/openai.yaml",
+    "revision": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa",
+    "sha256": "cb6fb9d7e6b4be5975f41f6def1dd00a1255bad5d9b02696b124c924a8b8745c"
+  }
+]

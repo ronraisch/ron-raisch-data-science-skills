@@ -22,6 +22,7 @@ class SkillTests(unittest.TestCase):
 
     def test_skill_relative_links_resolve(self):
         for path in (ROOT/'skills').rglob('*.md'):
+            if 'upstream' in path.parts: continue # Immutable third-party references retain external harness links.
             for target in re.findall(r'\]\(([^)]+)\)',path.read_text()):
                 if '://' not in target and not target.startswith('#'):
                     self.assertTrue((path.parent/target).exists(),f'{path}: {target}')
@@ -41,3 +42,16 @@ class SkillTests(unittest.TestCase):
 
     def test_only_one_portable_record_contract(self):
         self.assertEqual(len(list((ROOT/'skills').glob('*/references/record-contract.md'))),1)
+
+    def test_bundled_upstream_integrity_and_install(self):
+        import hashlib, json, tempfile
+        from tools.install_skills import install
+        manifest=json.loads((ROOT/'docs/upstream-files.json').read_text())
+        self.assertEqual(len({row['path'].split('/')[1] for row in manifest}),9)
+        with tempfile.TemporaryDirectory() as tmp:
+            destination=Path(tmp)
+            install(['all'],destination)
+            for row in manifest:
+                relative=Path(row['path'])
+                for file in (ROOT/relative,destination/Path(*relative.parts[1:])):
+                    self.assertEqual(hashlib.sha256(file.read_bytes()).hexdigest(),row['sha256'])

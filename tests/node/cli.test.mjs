@@ -17,3 +17,5 @@ test('refuses overwrite before copying any skill',()=>temp(d=>{fs.mkdirSync(path
 test('claude destination is relative to caller',()=>temp(d=>{const r=call(['install','research-grill','--agent','claude'],d);assert.equal(r.status,0,r.stderr);assert.ok(fs.existsSync(path.join(d,'.claude/skills/research-grill/SKILL.md')));}));
 test('rejects conflicting or malformed options',()=>{for(const args of [['install'],['install','all','research-grill'],['install','all','--agent','bad'],['install','all','--destination'],['install','all','--agent','codex','--destination','x']])assert.equal(call(args).status,1);});
 test('Python launcher returns usage from outside checkout',()=>temp(d=>{const r=call(['serve','--help'],d);assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/read-only research dashboard/);}));
+
+test('offline install bundles upstream methods and supporting scripts',()=>temp(d=>{const r=call(['install','eda','--destination',d]);assert.equal(r.status,0,r.stderr);for(const f of ['METHOD.md','scripts/eda_analyzer.py','assets/report_template.md'])assert.ok(fs.existsSync(path.join(d,'eda/references/upstream',f)));}));

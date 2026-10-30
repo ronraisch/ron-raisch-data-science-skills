@@ -1,5 +1,8 @@
 # Ron's Data Science Skills
 
+
+Nine skills now use bundled, pinned methods from K-Dense, Kalaris and Matt Pocock through concise local entry points. Seven skills retain local verification and continuity workflows. See [source selection](docs/curation.md). Install once; the methods and supporting files remain available offline. For local models, invoke one skill and load only the method sections it names.
+
 A small collection of practical, reusable research skills for data scientists, ML researchers, and coding agents. Use them to ask better questions, run the experiment you intended, understand failures, and leave enough evidence to resume a project months later.
 
 **The skills are the product.** Python utilities, file records, a CPU example, optional ClearML integration, and a small read-only dashboard support them. No database, server, paid model, or NVIDIA GPU is required.

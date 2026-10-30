@@ -10,7 +10,7 @@
       "skills/hypothesis-generation/SKILL.md",
       "skills/scientific-visualization/SKILL.md"
     ],
-    "reuse": "Workflow concepts adapted and specialized; no upstream scripts or service integrations vendored."
+    "reuse": "Pinned method and complete supporting files bundled unchanged in the corresponding local skill references/upstream directory; concise local entry points define offline execution and output contracts."
   },
   {
     "repository": "https://github.com/KalarisLabs/research-agent-skills",
@@ -21,7 +21,7 @@
       "skills/experimental-design/SKILL.md",
       "skills/scientific-critical-thinking/SKILL.md"
     ],
-    "reuse": "Workflow concepts adapted and specialized; no upstream scripts or service integrations vendored."
+    "reuse": "Pinned method and complete supporting files bundled unchanged in the corresponding local skill references/upstream directory; concise local entry points define offline execution and output contracts."
   },
   {
     "repository": "https://github.com/mattpocock/skills",
@@ -33,6 +33,6 @@
       "skills/productivity/grilling/SKILL.md",
       "skills/engineering/retro/SKILL.md"
     ],
-    "reuse": "Workflow concepts adapted and specialized; no upstream scripts or service integrations vendored."
+    "reuse": "Pinned method and complete supporting files bundled unchanged in the corresponding local skill references/upstream directory; concise local entry points define offline execution and output contracts."
   }
 ]
