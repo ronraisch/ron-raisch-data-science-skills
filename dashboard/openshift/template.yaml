@@ -1,0 +1,113 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: research-records
+parameters:
+  - name: IMAGE
+    required: true
+  - name: BASE_IMAGE
+    value: python:3.12-slim
+objects:
+  - apiVersion: image.openshift.io/v1
+    kind: ImageStream
+    metadata:
+      name: research-records
+  - apiVersion: build.openshift.io/v1
+    kind: BuildConfig
+    metadata:
+      name: research-records
+    spec:
+      runPolicy: Serial
+      source:
+        type: Binary
+        binary: {}
+      strategy:
+        type: Docker
+        dockerStrategy:
+          dockerfilePath: dashboard/Containerfile
+          buildArgs:
+            - name: BASE_IMAGE
+              value: ${BASE_IMAGE}
+      output:
+        to:
+          kind: ImageStreamTag
+          name: research-records:latest
+      triggers: []
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: research-records
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: research-records
+      template:
+        metadata:
+          labels:
+            app: research-records
+        spec:
+          automountServiceAccountToken: false
+          securityContext:
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          containers:
+            - name: dashboard
+              image: ${IMAGE}
+              imagePullPolicy: Always
+              ports:
+                - name: http
+                  containerPort: 8080
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop: [ALL]
+              resources:
+                requests:
+                  cpu: 25m
+                  memory: 32Mi
+                limits:
+                  cpu: 250m
+                  memory: 128Mi
+              readinessProbe:
+                httpGet:
+                  path: /
+                  port: http
+              livenessProbe:
+                httpGet:
+                  path: /healthz
+                  port: http
+              volumeMounts:
+                - name: snapshot
+                  mountPath: /snapshot
+                  readOnly: true
+          volumes:
+            - name: snapshot
+              configMap:
+                name: research-records-html
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: research-records
+    spec:
+      selector:
+        app: research-records
+      ports:
+        - name: http
+          port: 8080
+          targetPort: http
+  - apiVersion: route.openshift.io/v1
+    kind: Route
+    metadata:
+      name: research-records
+    spec:
+      to:
+        kind: Service
+        name: research-records
+      port:
+        targetPort: http
+      tls:
+        termination: edge
+        insecureEdgeTerminationPolicy: Redirect

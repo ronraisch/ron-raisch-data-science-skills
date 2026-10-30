@@ -20,3 +20,7 @@ The supplied verifier is a local CSV/JSON adapter with instrumented runtime comp
 No live ClearML Server, actual ClearML SDK offline serialization, dataset upload, remote Agent execution, Docker deployment, optional matplotlib installation, third-party model API, or hosted dashboard was run. ClearML method usage and licensing were checked against official sources; its adapter was tested through a fake Task object. The GitHub repository has not been created remotely; docs/publish.md supplies the creation link and push steps.
 
 CI is configured for Python 3.11, 3.12 and 3.13 on GitHub Actions; only the local interpreter was executed here. Git bundle validation and a fresh clone/check run are performed as delivery checks. Repository metadata and dependencies may change after release; re-run checks in the intended environment.
+
+## Dashboard hosting update — 2026-10-30
+
+The suite now includes 60 passing tests, with local HTTP routing/security headers, traversal rejection, snapshot replacement, explicit launcher input, ConfigMap size preflight, and mocked OpenShift installation/build staging. Only the two hosting source files enter the image build context. A real local launcher HTTP smoke check was also performed. OpenShift templates and Containerfile are supplied, but no container runtime, oc CLI or cluster is available here; actual image build/SCC admission/Route rollout are untested.

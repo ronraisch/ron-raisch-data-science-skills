@@ -45,6 +45,18 @@ The example generates synthetic sensor observations, runs train-only EDA, freeze
 
 A committed [example record](examples/sensor-study/project.json) is included for browsing without running Python. Re-execute the example to create a fresh run with your environment/Git provenance. Read [validation results and limits](docs/validation.md).
 
+## Host the dashboard quickly
+
+```bash
+python -m dashboard --demo
+# Your own research records:
+python -m dashboard /path/to/my-study
+# OpenShift (after oc login and oc project):
+python -m dashboard.openshift.install /path/to/my-study
+```
+
+Local hosting opens at http://127.0.0.1:8080; the OpenShift installer prints the Route URL. No pip packages are needed. Both serve only the generated HTML. See [dashboard setup](dashboard/README.md) for existing HTML files, disconnected clusters, prebuilt images and updates.
+
 ## Use with coding agents
 
 From a complete checkout, an agent can simply read a named `skills/<name>/SKILL.md`. To copy selected portable skills into a project:

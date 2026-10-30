@@ -1,0 +1,1 @@
+"""Optional OpenShift installation helpers."""
