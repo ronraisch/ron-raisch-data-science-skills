@@ -1,0 +1,17 @@
+[
+  {
+    "confounders": [
+      "single data seed",
+      "synthetic distribution"
+    ],
+    "falsification": "Gain below 0.10 on independent replication fails the useful-effect criterion",
+    "id": "H1",
+    "next_test": "paired independent seed replication",
+    "rivals": [
+      "Majority balance explains apparent gains",
+      "Measurement/label noise determines errors"
+    ],
+    "statement": "A one-feature logistic classifier improves validation accuracy over majority by >=0.10",
+    "status": "inconclusive"
+  }
+]

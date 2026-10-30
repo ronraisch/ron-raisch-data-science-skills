@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "id": "REPLACE",
+  "title": "REPLACE",
+  "objective": "REPLACE",
+  "question": "REPLACE",
+  "status": "active",
+  "pause_reason": null,
+  "hypotheses": [
+    {
+      "id": "H1",
+      "statement": "REPLACE WITH TESTABLE STATEMENT",
+      "status": "proposed"
+    }
+  ],
+  "runs": [],
+  "findings": [],
+  "next_experiments": [],
+  "documents": []
+}

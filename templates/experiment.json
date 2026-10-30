@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "REPLACE",
+  "hypothesis_id": "H1",
+  "decision_rule": "REPLACE support/falsification/inconclusive regions",
+  "evaluation_protocol": "REPLACE metric implementation version/digest and protocol",
+  "dataset": {
+    "path": "data.csv",
+    "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+  },
+  "splits": {
+    "path": "splits.json",
+    "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+  },
+  "required_artifacts": [
+    "checkpoint.json",
+    "history.json",
+    "source.json",
+    "spec.json"
+  ],
+  "expected": {
+    "preprocessing": {
+      "REPLACE": "actual transform/fit policy"
+    },
+    "model": {
+      "REPLACE": "expected instantiated structure"
+    },
+    "checkpoint": null,
+    "parameters": {
+      "REPLACE": "expected counts/names/trainability"
+    },
+    "optimizer": null,
+    "scheduler": null,
+    "hyperparameters": {
+      "REPLACE": "effective settings"
+    },
+    "training": {
+      "REPLACE": "expected completed steps and termination"
+    },
+    "metric": {
+      "name": "accuracy",
+      "split": "validation",
+      "direction": "maximize"
+    },
+    "environment": {
+      "REPLACE": "planned environment/provenance"
+    }
+  }
+}

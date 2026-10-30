@@ -1,0 +1,87 @@
+{
+  "documents": [
+    "brief.md",
+    "eda.md",
+    "hypotheses.json",
+    "roadmap.md",
+    "failure-analysis.md",
+    "ablation-review.md",
+    "summary.md",
+    "retro.md",
+    "blog.md",
+    "decisions.md",
+    "handoff.md"
+  ],
+  "findings": [
+    {
+      "claim": "Fixed-split classifier and baseline results are recorded; interpretation is limited to one seed.",
+      "evidence": [
+        "comparison.json",
+        "summary.md"
+      ],
+      "id": "F1",
+      "kind": "observation",
+      "run_ids": [
+        "logistic",
+        "majority"
+      ]
+    },
+    {
+      "claim": "Wrong optimizer and reported metric invalidate those executions, not H1.",
+      "evidence": [
+        "runs/wrong-optimizer/verification.json",
+        "runs/wrong-metric/verification.json"
+      ],
+      "id": "F2",
+      "kind": "negative-result",
+      "run_ids": [
+        "wrong-optimizer",
+        "wrong-metric"
+      ]
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "H1",
+      "statement": "Learned score improves accuracy by at least 0.10",
+      "status": "inconclusive"
+    }
+  ],
+  "id": "sensor-study",
+  "next_experiments": [
+    "Parameterize the fixed generator seed and predeclare paired independent data-seed replication",
+    "Controlled noise versus nonlinear-boundary experiment"
+  ],
+  "objective": "Demonstrate trustworthy local research and continuity",
+  "pause_reason": "Demo milestone complete; multi-seed robustness study needs a new design.",
+  "question": "Does a learned sensor-score classifier improve over a majority baseline?",
+  "runs": [
+    {
+      "directory": "runs/majority",
+      "id": "majority",
+      "spec": "specs/majority.json",
+      "status": "completed"
+    },
+    {
+      "directory": "runs/logistic",
+      "id": "logistic",
+      "spec": "specs/logistic.json",
+      "status": "completed"
+    },
+    {
+      "directory": "runs/wrong-optimizer",
+      "id": "wrong-optimizer",
+      "spec": "specs/logistic.json",
+      "status": "completed"
+    },
+    {
+      "directory": "runs/wrong-metric",
+      "id": "wrong-metric",
+      "spec": "specs/logistic.json",
+      "status": "completed"
+    }
+  ],
+  "schema_version": 1,
+  "status": "paused",
+  "title": "Synthetic sensor classification"
+}

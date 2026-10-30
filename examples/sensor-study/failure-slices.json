@@ -1,0 +1,14 @@
+[
+  {
+    "error_rate": 0.375,
+    "errors": 3,
+    "n": 8,
+    "slice": "near-boundary"
+  },
+  {
+    "error_rate": 0.09375,
+    "errors": 3,
+    "n": 32,
+    "slice": "far-boundary"
+  }
+]

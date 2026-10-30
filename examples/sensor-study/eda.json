@@ -1,0 +1,26 @@
+{
+  "bins": [
+    [
+      "<-1",
+      17
+    ],
+    [
+      "-1 to 0",
+      28
+    ],
+    [
+      "0 to 1",
+      29
+    ],
+    [
+      ">=1",
+      26
+    ]
+  ],
+  "dataset_sha256": "b24ca7d3eb19990717bf427cf42e681f6997ccf90697c61da953cac1f8038743",
+  "positive_fraction": 0.47,
+  "split_sha256": "868e5a3107b8d348bc29d6c1c0df0a27a8aa3dbc1dbde9c37f18f346d401270f",
+  "train_count": 100,
+  "train_mean": 0.12704091597,
+  "train_sd": 1.0964204351015239
+}

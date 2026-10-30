@@ -1,0 +1,14 @@
+[project]
+name = "ron-raisch-data-science-skills"
+version = "0.1.0"
+description = "Practical research skills, runtime verification and durable file-based research records"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = []
+
+[project.optional-dependencies]
+clearml = ["clearml>=1.16,<3"]
+plots = ["matplotlib>=3.8,<4"]
+
+[tool.uv]
+package = false

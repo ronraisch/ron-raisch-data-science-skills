@@ -1,0 +1,11 @@
+{
+  "inputs": [
+    "eda.json",
+    "failure-slices.json",
+    "comparison.json",
+    "runs/logistic/predictions.csv"
+  ],
+  "notes": "Deterministic SVG bars; uncertainty reported in adjacent JSON and captions, not drawn as independent bars.",
+  "script": "examples/demo.py",
+  "seed": 17
+}

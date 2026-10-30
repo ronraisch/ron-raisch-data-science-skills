@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "hypotheses": [
+    {
+      "id": "H1",
+      "observation": {
+        "claim": "REPLACE",
+        "evidence": [
+          "REPLACE relative evidence path"
+        ]
+      },
+      "statement": "REPLACE",
+      "type": "predictive-association",
+      "independent_unit": "REPLACE",
+      "rivals": [
+        "null",
+        "measurement-error explanation"
+      ],
+      "predictions": [
+        {
+          "intervention": "REPLACE",
+          "expected_under_H1": "REPLACE",
+          "expected_under_rival": "REPLACE"
+        }
+      ],
+      "minimum_useful_effect": null,
+      "support_rule": "REPLACE",
+      "falsification_rule": "REPLACE",
+      "inconclusive_rule": "REPLACE",
+      "confounders": [],
+      "status": "proposed"
+    }
+  ]
+}

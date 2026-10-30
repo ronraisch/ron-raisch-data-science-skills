@@ -1,0 +1,5 @@
+# Comparison review
+
+Majority accuracy=0.6250; logistic=0.8500; paired delta=0.2250, 95% descriptive group-bootstrap interval=[0.05, 0.4]. Method: paired percentile bootstrap over 20 independent validation groups; 2000 draws; seed 91. Training is deterministic; one generated data seed. Interval addresses group sampling, not variation across generated datasets. Both valid runs share data, splits and evaluation. This is a baseline comparison, not a one-factor causal ablation of optimizer or architecture. Majority has zero optimization steps; logistic has 120 full-batch steps.
+
+Wrong-optimizer and falsified-metric examples are completed processes with failed verification; they are excluded from best-verified results, retained in the manifest, and cannot test H1. The frozen-parameter unit test is another invalid execution. No final test metrics are calculated. A >=0.10 validation gain is promising under the exploratory design rule; H1 remains inconclusive for robustness until independent replication.

@@ -90,4 +90,3 @@ Reviewed K-Dense Scientific Agent Skills, Kalaris Research Agent Skills and Matt
 MIT for this repository; upstream notices in `LICENSES/`. Contribute small skills, realistic evidence fixtures and deterministic checks; see [CONTRIBUTING.md](CONTRIBUTING.md). All contributions must preserve scientific uncertainty and failed outcomes.
 
 To publish this prepared repository, follow [the GitHub instructions](docs/publish.md).
-

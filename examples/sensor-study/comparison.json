@@ -1,0 +1,8 @@
+{
+  "delta": 0.225,
+  "interval95": [
+    0.05,
+    0.4
+  ],
+  "method": "paired percentile bootstrap over 20 independent validation groups; 2000 draws; seed 91"
+}

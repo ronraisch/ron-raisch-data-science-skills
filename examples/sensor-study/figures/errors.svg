@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="340" viewBox="0 0 640 340">
+<rect width="100%" height="100%" fill="white"/>
+<text x="30" y="25" font-family="sans-serif" font-size="16">Validation error by exploratory slice</text>
+<text x="30" y="50" font-family="sans-serif" font-size="12">error fraction; denominators in failure-slices.json; axis starts at 0</text>
+<path d="M60 65 V270 H620" fill="none" stroke="#333"/>
+<rect x="80.00" y="208.04" width="180.00" height="61.96" fill="#286a8d"/>
+<text x="80.00" y="198.04" font-size="12" font-family="sans-serif">0.375</text>
+<text x="80.00" y="295" font-size="12" font-family="sans-serif">near-boundary</text>
+<rect x="340.00" y="254.51" width="180.00" height="15.49" fill="#286a8d"/>
+<text x="340.00" y="244.51" font-size="12" font-family="sans-serif">0.0938</text>
+<text x="340.00" y="295" font-size="12" font-family="sans-serif">far-boundary</text>
+</svg>
