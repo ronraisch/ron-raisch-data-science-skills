@@ -7,6 +7,12 @@ description: "Review scientific literature, compare methods and trace claims. Su
 
 A scoped question, search cutoff, and available papers or search access.
 
+## Definitions
+
+- **Reported result**: a claim read in the source, with page or table.
+- **Artifact-checked result**: a reported value checked against supplied code/data/output.
+- **Reproduced result**: a value obtained by executing the method and recorded protocol yourself.
+
 ## Procedure
 
 1. Define review type and eligibility before searching. Do not call a quick scan systematic.
@@ -22,8 +28,8 @@ literature.md, sources/search-log.csv, sources/evidence.csv and local-paper hash
 
 ## Completion criteria
 
-Claims have source locations and evidence levels; coverage and inaccessible evidence are explicit.
+Finish when every included claim has a source location and evidence level, exclusions are logged, and search coverage is stated. An unread paper cannot support a finding. A DOI check establishes identity, not correctness.
 
 ## Resources
 
-Use the [output template](assets/output.md). Consult the [record contract](references/record-contract.md) for IDs, paths and evidence rules. Keep work local/offline unless another tool is explicitly selected. Never fabricate evidence; preserve failures and separate observation from interpretation.
+[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.

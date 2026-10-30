@@ -7,6 +7,12 @@ description: "Explore data for distributions, anomalies, bias and leakage before
 
 Local data/version, dictionary, target, independent unit and planned splits.
 
+## Definitions
+
+- **Independent unit**: the entity whose observations can vary independently, such as a patient or acquisition.
+- **Leakage**: evaluation information entering training, preprocessing fitting or model selection.
+- **Finding**: a measured pattern with a denominator, input identity and analysis command.
+
 ## Procedure
 
 1. Hash inputs. Profile schema, units, missingness, label coverage, duplicates, groups and timestamps; preserve raw files.
@@ -22,8 +28,8 @@ eda.md, reproducible analysis, input hashes, aggregate tables, figures and leaka
 
 ## Completion criteria
 
-Aggregates reproduce; sampling limits, suspicious examples and next hypotheses are recorded.
+Stop model development if split leakage is found. Save the violating IDs and correct the split under a new version. Finish EDA when aggregates reproduce and each proposed explanation is labeled as a hypothesis.
 
 ## Resources
 
-Use the [output template](assets/output.md). Consult the [record contract](references/record-contract.md) for IDs, paths and evidence rules. Keep work local/offline unless another tool is explicitly selected. Never fabricate evidence; preserve failures and separate observation from interpretation.
+[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.

@@ -7,6 +7,12 @@ description: "Investigate model errors, error clusters and dataset or annotation
 
 Verified predictions, labels/coverage, metadata, evaluation protocol and baseline predictions.
 
+## Definitions
+
+- **False positive/negative**: an error under the recorded threshold, matching rule and annotation policy.
+- **Error slice**: samples selected by one explicit predicate, with total and error counts.
+- **Annotation defect**: an error established by review of the input and labeling specification.
+
 ## Procedure
 
 1. Check one-to-one prediction/label joins and evaluation coverage. Missing predictions remain errors.
@@ -22,8 +28,8 @@ failure-analysis.md, error/slice tables, representative examples and proposed hy
 
 ## Completion criteria
 
-Findings have denominators and examples; proposed fixes test an explanation.
+Do not call an apparent model error an annotation defect without review evidence. Every reported error rate needs a denominator. Every recommended fix needs a discriminating experiment. Missing predictions remain in the evaluation denominator.
 
 ## Resources
 
-Use the [output template](assets/output.md). Consult the [record contract](references/record-contract.md) for IDs, paths and evidence rules. Keep work local/offline unless another tool is explicitly selected. Never fabricate evidence; preserve failures and separate observation from interpretation.
+[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.

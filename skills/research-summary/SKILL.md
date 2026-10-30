@@ -7,6 +7,12 @@ description: "Summarize a milestone with evidence, negative results and unresolv
 
 Question, hypotheses, complete run inventory, reports and decisions.
 
+## Definitions
+
+- **Observation**: a recorded measurement linked to an artifact.
+- **Interpretation**: a conclusion drawn from observations under stated assumptions.
+- **Negative result**: a valid experiment that did not meet its predefined support criterion; a broken execution is not a negative scientific result.
+
 ## Procedure
 
 1. Read primary records, not just the latest slide. State the question and scope changes.
@@ -22,8 +28,8 @@ summary.md, evidence-linked findings, current status and next experiments.
 
 ## Completion criteria
 
-Every conclusion is traceable and its limits are visible.
+Every conclusion must link to experiments and their verification states. Include unsuccessful approaches and contradictions. If the design cannot distinguish explanations, label the conclusion inconclusive.
 
 ## Resources
 
-Use the [output template](assets/output.md). Consult the [record contract](references/record-contract.md) for IDs, paths and evidence rules. Keep work local/offline unless another tool is explicitly selected. Never fabricate evidence; preserve failures and separate observation from interpretation.
+[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.

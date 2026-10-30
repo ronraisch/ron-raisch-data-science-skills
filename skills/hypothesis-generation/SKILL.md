@@ -7,6 +7,12 @@ description: "Turn observations into falsifiable hypotheses and discriminating e
 
 Observations with evidence, existing hypotheses and constraints.
 
+## Definitions
+
+- **Hypothesis**: a statement whose predefined measurement can contradict it.
+- **Rival**: an alternative explanation of the same observation.
+- **Discriminating test**: an experiment for which rivals predict different outcomes.
+
 ## Procedure
 
 1. State the observation and its uncertainty. Separate measurements from impressions or reported claims.
@@ -22,8 +28,8 @@ hypotheses.json and hypotheses.md: IDs, provenance, rivals, predictions and next
 
 ## Completion criteria
 
-Each hypothesis can fail and has a test that separates it from a rival.
+Reject hypotheses without a measurable falsification rule. Reject tests whose outcomes cannot separate rivals. Finish with one selected test, its controls and predefined support/rejection/inconclusive regions.
 
 ## Resources
 
-Use the [output template](assets/output.md). Consult the [record contract](references/record-contract.md) for IDs, paths and evidence rules. Keep work local/offline unless another tool is explicitly selected. Never fabricate evidence; preserve failures and separate observation from interpretation.
+[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.

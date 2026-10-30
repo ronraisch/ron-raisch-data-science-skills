@@ -7,6 +7,12 @@ description: "Design controlled experiments and write executable specifications 
 
 Hypothesis ID, data/version, baseline, confounders and budget.
 
+## Definitions
+
+- **Baseline**: a named reference method evaluated under the same protocol.
+- **Controlled comparison**: only declared treatment factors vary; all listed controls stay fixed.
+- **Ablation**: a controlled comparison that removes or changes a declared component.
+
 ## Procedure
 
 1. Define population, independent unit, estimand, primary metric/direction and useful effect. Separate exploratory metrics.
@@ -22,8 +28,8 @@ specs/<id>.json and design note with controls, replication and decision rules.
 
 ## Completion criteria
 
-Intent is executable, immutable and capable of falsifying the hypothesis.
+Do not run with unknown input hashes, undefined primary metric, absent baseline or unfilled runtime settings. Freeze the spec before execution. Any change to intent requires a new experiment ID and amendment reason.
 
 ## Resources
 
-Use the [output template](assets/output.md). Consult the [record contract](references/record-contract.md) for IDs, paths and evidence rules. Keep work local/offline unless another tool is explicitly selected. Never fabricate evidence; preserve failures and separate observation from interpretation.
+[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.

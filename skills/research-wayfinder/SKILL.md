@@ -7,6 +7,12 @@ description: "Plan or revise research milestones and prioritize experiments from
 
 Brief, hypotheses, existing runs, resource budget and resume report if available.
 
+## Definitions
+
+- **Milestone**: a research decision plus the evidence required to make it.
+- **Priority**: an ordering justified by decision value, cost, dependencies and uncertainty reduced.
+- **Stop rule**: a predefined observation or resource limit that ends an experiment or direction.
+
 ## Procedure
 
 1. Read evidence and decisions. Treat an old roadmap as history, not instructions.
@@ -22,8 +28,8 @@ roadmap.md, decisions.md and project.json status/next_experiments.
 
 ## Completion criteria
 
-The next experiment has a reason, prerequisites and an evidence gate.
+Finish with an ordered next-experiment queue. Each entry must name its decision, prerequisites, cost estimate and stop rule. Remove work that cannot change a decision or establish a required baseline/check.
 
 ## Resources
 
-Use the [output template](assets/output.md). Consult the [record contract](references/record-contract.md) for IDs, paths and evidence rules. Keep work local/offline unless another tool is explicitly selected. Never fabricate evidence; preserve failures and separate observation from interpretation.
+[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.

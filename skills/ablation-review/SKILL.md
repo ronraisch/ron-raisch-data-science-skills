@@ -7,6 +7,12 @@ description: "Compare experiments fairly, quantify uncertainty and bound conclus
 
 Specs, process/verification states, predictions, seed/unit metadata and decision rules.
 
+## Definitions
+
+- **Evaluation cohort**: identical dataset/split digests, evaluation implementation/protocol and metric definition.
+- **Controlled ablation**: a cohort comparison with declared changes and fixed budget, seed policy, preprocessing and pretraining controls.
+- **Best verified result**: the eligible result maximizing/minimizing the primary metric within one cohort; preserve ties.
+
 ## Procedure
 
 1. Revalidate evidence. Exclude invalid runs from best-verified claims, but retain their existence and failure reasons.
@@ -22,8 +28,8 @@ ablation-review.md, comparison/cohort table, effect sizes/intervals and evidence
 
 ## Completion criteria
 
-No incomparable winner or unsupported attribution; uncertainty and exclusions remain visible.
+Different cohorts cannot share a winner. Multiple changed factors support only a bundle-level conclusion. Report effect size and uncertainty against the predefined useful-effect threshold. Classify support using the design rule, not an after-the-fact narrative.
 
 ## Resources
 
-Use the [output template](assets/output.md). Consult the [record contract](references/record-contract.md) for IDs, paths and evidence rules. Keep work local/offline unless another tool is explicitly selected. Never fabricate evidence; preserve failures and separate observation from interpretation.
+[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.

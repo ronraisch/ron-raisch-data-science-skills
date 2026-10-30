@@ -7,6 +7,12 @@ description: "Review a research process and turn methodological mistakes into co
 
 Plans, execution history, verification failures, decisions, costs and summary.
 
+## Definitions
+
+- **Process defect**: a repeatable failure of planning, execution, verification or record keeping.
+- **Root cause**: an explanation supported by the event history, not inferred intent.
+- **Action**: a change with an owner, trigger and pass/fail check.
+
 ## Procedure
 
 1. Reconstruct decisions from records. Judge what was knowable then; avoid hindsight blame.
@@ -22,8 +28,8 @@ retro.md with concrete actions and checks; decisions.md update.
 
 ## Completion criteria
 
-Actions are testable; suspected causes and estimated costs are labeled.
+Every proposed improvement needs an observed incident and a validation check. Mechanical mistakes require executable guards. Mark unmeasured costs as estimates. Do not rewrite a legitimate negative result as a process failure.
 
 ## Resources
 
-Use the [output template](assets/output.md). Consult the [record contract](references/record-contract.md) for IDs, paths and evidence rules. Keep work local/offline unless another tool is explicitly selected. Never fabricate evidence; preserve failures and separate observation from interpretation.
+[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.

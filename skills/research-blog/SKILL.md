@@ -7,6 +7,12 @@ description: "Write an internal research article grounded in methods, results an
 
 Evidence-backed summary, figures, audience and disclosure limits.
 
+## Definitions
+
+- **Research article**: an explanation of a question, method, evidence and conclusion for the named audience.
+- **Result**: a source-linked measurement, not a persuasive claim.
+- **Draft**: a saved article that has not been published or sent.
+
 ## Procedure
 
 1. Open with the reader’s question and why it matters. State scope before implementation details.
@@ -22,8 +28,8 @@ blog.md with captions, evidence links, limitations and reproduction pointer.
 
 ## Completion criteria
 
-A reader can follow the argument; every number resolves to evidence.
+Every numerical claim must match a source table. Every conclusion must stay within the summary’s evidence. Include failures and competing explanations. Save the draft; publishing or sending is outside this skill.
 
 ## Resources
 
-Use the [output template](assets/output.md). Consult the [record contract](references/record-contract.md) for IDs, paths and evidence rules. Keep work local/offline unless another tool is explicitly selected. Never fabricate evidence; preserve failures and separate observation from interpretation.
+[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.
