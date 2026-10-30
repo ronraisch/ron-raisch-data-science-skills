@@ -2,6 +2,7 @@
 import argparse
 from pathlib import Path
 import shutil
+import re
 
 
 def install(names, destination):
@@ -12,6 +13,16 @@ def install(names, destination):
         raise ValueError('Choose unique skill names or all')
     for name in names:
         if name not in available:raise ValueError(f'Unknown skill: {name}')
+    pending=list(names)
+    closure=set(names)
+    while pending:
+        name=pending.pop()
+        for dependency in re.findall(r'\]\(\.\./([a-z0-9-]+)/SKILL\.md\)', (available[name]/'SKILL.md').read_text()):
+            if dependency not in available:raise ValueError(f'Unknown skill dependency: {dependency}')
+            if dependency not in closure:
+                closure.add(dependency);pending.append(dependency)
+    names=sorted(closure)
+    for name in names:
         if (destination/name).exists():raise FileExistsError(destination/name)
     destination.mkdir(parents=True,exist_ok=True)
     for name in names:shutil.copytree(available[name],destination/name)

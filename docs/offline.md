@@ -8,4 +8,4 @@ For optional plotting or ClearML, prepare an OS/Python-specific wheelhouse and a
 
 Literature review: put local PDF/text papers under sources/papers/, record file hashes and page-level evidence, and label the corpus cutoff. Use locally installed PDF extraction tooling if needed. The skill does not claim exhaustive or current coverage from a local corpus. Never send unpublished data to online services as an implicit fallback.
 
-Copy selected skills with tools/install_skills.py or copy entire directories manually. Bundled record contracts/templates move with them. Executable verification needs the full checkout or an explicitly reviewed equivalent implementation; it is not secretly bundled into each prompt.
+Copy selected skills with tools/install_skills.py or copy entire directories manually. The installer copies referenced sibling skills transitively. research-summary owns the portable record contract; templates remain with their skill. Manual copies must include referenced siblings. Executable verification needs the full checkout or an explicitly reviewed equivalent implementation; it is not secretly bundled into each prompt.

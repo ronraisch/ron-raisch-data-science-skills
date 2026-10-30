@@ -3,17 +3,13 @@ name: scientific-visualization
 description: "Create reproducible scientific figures from actual data and model outputs."
 ---
 
-## Inputs
+Start with: Source artifacts, intended claim, audience, metric definitions and uncertainty method.
 
-Source artifacts, intended claim, audience, metric definitions and uncertainty method.
+## Terms
 
-## Definitions
-
-- **Figure**: a deterministic mapping from named source data to visual marks.
 - **Uncertainty band**: an interval with a stated method and resampling/replication unit.
-- **Caption**: the claim, population, protocol, denominator and interpretation needed to read the figure.
 
-## Procedure
+## Do
 
 1. Name the question each figure answers. Choose the chart for the variables; never generate numerical evidence as an AI image.
 2. Save source tables and plotting code with input hashes, filters, joins, units, seed and environment.
@@ -22,14 +18,16 @@ Source artifacts, intended claim, audience, metric definitions and uncertainty m
 5. For CV overlays, distinguish predictions/annotations and record coordinates, thresholds and protocol. For embeddings, record encoder/projection settings; visual clusters do not prove separability.
 6. Compare valid cohorts. Export SVG/PDF or PNG for the target publication or viewer; inspect rendering. Write captions linking evidence and limits; use upstream guidance for specialist layouts.
 
-## Outputs and evidence
+Use [ablation-review](../ablation-review/SKILL.md): Use its approved cohorts and uncertainty calculations for method comparisons.
 
-figures/: script, source tables, exports, captions and input/method manifest.
+## Deliver
 
-## Completion criteria
+figures/: script, source tables, exports, captions and input/method manifest. [Template](assets/output.md).
+
+## Stop
 
 Reject figures without source data and regeneration code. Label units, filters, scales and uncertainty. Inspect the rendered export. Embedding separation is a visualization outcome, not proof of generalization.
 
-## Resources
+## Source
 
-[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.
+Adapted workflow concepts from [K-Dense-AI/scientific-agent-skills — scientific-visualization](https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/skills/scientific-visualization/SKILL.md) (MIT); specialized for this collection’s local records.

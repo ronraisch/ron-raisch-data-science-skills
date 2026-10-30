@@ -3,17 +3,15 @@ name: hypothesis-generation
 description: "Turn observations into falsifiable hypotheses and discriminating experiments."
 ---
 
-## Inputs
+Start with: Observations with evidence, existing hypotheses and constraints.
 
-Observations with evidence, existing hypotheses and constraints.
-
-## Definitions
+## Terms
 
 - **Hypothesis**: a statement whose predefined measurement can contradict it.
 - **Rival**: an alternative explanation of the same observation.
 - **Discriminating test**: an experiment for which rivals predict different outcomes.
 
-## Procedure
+## Do
 
 1. State the observation and its uncertainty. Separate measurements from impressions or reported claims.
 2. Propose rival explanations, including a null and measurement/data error. Distinguish causal from predictive claims.
@@ -22,14 +20,16 @@ Observations with evidence, existing hypotheses and constraints.
 5. Name confounders and controls. Define support, falsification and inconclusive regions; non-significance alone does not establish the null.
 6. Choose the cheapest discriminating test. Keep exploratory hypotheses exploratory until tested on new evidence.
 
-## Outputs and evidence
+Use [experiment-design](../experiment-design/SKILL.md): Specify the selected test; do not duplicate its run protocol here.
 
-hypotheses.json and hypotheses.md: IDs, provenance, rivals, predictions and next tests.
+## Deliver
 
-## Completion criteria
+hypotheses.json and hypotheses.md: IDs, provenance, rivals, predictions and next tests. [Template](assets/output.md).
+
+## Stop
 
 Reject hypotheses without a measurable falsification rule. Reject tests whose outcomes cannot separate rivals. Finish with one selected test, its controls and predefined support/rejection/inconclusive regions.
 
-## Resources
+## Source
 
-[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.
+Adapted workflow concepts from [K-Dense-AI/scientific-agent-skills — hypothesis-generation](https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/skills/hypothesis-generation/SKILL.md) (MIT); specialized for this collection’s local records.

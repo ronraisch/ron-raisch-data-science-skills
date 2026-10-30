@@ -3,33 +3,29 @@ name: research-blog
 description: "Write an internal research article grounded in methods, results and evidence."
 ---
 
-## Inputs
+Start with: Evidence-backed summary, figures, audience and disclosure limits.
 
-Evidence-backed summary, figures, audience and disclosure limits.
+## Do
 
-## Definitions
+1. Read the current research-summary and name the target reader.
+2. Open with the question and why the answer matters. Explain the baseline, method and controls.
+3. Organize the article by questions answered. Reuse summary claims; link their source artifacts rather than restating the evidence review.
+4. Use scientific-visualization for figures. Include failed approaches, competing explanations and the limits on transfer.
+5. Check every number against its source table and every citation against its paper.
+6. Save an internal draft with reproduction instructions. Do not send or publish it.
 
-- **Research article**: an explanation of a question, method, evidence and conclusion for the named audience.
-- **Result**: a source-linked measurement, not a persuasive claim.
-- **Draft**: a saved article that has not been published or sent.
+Use [research-summary](../research-summary/SKILL.md): Use its claims and evidence ledger; do not perform a second research review.
 
-## Procedure
+Use [scientific-visualization](../scientific-visualization/SKILL.md) for figure production.
 
-1. Open with the reader’s question and why it matters. State scope before implementation details.
-2. Explain the method, baseline and controls; link reproduction details.
-3. Organize results by question. Include evidence-linked figures, uncertainty and failures.
-4. Separate observation, interpretation and future ideas. Do not strengthen the summary’s claims.
-5. Explain practical implications and limits: data coverage, leakage controls, compute and transfer assumptions.
-6. Check every number against source tables and citations against papers. Inspect figures; save an internal draft. Publication is a separate decision.
+## Deliver
 
-## Outputs and evidence
+blog.md with captions, evidence links, limitations and reproduction pointer. [Template](assets/output.md).
 
-blog.md with captions, evidence links, limitations and reproduction pointer.
+## Stop
 
-## Completion criteria
+Deliver a draft whose claims match research-summary and whose numbers resolve to source tables.
 
-Every numerical claim must match a source table. Every conclusion must stay within the summary’s evidence. Include failures and competing explanations. Save the draft; publishing or sending is outside this skill.
+## Origin
 
-## Resources
-
-[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.
+This writing workflow consumes the local research-summary record.

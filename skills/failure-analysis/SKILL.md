@@ -3,17 +3,15 @@ name: failure-analysis
 description: "Investigate model errors, error clusters and dataset or annotation problems."
 ---
 
-## Inputs
+Start with: Verified predictions, labels/coverage, metadata, evaluation protocol and baseline predictions.
 
-Verified predictions, labels/coverage, metadata, evaluation protocol and baseline predictions.
-
-## Definitions
+## Terms
 
 - **False positive/negative**: an error under the recorded threshold, matching rule and annotation policy.
 - **Error slice**: samples selected by one explicit predicate, with total and error counts.
 - **Annotation defect**: an error established by review of the input and labeling specification.
 
-## Procedure
+## Do
 
 1. Check one-to-one prediction/label joins and evaluation coverage. Missing predictions remain errors.
 2. Fix threshold and protocol. Detection needs IoU, box type, class mapping, duplicates and unlabeled-positive policy.
@@ -22,14 +20,16 @@ Verified predictions, labels/coverage, metadata, evaluation protocol and baselin
 5. Audit labels, corruption, shift and preprocessing. Separate suspected annotation problems from confirmed model errors; compare baseline and candidate on the same samples.
 6. Rank experiments that distinguish explanations. Link each recommendation to error evidence and expected change; keep sensitive sample IDs local.
 
-## Outputs and evidence
+Use [hypothesis-generation](../hypothesis-generation/SKILL.md): Convert the error explanations into discriminating tests.
 
-failure-analysis.md, error/slice tables, representative examples and proposed hypothesis IDs.
+## Deliver
 
-## Completion criteria
+failure-analysis.md, error/slice tables, representative examples and proposed hypothesis IDs. [Template](assets/output.md).
+
+## Stop
 
 Do not call an apparent model error an annotation defect without review evidence. Every reported error rate needs a denominator. Every recommended fix needs a discriminating experiment. Missing predictions remain in the evaluation denominator.
 
-## Resources
+## Origin
 
-[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.
+Prediction-to-error investigation is specific to this collection.

@@ -68,7 +68,7 @@ python -m tools.install_skills research-grill experiment-design experiment-verif
 python -m tools.install_skills research-resume --destination /path/to/project/.claude/skills
 ```
 
-Check your harness' discovery location/version. Cursor, Copilot, Gemini and other systems can consume the Markdown instructions or Agent Skills directories where supported; no universal plugin registration is assumed. The installer refuses to overwrite existing skills. No model API or harness-specific tool call is required. Avoid duplicate upstream/local trigger names. More in [installation and offline use](docs/offline.md).
+Check your harness' discovery location/version. Cursor, Copilot, Gemini and other systems can consume the Markdown instructions or Agent Skills directories where supported; no universal plugin registration is assumed. The installer includes the sibling skills linked by the selected workflows, including transitive links, and refuses to overwrite existing directories. Read the printed skill list after installation. No model API or harness-specific tool call is required. Avoid duplicate upstream/local trigger names. More in [installation and offline use](docs/offline.md).
 
 Example request: “Follow research-resume on `my-study/`. Revalidate available evidence, distinguish old conclusions from current evidence, and propose the next experiment. Use local files only.”
 
@@ -96,6 +96,15 @@ Keep `project.json`, hypotheses, immutable specs, run folders, decisions, summar
 - [Dashboard](dashboard/README.md): static offline research continuity views of questions, hypotheses, findings, failures, pause reasons and next steps. It reads file records and does not duplicate ClearML's monitoring UI.
 
 ## Sources, contribution and license
+
+| Source | Role in this collection |
+| --- | --- |
+| [K-Dense Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills) | Literature, EDA, hypotheses and scientific figures |
+| [Kalaris Research Agent Skills](https://github.com/KalarisLabs/research-agent-skills) | Experimental design and critical appraisal |
+| [Matt Pocock Skills](https://github.com/mattpocock/skills) | Questioning, decision-driven planning and retrospectives |
+
+Relevant skills link directly to the reviewed upstream file at its pinned revision. Original local skills are labeled as such. These are concept adaptations, not vendored upstream implementations.
+
 
 Reviewed K-Dense Scientific Agent Skills, Kalaris Research Agent Skills and Matt Pocock's Skills. Adapted selected workflow concepts and referenced specialized tooling rather than copying their catalogs. [Curation decisions](docs/curation.md), [pinned sources](docs/upstream-sources.json), and [retained notices](THIRD_PARTY_NOTICES.md) explain provenance.
 

@@ -15,3 +15,9 @@ Read the pinned upstream skill files in upstream-sources.json, their root licens
 Use the pinned repository/path URLs in upstream-sources.json to inspect specialized tooling. Review per-file licenses and dependencies before copying anything new; retain notices and document modifications. Avoid installing both upstream and local skills with the same trigger name unless the harness supports explicit selection.
 
 Optional services are not part of the offline workflow. Literature reviews in an offline environment must describe local-corpus coverage and cutoff rather than claim current or exhaustive search.
+
+## Point-of-use attribution and composition
+
+Each adapted SKILL.md links directly to its reviewed upstream file and commit. Original local workflows name their role instead of implying upstream implementation reuse. Root MIT notices and LICENSES/ remain unchanged.
+
+Each skill owns one task. Comparison rules belong to ablation-review, runtime checks to experiment-verify, evidence synthesis to research-summary, and figure production to scientific-visualization. Other skills link to these owners. The portable record contract lives only in research-summary/references/; the installer follows sibling links so offline installations resolve.

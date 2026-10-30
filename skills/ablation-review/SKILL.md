@@ -3,17 +3,15 @@ name: ablation-review
 description: "Compare experiments fairly, quantify uncertainty and bound conclusions."
 ---
 
-## Inputs
+Start with: Specs, process/verification states, predictions, seed/unit metadata and decision rules.
 
-Specs, process/verification states, predictions, seed/unit metadata and decision rules.
-
-## Definitions
+## Terms
 
 - **Evaluation cohort**: identical dataset/split digests, evaluation implementation/protocol and metric definition.
 - **Controlled ablation**: a cohort comparison with declared changes and fixed budget, seed policy, preprocessing and pretraining controls.
 - **Best verified result**: the eligible result maximizing/minimizing the primary metric within one cohort; preserve ties.
 
-## Procedure
+## Do
 
 1. Revalidate evidence. Exclude invalid runs from best-verified claims, but retain their existence and failure reasons.
 2. Group by data/split digests, evaluation implementation/protocol and metric/split/direction. Use best_runs for these cohorts; audit controls separately.
@@ -22,14 +20,16 @@ Specs, process/verification states, predictions, seed/unit metadata and decision
 5. Apply the predeclared useful-effect rule. Disclose multiplicity, selection and test reuse; one run cannot establish robustness.
 6. Mark hypotheses supported, rejected or inconclusive. Save best results per cohort, negative findings, limitations and the next decisive test.
 
-## Outputs and evidence
+Use [experiment-verify](../experiment-verify/SKILL.md): Revalidate runs before including them in a cohort.
 
-ablation-review.md, comparison/cohort table, effect sizes/intervals and evidence-linked conclusions.
+## Deliver
 
-## Completion criteria
+ablation-review.md, comparison/cohort table, effect sizes/intervals and evidence-linked conclusions. [Template](assets/output.md).
+
+## Stop
 
 Different cohorts cannot share a winner. Multiple changed factors support only a bundle-level conclusion. Report effect size and uncertainty against the predefined useful-effect threshold. Classify support using the design rule, not an after-the-fact narrative.
 
-## Resources
+## Source
 
-[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.
+Adapted workflow concepts from [KalarisLabs/research-agent-skills — scientific-critical-thinking](https://github.com/KalarisLabs/research-agent-skills/blob/b0ee35abfd7e26428846fbd84f282114560a5fbd/skills/scientific-critical-thinking/SKILL.md) (MIT); specialized for this collection’s local records.

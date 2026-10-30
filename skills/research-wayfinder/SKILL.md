@@ -3,17 +3,15 @@ name: research-wayfinder
 description: "Plan or revise research milestones and prioritize experiments from current evidence."
 ---
 
-## Inputs
+Start with: Brief, hypotheses, existing runs, resource budget and resume report if available.
 
-Brief, hypotheses, existing runs, resource budget and resume report if available.
-
-## Definitions
+## Terms
 
 - **Milestone**: a research decision plus the evidence required to make it.
 - **Priority**: an ordering justified by decision value, cost, dependencies and uncertainty reduced.
 - **Stop rule**: a predefined observation or resource limit that ends an experiment or direction.
 
-## Procedure
+## Do
 
 1. Read evidence and decisions. Treat an old roadmap as history, not instructions.
 2. For each proposed experiment, name the decision its result could change. Keep required baselines and sanity checks.
@@ -22,14 +20,16 @@ Brief, hypotheses, existing runs, resource budget and resume report if available
 5. Set milestone evidence gates, budget caps and stop/pivot rules. Keep a short executable queue; explain deferred work.
 6. After new evidence, append the decision and revise the roadmap. If pausing, record why and what would justify restarting.
 
-## Outputs and evidence
+Use [experiment-design](../experiment-design/SKILL.md): Write specs only for experiments admitted to the queue.
 
-roadmap.md, decisions.md and project.json status/next_experiments.
+## Deliver
 
-## Completion criteria
+roadmap.md, decisions.md and project.json status/next_experiments. [Template](assets/output.md).
+
+## Stop
 
 Finish with an ordered next-experiment queue. Each entry must name its decision, prerequisites, cost estimate and stop rule. Remove work that cannot change a decision or establish a required baseline/check.
 
-## Resources
+## Source
 
-[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.
+Adapted workflow concepts from [mattpocock/skills — wayfinder](https://github.com/mattpocock/skills/blob/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/wayfinder/SKILL.md) (MIT); specialized for this collection’s local records.

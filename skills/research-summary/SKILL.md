@@ -3,33 +3,32 @@ name: research-summary
 description: "Summarize a milestone with evidence, negative results and unresolved questions."
 ---
 
-## Inputs
+Start with: Question, hypotheses, complete run inventory, reports and decisions.
 
-Question, hypotheses, complete run inventory, reports and decisions.
-
-## Definitions
+## Terms
 
 - **Observation**: a recorded measurement linked to an artifact.
-- **Interpretation**: a conclusion drawn from observations under stated assumptions.
 - **Negative result**: a valid experiment that did not meet its predefined support criterion; a broken execution is not a negative scientific result.
 
-## Procedure
+## Do
 
-1. Read primary records, not just the latest slide. State the question and scope changes.
-2. Map claims to run IDs, source artifacts, protocol, verification and uncertainty.
-3. Summarize strongest comparable results with baselines, effect sizes and compute.
-4. Include negative results and failed approaches. Distinguish broken execution from scientific rejection.
-5. Separate measurements, interpretation and speculation. Preserve contradictions and open questions.
-6. Save a dated summary; update manifest findings/status without erasing history. Validate record references.
+1. Read the original question, decisions and complete run index. State scope changes.
+2. Use ablation-review for comparisons. Carry its cohort IDs, verification states, effects and uncertainty into the summary.
+3. Write one claim-to-evidence row per conclusion: claim, run/artifact, observation, interpretation and unresolved assumption.
+4. Include negative scientific results and technical failures as separate entries. Preserve contradictions.
+5. List decisions, unanswered questions and next experiments. An explanation not separated from its rivals remains inconclusive.
+6. Save a dated summary. Update manifest findings/status; validate references without deleting prior entries.
 
-## Outputs and evidence
+Use [ablation-review](../ablation-review/SKILL.md): Use its comparison table and conclusions; do not rerank runs.
 
-summary.md, evidence-linked findings, current status and next experiments.
+## Deliver
 
-## Completion criteria
+summary.md, evidence-linked findings, current status and next experiments. [Template](assets/output.md). [Record contract](references/record-contract.md).
+
+## Stop
 
 Every conclusion must link to experiments and their verification states. Include unsuccessful approaches and contradictions. If the design cannot distinguish explanations, label the conclusion inconclusive.
 
-## Resources
+## Origin
 
-[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.
+The claim ledger is part of this repository’s continuity format.

@@ -3,17 +3,15 @@ name: literature-review
 description: "Review scientific literature, compare methods and trace claims. Supports local papers offline."
 ---
 
-## Inputs
+Start with: A scoped question, search cutoff, and available papers or search access.
 
-A scoped question, search cutoff, and available papers or search access.
-
-## Definitions
+## Terms
 
 - **Reported result**: a claim read in the source, with page or table.
 - **Artifact-checked result**: a reported value checked against supplied code/data/output.
 - **Reproduced result**: a value obtained by executing the method and recorded protocol yourself.
 
-## Procedure
+## Do
 
 1. Define review type and eligibility before searching. Do not call a quick scan systematic.
 2. Log source, query, date and counts. Offline: inventory local papers and hashes; state corpus limits.
@@ -22,14 +20,16 @@ A scoped question, search cutoff, and available papers or search access.
 5. Compare protocols before scores. Preserve contradictions; no search hits does not establish novelty.
 6. Check citations against actual papers. Recommend baselines and experiments; use curated upstream resources for specialist searches.
 
-## Outputs and evidence
+Use [hypothesis-generation](../hypothesis-generation/SKILL.md): Turn gaps and contradictions into rival explanations.
 
-literature.md, sources/search-log.csv, sources/evidence.csv and local-paper hashes.
+## Deliver
 
-## Completion criteria
+literature.md, sources/search-log.csv, sources/evidence.csv and local-paper hashes. [Template](assets/output.md).
+
+## Stop
 
 Finish when every included claim has a source location and evidence level, exclusions are logged, and search coverage is stated. An unread paper cannot support a finding. A DOI check establishes identity, not correctness.
 
-## Resources
+## Source
 
-[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.
+Adapted workflow concepts from [K-Dense-AI/scientific-agent-skills — literature-review](https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/skills/literature-review/SKILL.md) (MIT); specialized for this collection’s local records.

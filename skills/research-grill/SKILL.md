@@ -3,17 +3,13 @@ name: research-grill
 description: "Clarify and challenge a research idea before committing to experiments."
 ---
 
-## Inputs
+Start with: The idea, existing records, constraints and decision owner.
 
-The idea, existing records, constraints and decision owner.
+## Terms
 
-## Definitions
-
-- **Business objective**: the operational outcome and the person who decides its value.
 - **Research question**: a population, comparison and measurable outcome.
-- **Assumption**: a premise required for the plan that has not been established by cited evidence.
 
-## Procedure
+## Do
 
 1. Read the project first. Look up facts yourself; ask the researcher for decisions.
 2. Separate the business objective from the scientific question. Name the population, comparison and outcome.
@@ -22,14 +18,16 @@ The idea, existing records, constraints and decision owner.
 5. Agree on a baseline, minimum useful effect, budget, non-goals and stop rule.
 6. Stop interviewing when the next experiment can answer the remaining uncertainty. Record unresolved decisions and owners.
 
-## Outputs and evidence
+Use [experiment-design](../experiment-design/SKILL.md): Define the executable experiment after the question is settled.
 
-brief.md and project.json: objective, question, assumptions, success criterion and next step.
+## Deliver
 
-## Completion criteria
+brief.md and project.json: objective, question, assumptions, success criterion and next step. [Template](assets/output.md).
+
+## Stop
 
 Finish when the question, baseline, useful-effect threshold, budget and next experiment are written. If a decision blocks the experiment, name the decision and owner. Do not ask questions answered by existing records.
 
-## Resources
+## Source
 
-[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.
+Adapted workflow concepts from [mattpocock/skills — grilling](https://github.com/mattpocock/skills/blob/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/productivity/grilling/SKILL.md) (MIT); specialized for this collection’s local records.

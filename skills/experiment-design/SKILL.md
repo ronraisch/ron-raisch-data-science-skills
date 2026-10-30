@@ -3,17 +3,15 @@ name: experiment-design
 description: "Design controlled experiments and write executable specifications before running."
 ---
 
-## Inputs
+Start with: Hypothesis ID, data/version, baseline, confounders and budget.
 
-Hypothesis ID, data/version, baseline, confounders and budget.
-
-## Definitions
+## Terms
 
 - **Baseline**: a named reference method evaluated under the same protocol.
 - **Controlled comparison**: only declared treatment factors vary; all listed controls stay fixed.
 - **Ablation**: a controlled comparison that removes or changes a declared component.
 
-## Procedure
+## Do
 
 1. Define population, independent unit, estimand, primary metric/direction and useful effect. Separate exploratory metrics.
 2. Choose simple and relevant strong baselines. Hold splits, preprocessing, evaluation, budget and seed policy fixed; label bundled changes.
@@ -22,14 +20,16 @@ Hypothesis ID, data/version, baseline, confounders and budget.
 5. Specify architecture, checkpoint/loading policy, trainability, optimizer, scheduler, runtime settings, steps, artifacts and environment. Fill the machine-readable template; run validate_spec.
 6. Predeclare support, falsification, inconclusive and stopping rules. Keep final test sealed. Amend intent under a new experiment ID.
 
-## Outputs and evidence
+Use [experiment-verify](../experiment-verify/SKILL.md): Use its runtime evidence contract; the spec records intent, not proof of execution.
 
-specs/<id>.json and design note with controls, replication and decision rules.
+## Deliver
 
-## Completion criteria
+specs/<id>.json and design note with controls, replication and decision rules. [Template](assets/output.md).
+
+## Stop
 
 Do not run with unknown input hashes, undefined primary metric, absent baseline or unfilled runtime settings. Freeze the spec before execution. Any change to intent requires a new experiment ID and amendment reason.
 
-## Resources
+## Source
 
-[Output template](assets/output.md) · [Record format and evidence rules](references/record-contract.md). Work offline by default. Record missing evidence; do not invent it.
+Adapted workflow concepts from [KalarisLabs/research-agent-skills — experimental-design](https://github.com/KalarisLabs/research-agent-skills/blob/b0ee35abfd7e26428846fbd84f282114560a5fbd/skills/experimental-design/SKILL.md) (MIT); specialized for this collection’s local records.

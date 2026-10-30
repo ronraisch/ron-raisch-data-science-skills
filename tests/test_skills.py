@@ -15,9 +15,9 @@ class SkillTests(unittest.TestCase):
                 self.assertIn('name: '+path.parent.name,front)
                 self.assertRegex(path.parent.name,r'^[a-z0-9]+(-[a-z0-9]+)*$')
                 self.assertIn('description: ',front)
-                for section in ('Inputs','Procedure','Outputs and evidence','Completion criteria','Resources'):
+                for section in ('Do','Deliver','Stop'):
                     self.assertIn('## '+section,text)
-                self.assertGreaterEqual(len(re.findall(r"^\d+\. ",text,re.M)),6)
+                self.assertGreaterEqual(len(re.findall(r"^\d+\. ",text,re.M)),4)
                 self.assertLess(len(text.splitlines()),500)
 
     def test_skill_relative_links_resolve(self):
@@ -30,3 +30,14 @@ class SkillTests(unittest.TestCase):
         canonical=(ROOT/'docs/record-contract.md').read_text()
         for p in (ROOT/'skills').glob('*/references/record-contract.md'):
             self.assertEqual(p.read_text(),canonical)
+
+    def test_upstream_sources_are_pinned_at_point_of_use(self):
+        import json
+        sources=json.loads((ROOT/'docs/upstream-sources.json').read_text())
+        for source in sources:
+            for path in source['paths']:
+                url=source['repository']+'/blob/'+source['revision']+'/'+path
+                self.assertTrue(any(url in p.read_text() for p in (ROOT/'skills').glob('*/SKILL.md')), url)
+
+    def test_only_one_portable_record_contract(self):
+        self.assertEqual(len(list((ROOT/'skills').glob('*/references/record-contract.md'))),1)

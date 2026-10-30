@@ -10,7 +10,9 @@ class OptionalTests(unittest.TestCase):
     def test_selected_skill_install_and_no_clobber(self):
         with tempfile.TemporaryDirectory() as d:
             out=Path(d)/'skills';install(['research-resume'],out)
-            self.assertTrue((out/'research-resume/references/record-contract.md').exists())
+            self.assertTrue((out/'research-summary/references/record-contract.md').exists())
+            self.assertTrue((out/'research-handoff/SKILL.md').exists())
+            self.assertTrue((out/'experiment-verify/SKILL.md').exists())
             with self.assertRaises(FileExistsError):install(['research-resume'],out)
 
     def test_installer_preflights_all_names(self):
