@@ -1,6 +1,6 @@
 ---
 name: research-resume
-description: "Reconstruct paused research, recheck evidence and choose the next experiment."
+description: "Resume a paused or unfamiliar research project. Reconstruct history, recheck evidence and choose the next experiment when returning after a break or taking over existing work."
 ---
 
 Start with: Project directory, manifests, notes, code/data/artifacts and optional tracker exports.

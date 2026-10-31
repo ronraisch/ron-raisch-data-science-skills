@@ -18,7 +18,7 @@ Start with: Reviewed spec, inspected runner, verification hooks, output path and
 3. Run the input preflight from experiment-verify. Failure blocks training. Smoke-test finite loss, shapes, gradients/freezing, checkpoint round-trip and metric sanity.
 4. Execute locally. Attach experiment-verify hooks after trainer overrides and checkpoint loading. Capture logs, actual updates, predictions, artifacts and termination.
 5. On exception, save failed process state and partial evidence before propagating the error. Register every attempted run.
-6. Run postflight verification. Save process state separately from verification state. Mirror local records to ClearML only when selected.
+6. Run postflight verification. Save process state separately from verification state. Use optional ZenML orchestration only when selected.
 
 Use [experiment-verify](../experiment-verify/SKILL.md): Delegate all input, runtime and postflight checks to this skill.
 

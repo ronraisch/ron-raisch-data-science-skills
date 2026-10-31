@@ -85,5 +85,23 @@
     "mandatory_long_method_links": 0,
     "source_provenance_files": 9,
     "decision": "Direct scientific procedures; task-specific shared references only. No local-model performance claim."
+  },
+  "startup_onboarding": {
+    "python_passed": 130,
+    "node_passed": 16,
+    "skill_count": 20,
+    "python_log_sha256": "ea5e1a3b7f3a366f9c479017f9ed376ab9c3bf57d23f63cbacdc3ae804364391",
+    "node_log_sha256": "ebd5abd5481bfc2d13abab1679fe9ad0f7624711d7bbeea436dab091cbc12178",
+    "checks": [
+      "actual interactive terminal yes/no flows",
+      "noninteractive explicit opt in and opt out",
+      "preserves existing AGENTS content and edited blocks",
+      "rejects symlink/incomplete targets",
+      "automatic startup dependency closure with consent",
+      "offline packaged CLI install",
+      "both CPU examples passed",
+      "all pinned upstream hashes intact"
+    ],
+    "removed_feature": "ClearML SDK/Agent infrastructure and its two obsolete adapter tests; replaced with removal regression check"
   }
 }

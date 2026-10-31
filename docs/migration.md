@@ -12,4 +12,10 @@ To start new component-controlled work:
 
 Conservative full-file ownership can reject a decoder edit in a file shared with a protected extractor. Move code before freezing the experiment, or obtain explicit expanded scope. Do not narrow mappings after a rejection. Watch-coverage changes need a new reviewed baseline. Source/version/contract checks cannot automatically detect an undeclared semantic purpose change; preserve human review and executable behavior tests.
 
-Production handoff/validation are new optional workflows, not migrations of research-handoff. A standalone inference notebook is the source-code handoff to MLOps; validator.py is a separate acceptance tool. Existing research continuity files and ClearML integration remain intact. ZenML is opt-in. npm package 0.4.0 is GitHub-installable; no npm registry release is implied.
+Production handoff/validation are new optional workflows, not migrations of research-handoff. A standalone inference notebook is the source-code handoff to MLOps; validator.py is a separate acceptance tool. Existing research continuity files remain intact. ZenML is opt-in. npm package 0.5.0 is GitHub-installable; no npm registry release is implied.
+
+## 0.5: research startup and ClearML removal
+
+ClearML SDK/Agent configuration, adapter scripts, package extra and setup guide have been removed at the maintainer's request. Existing records containing clearml_url remain readable; the dashboard no longer exposes that integration. Use tracker_url for an ordinary external research link, or zenml_url for ZenML. Old Git revisions retain historical ClearML code if migration context is needed. No other experiment, dashboard or deployment feature is removed.
+
+A new research-start skill routes startup/continuation through the existing lifecycle skills. npm/Python installation can optionally append templates/agents-research.md to a project AGENTS.md. Interactive terminals ask first; noninteractive installs require --with-agents. --no-agents skips the offer. Explicit opt-in includes research-start and its linked skills, even for a partial installation. Existing prose and already-installed research blocks are preserved.

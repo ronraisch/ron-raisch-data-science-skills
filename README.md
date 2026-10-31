@@ -1,16 +1,17 @@
 # Ron's Data Science Skills
 
 
-Nineteen concise research skills with explicit inputs, procedures, deliverables and stop rules. Scientific workflows retain their K-Dense, Kalaris and Matt Pocock provenance. No skill requires loading a long upstream method. Optional offline utilities and source archives remain bundled; [source selection](docs/curation.md) records attribution.
+Twenty concise research skills with explicit inputs, procedures, deliverables and stop rules. Scientific workflows retain their K-Dense, Kalaris and Matt Pocock provenance. No skill requires loading a long upstream method. Optional offline utilities and source archives remain bundled; [source selection](docs/curation.md) records attribution.
 
 A small collection of practical, reusable research skills for data scientists, ML researchers, and coding agents. Use them to ask better questions, run the experiment you intended, understand failures, and leave enough evidence to resume a project months later.
 
-**The skills are the product.** Python utilities, file records, a CPU example, optional ClearML integration, and a small read-only dashboard support them. No database, server, paid model, or NVIDIA GPU is required.
+**The skills are the product.** Python utilities, file records, a CPU example, optional ZenML integration, and a small read-only dashboard support them. No database, server, paid model, or NVIDIA GPU is required.
 
 ## Choose a skill
 
 | Stage | Skill | Durable output |
 | --- | --- | --- |
+| Start | [research-start](skills/research-start/SKILL.md) | Route a new idea through question clarification, component design and planning |
 | Understand | [research-grill](skills/research-grill/SKILL.md) | Question, assumptions, constraints and success criteria |
 | Understand | [literature-review](skills/literature-review/SKILL.md) | Search log, source evidence, competing methods |
 | Explore | [eda](skills/eda/SKILL.md) | Reproducible profiles, figures, leakage/bias findings |
@@ -56,9 +57,28 @@ npx --yes github:ronraisch/ron-raisch-data-science-skills serve /path/to/my-stud
 npx --yes github:ronraisch/ron-raisch-data-science-skills deploy /path/to/my-study
 ```
 
-For offline transfer, run `npm pack` in a connected checkout, transfer the `.tgz`, then `npm install --global --offline ./ron-raisch-data-science-skills-0.4.0.tgz`. Run `ron-raisch-data-science-skills install ...` locally. The tarball includes the skills, licenses and optional Python tools; no external packages need fetching. GitHub-based npx needs Git and network on first use.
+For offline transfer, run `npm pack` in a connected checkout, transfer the `.tgz`, then `npm install --global --offline ./ron-raisch-data-science-skills-0.5.0.tgz`. Run `ron-raisch-data-science-skills install ...` locally. The tarball includes the skills, licenses and optional Python tools; no external packages need fetching. GitHub-based npx needs Git and network on first use.
 
 From a source checkout, `npm test` tests the Node CLI and `npm start` opens the demo host (Python required). Existing Python commands remain supported.
+
+## Trigger the right skill
+
+Start with `npx --yes github:ronraisch/ron-raisch-data-science-skills install research-start`. Then tell your agent: **“Use research-start to begin this research project.”** Compatible harnesses can also discover it from requests such as “start a research project” or “explore this research idea.” Automatic selection depends on the harness/model; explicit invocation is the reliable fallback. No AGENTS.md change is required.
+
+research-start inspects existing records, resumes paused work when appropriate, or routes new work through research-grill → component-design → research-wayfinder. It loads the next skill for the current phase rather than repeating all procedures. Literature review and EDA enter the plan when their evidence is needed.
+
+The interactive `npx … install` command previews an optional [short research paragraph](templates/agents-research.md) and asks before appending it to the current project's AGENTS.md. Default is **No**. Accepting also installs research-start and its linked skills. Existing content and previously added blocks are preserved. For scripts:
+
+```bash
+# Explicitly opt in (also works without a terminal):
+npx --yes github:ronraisch/ron-raisch-data-science-skills install all --with-agents
+# Skip the prompt and leave AGENTS.md untouched:
+npx --yes github:ronraisch/ron-raisch-data-science-skills install research-start --no-agents
+# Choose another project's instruction file:
+npx --yes github:ronraisch/ron-raisch-data-science-skills install research-start --with-agents --agents-md /path/to/project/AGENTS.md
+```
+
+`npx --yes` only approves downloading the package; it does not consent to AGENTS.md changes. Python installation supports the same --with-agents, --no-agents and --agents-md options. Installing only a specialist skill does not silently add the startup workflow unless you accept the paragraph. Skill descriptions provide routing hints, not an enforcement guarantee; component scope and verification remain executable gates.
 
 ## Start locally
 
@@ -141,9 +161,8 @@ Keep `project.json`, hypotheses, immutable specs, run folders, decisions, summar
 
 ## Optional tools
 
-- [ClearML](docs/clearml.md): SDK logging, parameter/metric/artifact tracking, dataset digests, comparison, and remote CPU task registration/execution. Existing ClearML experiment comparison is reused. SDK/Agent: Apache-2.0; Server: SSPL-1.0, source-available rather than OSI-approved open source. Nothing here requires a server.
 - [ZenML](docs/zenml.md): optional open-source local pipelines and artifact lineage around the same standalone scripts. Components and scope enforcement work without ZenML.
-- [Dashboard](dashboard/README.md): static offline research continuity views of questions, hypotheses, findings, failures, pause reasons and next steps. It reads file records and does not duplicate ClearML's monitoring UI.
+- [Dashboard](dashboard/README.md): static offline research continuity views of questions, hypotheses, findings, failures, pause reasons and next steps. It reads file records and remains independent of experiment trackers.
 
 ## Sources, contribution and license
 

@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
+import {requestAgentsConsent,inspectAgentsFile,appendAgentsParagraph} from './research-onboarding.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const source = path.join(root, 'skills');
@@ -12,24 +13,30 @@ const help = `Ron's Data Science Skills
 
   list
   install <skill...|all> [--agent codex|claude] [--destination PATH]
+          [--with-agents|--no-agents] [--agents-md PATH]
   serve <project...|--demo|--html FILE> [--port 8080]
   deploy <project...|--html FILE> [--image IMAGE]
 
 Install defaults to .agents/skills in the current directory.
 Linked skills are included; existing directories are never overwritten.
+Interactive installation offers an optional research-triggering AGENTS.md paragraph.
+Noninteractive installs leave it unchanged unless --with-agents is supplied.
 Skill installation needs Node only. serve/deploy need Python 3.11+;
 deploy also needs an oc login. Set PYTHON to select an interpreter.
 `;
 
-function install(args) {
-  let destination, agent;
+async function install(args) {
+  let destination, agent, agentsFile='AGENTS.md', mode;
   const names = [];
   for (let i=0; i<args.length; i++) {
     const arg=args[i];
-    if (arg==='--destination' || arg==='--agent') {
+    if (arg==='--with-agents' || arg==='--no-agents') {
+      if (mode) throw new Error('Choose only one of --with-agents or --no-agents');
+      mode=arg==='--with-agents' ? 'yes' : 'no';
+    } else if (arg==='--destination' || arg==='--agent' || arg==='--agents-md') {
       const value=args[++i];
       if (!value || value.startsWith('--')) throw new Error(`Missing value for ${arg}`);
-      if (arg==='--destination') destination=value; else agent=value;
+      if (arg==='--destination') destination=value; else if (arg==='--agent') agent=value; else agentsFile=value;
     } else if (arg.startsWith('-')) throw new Error(`Unknown option: ${arg}`);
     else names.push(arg);
   }
@@ -37,7 +44,13 @@ function install(args) {
   if (destination && agent) throw new Error('Choose --destination or --agent');
   if (!names.length || new Set(names).size!==names.length || (names.includes('all') && names.length!==1)) throw new Error('Choose unique skill names or all');
   const known=new Set(available());
+  if (names.some(n=>n!=='all' && !known.has(n))) throw new Error('Unknown skill: '+names.find(n=>n!=='all' && !known.has(n)));
+  const filename=path.resolve(agentsFile);
+  const paragraph=fs.readFileSync(path.join(root,'templates/agents-research.md'),'utf8');
+  const consent=await requestAgentsConsent({mode,filename,paragraph});
+  if (consent) inspectAgentsFile(filename,paragraph);
   const queue=names[0]==='all' ? [...known] : [...names];
+  if (consent && !queue.includes('research-start')) queue.push('research-start');
   const closure=new Set();
   while (queue.length) {
     const name=queue.pop();
@@ -65,13 +78,16 @@ function install(args) {
     throw e;
   }
   console.log(`Installed ${selected.length} skills into ${target}:\n${selected.join('\n')}`);
+  if (consent) console.log(appendAgentsParagraph(filename,paragraph) ? `Added research triggering paragraph to ${filename}` : `Research paragraph already present in ${filename}; preserved it.`);
+  else console.log('AGENTS.md unchanged. Opt in with --with-agents; it also installs research-start.');
+  if (selected.includes('research-start')) console.log('To begin: ask your agent “Use research-start to begin this research project.”');
 }
 
 const [command,...args]=process.argv.slice(2);
 try {
   if (!command || ['help','--help','-h'].includes(command)) console.log(help);
   else if (command==='list') console.log(available().join('\n'));
-  else if (command==='install') install(args);
+  else if (command==='install') await install(args);
   else if (command==='serve' || command==='deploy') {
     const module=command==='serve' ? 'dashboard.serve' : 'dashboard.openshift.install';
     const python=process.env.PYTHON || (process.platform==='win32' ? 'python' : 'python3');

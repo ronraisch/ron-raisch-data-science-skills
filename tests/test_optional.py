@@ -2,8 +2,6 @@ from pathlib import Path
 import tempfile
 import unittest
 from tools.install_skills import install
-from tools.clearml.log_run import log_run
-from tools.experiment_verification import save_json
 
 
 class OptionalTests(unittest.TestCase):
@@ -21,37 +19,8 @@ class OptionalTests(unittest.TestCase):
             with self.assertRaises(ValueError):install(['research-resume','unknown'],out)
             self.assertFalse(out.exists())
 
-    def test_clearml_adapter_without_server(self):
-        class Logger:
-            def report_scalar(self,**kw):self.scalar=kw
-        class FakeTask:
-            offline=False
-            @classmethod
-            def set_offline(cls,offline_mode):cls.offline=offline_mode
-            @classmethod
-            def init(cls,**kw):cls.instance=cls();return cls.instance
-            def __init__(self):self.id='task-id';self.logger=Logger();self.connections=[];self.artifacts=[];self.closed=False
-            def connect(self,params,**kw):self.connections.append((params,kw))
-            def get_logger(self):return self.logger
-            def upload_artifact(self,**kw):self.artifacts.append(kw)
-            def close(self):self.closed=True
-        with tempfile.TemporaryDirectory() as d:
-            root=Path(d);spec=root/'spec.json';run=root/'runtime.json'
-            save_json(spec,{'id':'spec','dataset':{'sha256':'data'},'splits':{'sha256':'split'},'evaluation_protocol':'v1','expected':{'metric':{'name':'accuracy','split':'validation'}}})
-            save_json(run,{'run_id':'r1','observations':{'optimizer':{'value':{'lr':.1}}},'result':.7,'artifacts':[]})
-            result=log_run(root,spec,run,FakeTask,offline=True)
-            self.assertEqual(result,'task-id');self.assertTrue(FakeTask.offline)
-            self.assertTrue(FakeTask.instance.closed)
-            self.assertTrue(all(kw['ignore_remote_overrides'] for _,kw in FakeTask.instance.connections))
-            self.assertEqual(FakeTask.instance.logger.scalar['value'],.7)
-
-    def test_clearml_preserves_external_refs_without_uploading_large_bytes(self):
-        from unittest.mock import MagicMock
-        task=MagicMock();task.id='external-task';task_class=MagicMock();task_class.init.return_value=task
-        with tempfile.TemporaryDirectory() as d:
-            root=Path(d);spec=root/'spec.json';run=root/'runtime.json'
-            save_json(spec,{'id':'s','dataset':{'sha256':'data'},'splits':{'sha256':'split'},'evaluation_protocol':'v1','expected':{'metric':{'name':'accuracy','split':'validation'}},'components':{'allowed_changes':['model.decoder']}})
-            save_json(run,{'run_id':'r','observations':{},'result':1.0,'artifacts':[{'identity':'checkpoint','uri':'nfs://org/model','sha256':'a'*64,'provenance':'run'}]})
-            self.assertEqual(log_run(root,spec,run,task_class),'external-task')
-            self.assertTrue(any(call.kwargs.get('name')=='ExternalArtifacts' for call in task.connect.call_args_list))
-            self.assertFalse(any('nfs:' in str(call) for call in task.upload_artifact.call_args_list))
+    def test_clearml_infrastructure_is_removed(self):
+        root=Path(__file__).resolve().parents[1]
+        self.assertFalse((root/'tools/clearml').exists())
+        self.assertFalse((root/'docs/clearml.md').exists())
+        self.assertNotIn('clearml', (root/'pyproject.toml').read_text().lower())
