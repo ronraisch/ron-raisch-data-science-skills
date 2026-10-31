@@ -1,6 +1,6 @@
 # Working in this repository
 
-Start with README.md and the relevant skill, not all skills at once. See docs/record-contract.md for durable outputs and docs/verification.md for executable scope. This is primarily a skills collection; keep ClearML and dashboard optional.
+Start with README.md and the relevant skill, not all skills at once. See docs/record-contract.md for durable outputs and docs/verification.md for executable scope. This is primarily a skills collection; keep ZenML and dashboard optional.
 
 Use Python 3.11+ and uv; core tools must remain standard-library-only, CPU-friendly, offline and server-free. Run `python -m unittest discover -s tests -v` after changing tools, then run the CPU example for execution changes. Never promote a run from a cached report without checking its current evidence.
 

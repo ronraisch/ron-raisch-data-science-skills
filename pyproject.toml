@@ -1,13 +1,12 @@
 [project]
 name = "ron-raisch-data-science-skills"
-version = "0.4.0"
+version = "0.5.0"
 description = "Practical research skills, runtime verification and durable file-based research records"
 requires-python = ">=3.11"
 license = "MIT"
 dependencies = []
 
 [project.optional-dependencies]
-clearml = ["clearml>=1.16,<3"]
 zenml = ["zenml[local]>=0.98,<0.99"]
 plots = ["matplotlib>=3.8,<4"]
 

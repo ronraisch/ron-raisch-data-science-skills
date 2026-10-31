@@ -6,9 +6,8 @@ python -m dashboard.build PROJECT_A PROJECT_B --output /tmp/research.html
 
 Open the HTML file directly. It is a static snapshot, with no server, database, JavaScript, API keys or internet access. Rebuild after records change. It revalidates available run evidence before showing best results. Invalid projects are shown as errors rather than silently omitted.
 
-This view assembles the continuity information that lives in these local records: original question, hypothesis status, findings/negative results, pause reason, next experiments and expandable notes. It is a record reader, not an assertion that ClearML lacks project notes or reports. Experiment comparison, charts, resource monitoring, task queues and artifact management already have ClearML interfaces and are not reimplemented here. See docs/clearml.md for the capability review.
 
-Record text is escaped, external URLs are not followed, and a restrictive content security policy blocks scripts. Optional ClearML URLs can remain in manifests for human reference; the dashboard deliberately makes no live ClearML API calls. Only build trusted local records: a static output can contain private research text. This tool does not publish or upload it.
+Record text is escaped, external URLs are not followed, and a restrictive content security policy blocks scripts. Optional tracker links can remain in manifests for human reference; the dashboard makes no tracker API calls. Only build trusted local records: a static output can contain private research text. This tool does not publish or upload it.
 
 ## Quick local hosting
 
@@ -25,7 +24,7 @@ python -m dashboard /path/to/my-study /path/to/another-study
 python -m dashboard --html /path/to/research.html
 ```
 
-With uv, prefix the same command with `uv run --no-project`, e.g. `uv run --no-project python -m dashboard --demo`. Nothing contacts ClearML or an external service. If the port is busy, add `--port 8081`. For deliberate LAN access, add `--host 0.0.0.0`; the default binds only to your computer. There is no application login, so share only a snapshot appropriate for the network you expose it to.
+With uv, prefix the same command with `uv run --no-project`, e.g. `uv run --no-project python -m dashboard --demo`. Nothing contacts an external service. If the port is busy, add `--port 8081`. For deliberate LAN access, add `--host 0.0.0.0`; the default binds only to your computer. There is no application login, so share only a snapshot appropriate for the network you expose it to.
 
 Only `/`, `/index.html`, and `/healthz` are served. Project folders, datasets, checkpoints, source files and directory listings are never served. Project mode renders once on startup: restart after changing records. HTML mode reopens the file for each request, so replacing the snapshot takes effect on refresh. Invalid individual records remain visible in the rendered report. The standalone exported HTML still works with no host at all.
 
@@ -47,7 +46,7 @@ Already exported the page? Use:
 python -m dashboard.openshift.install --html /path/to/research.html
 ```
 
-The HTML contains research notes and is uploaded to the selected cluster. The generated Route uses edge TLS and redirects HTTP; it does not add login or identity management. Use your organization's existing ingress/access controls if the snapshot is private. The workload runs with an arbitrary non-root UID, dropped capabilities, no service-account token, a read-only root filesystem and a read-only ConfigMap mount. No PVC, database, dependency installation or live ClearML access is needed.
+The HTML contains research notes and is uploaded to the selected cluster. The generated Route uses edge TLS and redirects HTTP; it does not add login or identity management. Use your organization's existing ingress/access controls if the snapshot is private. The workload runs with an arbitrary non-root UID, dropped capabilities, no service-account token, a read-only root filesystem and a read-only ConfigMap mount. No PVC, database, dependency installation or tracker access is needed.
 
 ### Disconnected clusters and prebuilt images
 
@@ -100,4 +99,4 @@ The manifests are in [openshift/template.yaml](openshift/template.yaml); inspect
 
 Validation: local HTTP serving, fixed routes, traversal rejection, snapshot updates, size limits and installer command/staging behavior are tested. No Docker/Podman runtime, `oc` CLI or live OpenShift cluster is available in the development environment; container image builds and actual cluster rollout have not been executed here.
 
-Component projects add a hierarchy/version table, approved run scopes, scope/runtime/contract failures, external artifact references, optional ZenML/ClearML links and dated research events. The existing findings, comparable verified results and pause/resume notes remain. Rebuild the snapshot after record changes. NFS/file/HF references are links/metadata only: the host still serves HTML, never the artifacts. Opening an NFS reference requires a mounted share and browser/OS support.
+Component projects add a hierarchy/version table, approved run scopes, scope/runtime/contract failures, external artifact references, optional ZenML/tracker links and dated research events. The existing findings, comparable verified results and pause/resume notes remain. Rebuild the snapshot after record changes. NFS/file/HF references are links/metadata only: the host still serves HTML, never the artifacts. Opening an NFS reference requires a mounted share and browser/OS support.

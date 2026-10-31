@@ -27,7 +27,7 @@ def component_panel(root,project,runs):
         detail=run.get('component_verification',{})
         allowed=run.get('specification',{}).get('components',{}).get('allowed_changes','not recorded')
         failures=[c for c in run.get('checks',[]) if c['name'].startswith('components.') and c['status']!='verified']
-        trackers=' '.join(reference_link(run.get(k)) for k in ('clearml_url','zenml_url') if run.get(k))
+        trackers=' '.join(reference_link(run.get(k)) for k in ('tracker_url','zenml_url') if run.get(k))
         scopes.append('<details><summary>'+e(run['id'])+' — scope '+e(allowed)+' — '+e(detail.get('status','unknown'))+'</summary><pre>'+e(detail)+'</pre><pre>'+e(failures)+'</pre>'+trackers+'</details>')
     artifacts=''.join('<li>'+e(a.get('identity'))+' '+reference_link(a.get('uri',a.get('path')))+'<br><small>'+e({k:v for k,v in a.items() if k not in ('uri','path')})+'</small></li>' for a in project.get('external_artifacts',[])) or '<li>No external artifact references recorded</li>'
     timeline=''.join('<li>'+e(x.get('date','unknown'))+' — '+e(x.get('event',''))+'</li>' for x in project.get('timeline',[])) or '<li>No dated timeline recorded; inspect research notes.</li>'

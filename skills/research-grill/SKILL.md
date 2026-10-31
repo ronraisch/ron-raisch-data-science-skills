@@ -1,6 +1,6 @@
 ---
 name: research-grill
-description: "Clarify and challenge a research idea before committing to experiments."
+description: "Clarify and challenge a new research idea, vague objective or proposed study before experiments. Use when the research question, assumptions or success criteria are unsettled."
 ---
 
 Start with: The idea, existing records, constraints and decision owner.

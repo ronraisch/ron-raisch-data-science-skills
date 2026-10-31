@@ -1,6 +1,6 @@
 ---
 name: component-design
-description: "Define stable research components, contracts, code mappings and authorized experiment scopes. Use before component-controlled experiments or changing pipeline boundaries."
+description: "Define stable research components, contracts, code mappings and authorized experiment scopes. Use when defining a research pipeline, deciding component boundaries, or preparing component-controlled experiments."
 ---
 
 Start with: Research question, actual pipeline source, planned experimental variables and decision owner.
