@@ -25,7 +25,13 @@ def log_run(root, spec_path, runtime_path, task_class=None, offline=False):
                                        value=run["result"], iteration=0)
         for name,path in (("spec",spec_path),("runtime",runtime_path)):
             task.upload_artifact(name=name,artifact_object=str(path),wait_on_upload=True)
+        external=[a for a in run['artifacts'] if a.get('uri')]
+        if external:
+            task.connect({'references':external},name='ExternalArtifacts',ignore_remote_overrides=True)
+        if spec.get('components'):
+            task.connect(spec['components'],name='ComponentScope',ignore_remote_overrides=True)
         for artifact in run["artifacts"]:
+            if artifact.get('uri'):continue # Preserve references; never upload NFS checkpoints implicitly.
             task.upload_artifact(name=Path(artifact["path"]).name,artifact_object=str(resolve(root,artifact["path"])),wait_on_upload=True)
         folder=Path(runtime_path).parent
         task.upload_artifact(name="verification",artifact_object=str(folder/"verification.json"),wait_on_upload=True)

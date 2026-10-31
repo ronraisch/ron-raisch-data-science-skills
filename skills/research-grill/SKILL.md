@@ -14,6 +14,8 @@ Start with: The idea, existing records, constraints and decision owner.
 
 Use [experiment-design](../experiment-design/SKILL.md): Define the executable experiment after the question is settled.
 
+Use [component-design](../component-design/SKILL.md): Introduce stable component boundaries before choosing experimental variables.
+
 ## Deliver
 
 brief.md and project.json: objective, question, assumptions, success criterion and next step. [Template](assets/output.md).

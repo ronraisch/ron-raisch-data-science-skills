@@ -22,6 +22,8 @@ Start with: Verified predictions, labels/coverage, metadata, evaluation protocol
 
 Use [hypothesis-generation](../hypothesis-generation/SKILL.md): Convert the error explanations into discriminating tests.
 
+Use [component-design](../component-design/SKILL.md): Associate a failure hypothesis with component IDs only when error evidence supports that attribution; propose a scoped discriminating change.
+
 ## Deliver
 
 failure-analysis.md, error/slice tables, representative examples and proposed hypothesis IDs. [Template](assets/output.md).

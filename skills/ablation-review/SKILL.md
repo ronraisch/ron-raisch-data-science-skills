@@ -14,6 +14,8 @@ Start with: Specs, process/verification states, predictions, seed/unit metadata 
 
 Use [experiment-verify](../experiment-verify/SKILL.md): Revalidate runs before including them in a cohort.
 
+Use [component-design](../component-design/SKILL.md): Require verified component scope before calling a comparison a controlled component ablation. Audit intended variables, protected sources/config/dependencies and contract/regression evidence.
+
 ## Deliver
 
 ablation-review.md, comparison/cohort table, effect sizes/intervals and evidence-linked conclusions. [Template](assets/output.md).

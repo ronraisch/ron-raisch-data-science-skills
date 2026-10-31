@@ -21,6 +21,8 @@ Start with: Spec, actual data/splits, runtime hooks, predictions, artifacts and 
 
 Use [experiment-design](../experiment-design/SKILL.md): Resolve intent changes by creating a new spec, never by editing observations.
 
+Use [component-design](../component-design/SKILL.md): Run component source-scope preflight before edits/execution and postflight with runtime boundary evidence. Fail unauthorized changes; keep authorization, compatibility, runtime consistency and regression checks distinct.
+
 ## Deliver
 
 verification.json/.md: expected, observed, source, status, limitations and remediation. [Template](assets/output.md).

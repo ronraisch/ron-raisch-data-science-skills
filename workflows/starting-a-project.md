@@ -9,3 +9,5 @@ research-grill → literature-review → eda → hypothesis-generation → resea
 5. Follow [research-wayfinder](../skills/research-wayfinder/SKILL.md). Save roadmap.md, decisions.md and next_experiments. Pass the saved outputs and evidence paths to the next step; do not rely on chat memory.
 
 Gate: unresolved missing evidence stays explicit. Scientific conclusions require valid comparable runs; a plan or preflight alone cannot verify execution. Offline use records local-corpus and tooling limits.
+
+Define the useful pipeline hierarchy with component-design before freezing the first experiment. Preserve stable responsibilities; do not enumerate every layer.

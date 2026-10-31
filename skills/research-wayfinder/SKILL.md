@@ -14,6 +14,8 @@ Start with: Brief, hypotheses, existing runs, resource budget and resume report 
 
 Use [experiment-design](../experiment-design/SKILL.md): Write specs only for experiments admitted to the queue.
 
+Use [component-design](../component-design/SKILL.md): Name component-level questions, proposed change scopes, protected components and dependencies in the experiment queue.
+
 ## Deliver
 
 roadmap.md, decisions.md and project.json status/next_experiments. [Template](assets/output.md).

@@ -22,6 +22,8 @@ Start with: Reviewed spec, inspected runner, verification hooks, output path and
 
 Use [experiment-verify](../experiment-verify/SKILL.md): Delegate all input, runtime and postflight checks to this skill.
 
+Use [component-design](../component-design/SKILL.md): Capture component IDs/versions, live configurations, source snapshot and boundary/semantic-test evidence. Stop before any edit beyond approved scope.
+
 ## Deliver
 
 runs/<id>/ with spec, runtime evidence, predictions, artifacts, logs and verification; manifest entry. [Template](assets/output.md).

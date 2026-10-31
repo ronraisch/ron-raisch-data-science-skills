@@ -21,6 +21,8 @@ Start with: Project directory, manifests, notes, code/data/artifacts and optiona
 
 Use [research-handoff](../research-handoff/SKILL.md): Use the last handoff as the historical record, not as current verification.
 
+Use [component-design](../component-design/SKILL.md): Reconstruct the component hierarchy/version history and authorized experiment scopes. Recheck current evidence; missing historic baselines remain unknown.
+
 ## Deliver
 
 resume.md: history, current cohorts, evidence gaps, cold-start result and next experiments; revised roadmap input. [Template](assets/output.md).

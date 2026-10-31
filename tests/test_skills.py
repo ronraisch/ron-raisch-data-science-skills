@@ -6,9 +6,9 @@ ROOT=Path(__file__).resolve().parents[1]
 
 
 class SkillTests(unittest.TestCase):
-    def test_sixteen_valid_skills(self):
+    def test_nineteen_valid_skills(self):
         paths=list((ROOT/'skills').glob('*/SKILL.md'))
-        self.assertEqual(len(paths),16)
+        self.assertEqual(len(paths),19)
         for path in paths:
             with self.subTest(skill=path.parent.name):
                 text=path.read_text();front=text.split('---',2)[1]

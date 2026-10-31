@@ -25,7 +25,7 @@ def install(names, destination):
     for name in names:
         if (destination/name).exists():raise FileExistsError(destination/name)
     destination.mkdir(parents=True,exist_ok=True)
-    for name in names:shutil.copytree(available[name],destination/name)
+    for name in names:shutil.copytree(available[name],destination/name,ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     return names
 
 

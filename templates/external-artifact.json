@@ -1,0 +1,7 @@
+{
+  "identity": "REPLACE",
+  "provenance": "REPLACE with producing run and source/checkpoint lineage",
+  "sha256": "REPLACE",
+  "uri": "file:///nfs/project/model.ckpt",
+  "version": "REPLACE"
+}

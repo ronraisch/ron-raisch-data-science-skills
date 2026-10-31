@@ -14,6 +14,8 @@ Start with: Hypothesis ID, data/version, baseline, confounders and budget.
 
 Use [experiment-verify](../experiment-verify/SKILL.md): Use its runtime evidence contract; the spec records intent, not proof of execution.
 
+Use [component-design](../component-design/SKILL.md): Declare experimental variables, allowed_changes and approval, protected components, baseline hashes and evaluation controls. Freeze scope before implementation.
+
 ## Deliver
 
 specs/<id>.json and design note with controls, replication and decision rules. [Template](assets/output.md).

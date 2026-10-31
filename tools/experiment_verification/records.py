@@ -22,6 +22,19 @@ def validate_project(root):
             errors.append(f"{field} must be a list")
     if errors:
         return p, errors
+    component_ids=set()
+    if p.get("components"):
+        try:
+            from .components import validate_manifest
+            component_manifest=validate_manifest(load_json(resolve(root,p['components'])))
+            component_ids={c['id'] for c in component_manifest['components']}
+        except (OSError, ValueError, AssertionError, TypeError, KeyError) as exc:
+            errors.append(f'Component manifest: {exc}')
+    for artifact in p.get('external_artifacts',[]):
+        try:
+            from .artifacts import validate_reference
+            validate_reference(artifact)
+        except (ValueError,TypeError) as exc: errors.append(str(exc))
     hypotheses, run_ids, finding_ids = set(), set(), set()
     def unique(items, seen, label):
         for item in items:
@@ -48,10 +61,15 @@ def validate_project(root):
             exists(run.get(field))
         try:
             spec = load_json(resolve(root, run["spec"]))
+            if p.get('components') and not spec.get('components'):
+                errors.append(f'Component project requires explicit scope for {run["id"]}')
             if spec.get("hypothesis_id") not in hypotheses:
                 errors.append(f"Unknown hypothesis for {run['id']}")
         except (ValueError, OSError, KeyError) as exc:
             errors.append(f"Spec error: {exc}")
+    for entry in p['runs']+p['findings']:
+        if any(identity not in component_ids for identity in entry.get('component_ids',[])):
+            errors.append(f'Unknown component reference: {entry.get("id")}')
     for finding in p["findings"]:
         if finding.get("kind") not in ("observation", "interpretation", "negative-result") or not finding.get("claim"):
             errors.append(f"Invalid finding: {finding.get('id')}")
@@ -80,7 +98,7 @@ def inspect_runs(root, project):
             report = verify(spec, runtime, root, spec_path)
             if runtime["run_id"] != entry["id"]:
                 raise ValueError("Manifest/runtime run ID mismatch")
-            item.update(specification=spec, runtime=runtime, verification=report["status"], checks=report["checks"])
+            item.update(specification=spec, runtime=runtime, verification=report["status"], checks=report["checks"], component_verification=report["components"])
         except (OSError, ValueError, KeyError, TypeError) as exc:
             item.update(verification="unverifiable", error=str(exc))
         results.append(item)
@@ -90,7 +108,8 @@ def inspect_runs(root, project):
 def cohort_key(spec):
     import json
     return json.dumps([spec["dataset"]["sha256"], spec["splits"]["sha256"],
-                       spec["evaluation_protocol"], spec["expected"]["metric"]], sort_keys=True)
+                       spec["evaluation_protocol"], spec["expected"]["metric"],
+                       {k:spec.get('components',{}).get(k) for k in ('baseline','allowed_changes')}], sort_keys=True)
 
 
 def best_runs(root, project=None):
@@ -144,7 +163,9 @@ def resume_report(root):
     lines += [f"- {f['id']} [{f['kind']}]: {f['claim']} Evidence: {', '.join(f['evidence'])}" for f in project["findings"]]
     lines += ["", "## Recommended next experiments (recorded, not auto-approved)", ""]
     lines += [f"- {x}" for x in project["next_experiments"]]
-    lines += ["", "## Required cold-start work", "",
+    lines += ["", "## Components and artifact provenance", "",
+              str(project.get("components", "Legacy project: component scope unknown")),
+              str(project.get("external_artifacts", [])), "", "## Required cold-start work", "",
               "Read handoff/decisions and original artifacts; audit runtime hooks. Reproduce the smallest run in a new output directory. Check current data/environment access. Reassess old interpretations before changing status. Offline literature cutoff and absent records remain unknown.", "",
               "This report inventories evidence. It does not reconstruct missing conversations or infer scientific support from a score."]
     return "\n".join(lines)+"\n"

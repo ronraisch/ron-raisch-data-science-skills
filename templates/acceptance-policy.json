@@ -1,0 +1,33 @@
+{
+  "approval": {
+    "by": "REPLACE",
+    "policy_sha256": "REPLACE_AFTER_APPROVAL",
+    "reference": "decisions.md#acceptance",
+    "role": "research-lead"
+  },
+  "classes": [
+    "REPLACE"
+  ],
+  "files": {
+    "SAMPLE": {
+      "prediction": "TEAM_PATH",
+      "test": "REFERENCE_PATH"
+    }
+  },
+  "quality": {
+    "ap50": {
+      "minimum": null
+    },
+    "recall": {
+      "minimum": null
+    }
+  },
+  "reference": {
+    "min_box_iou": null,
+    "score_atol": null
+  },
+  "schema_version": 1,
+  "score_threshold": null,
+  "strategy": "hybrid",
+  "task": "detection"
+}

@@ -1,6 +1,6 @@
 {
   "name": "ron-raisch-data-science-skills",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Composable research skills, runtime verification and research continuity",
   "type": "module",
   "license": "MIT",
@@ -28,7 +28,10 @@
     "dashboard/Containerfile",
     "dashboard/openshift/template.yaml",
     "tools/**/*.py",
-    "tools/clearml/clearml.conf.example"
+    "tools/clearml/clearml.conf.example",
+    "examples/component_study/",
+    "!**/__pycache__/**",
+    "!**/*.pyc"
   ],
   "scripts": {
     "test": "node --test tests/node/*.test.mjs",

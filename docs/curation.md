@@ -1,6 +1,6 @@
 # Source selection
 
-Nine skills use pinned upstream methods, bundled with supporting scripts, references and assets. Their short SKILL.md entry points select relevant sections and define local outputs. Read one method section at a time; do not load the whole collection. The seven remaining skills own execution verification, failure investigation and durable research records.
+Nine skills use pinned upstream methods, bundled with supporting scripts, references and assets. Their short SKILL.md entry points select relevant sections and define local outputs. Read one method section at a time; do not load the whole collection. The seven original local skills own execution verification, failure investigation and durable research records. component-design, production-handoff and production-validator add local contract and transfer workflows without replacing the upstream science.
 
 | Entry points | Method authority | Local adaptation |
 | --- | --- | --- |

@@ -15,3 +15,9 @@ Keep records in a project directory. JSON is strict (no NaN/Infinity), UTF-8, wi
 Best results are derived within dataset/split/evaluation/metric cohorts, never one global score. Fully verified means the implemented checks passed for instrumented evidence, not absolute scientific truth. For a controlled ablation also audit budget, seeds, preprocessing, pretraining and changed factors.
 
 Every deliverable must identify inputs, commands/method, observations, interpretations, limitations, failed/negative outcomes, and the next decision. Leave unavailable sections explicitly unknown. Offline use needs only local files and a local model or a human; no server or paid service is part of this contract.
+
+## Optional component extension (compatible with v1)
+
+project.components points to components.json; new component projects require components scope in every registered spec. The shared component contract belongs to component-design/references/component-contract.md. Runtime evidence carries component snapshot and observations; verification adds a component section. Legacy verification keeps its old narrower meaning and explicitly reports unknown component scope. Do not manufacture historic approvals.
+
+Optional external_artifacts contain identity, URI/path, version/revision, sha256 and provenance. Default large storage is mounted organizational NFS; internal HF references need immutable revision and provisioned local_path offline. No large binaries enter Git. Run tracker links may include clearml_url and zenml_url; findings may name component_ids. Optional timeline entries preserve dated decisions and pause/resume events. These fields add no mandatory service.

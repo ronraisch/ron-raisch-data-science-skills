@@ -1,7 +1,7 @@
 # Ron's Data Science Skills
 
 
-Nine skills now use bundled, pinned methods from K-Dense, Kalaris and Matt Pocock through concise local entry points. Seven skills retain local verification and continuity workflows. See [source selection](docs/curation.md). Install once; the methods and supporting files remain available offline. For local models, invoke one skill and load only the method sections it names.
+Nine skills now use bundled, pinned methods from K-Dense, Kalaris and Matt Pocock through concise local entry points. Seven original skills retain local verification and continuity workflows. Three new skills add component design and the two production handoff guarantees. See [source selection](docs/curation.md). Install once; the methods and supporting files remain available offline. For local models, invoke one skill and load only the method sections it names.
 
 A small collection of practical, reusable research skills for data scientists, ML researchers, and coding agents. Use them to ask better questions, run the experiment you intended, understand failures, and leave enough evidence to resume a project months later.
 
@@ -16,6 +16,7 @@ A small collection of practical, reusable research skills for data scientists, M
 | Explore | [eda](skills/eda/SKILL.md) | Reproducible profiles, figures, leakage/bias findings |
 | Explain | [hypothesis-generation](skills/hypothesis-generation/SKILL.md) | Rival explanations and falsifiable predictions |
 | Plan | [research-wayfinder](skills/research-wayfinder/SKILL.md) | Evidence-driven milestones and next experiments |
+| Structure | [component-design](skills/component-design/SKILL.md) | Stable hierarchy, contracts, code mappings and approved change scope |
 | Design | [experiment-design](skills/experiment-design/SKILL.md) | Controlled comparison and machine-readable specification |
 | Verify | [experiment-verify](skills/experiment-verify/SKILL.md) | Intended-versus-observed evidence report |
 | Run | [experiment-run](skills/experiment-run/SKILL.md) | Run artifacts, process state and verification |
@@ -27,6 +28,8 @@ A small collection of practical, reusable research skills for data scientists, M
 | Explain | [research-blog](skills/research-blog/SKILL.md) | Readable internal article with evidence |
 | Pause | [research-handoff](skills/research-handoff/SKILL.md) | Cold-start instructions, failures and pause reasons |
 | Resume | [research-resume](skills/research-resume/SKILL.md) | Reconstructed history, best comparable results and evidence gaps |
+| Transfer | [production-handoff](skills/production-handoff/SKILL.md) | One standalone inference notebook and isolated parity evidence |
+| Accept | [production-validator](skills/production-validator/SKILL.md) | Standalone validator.py and approved production validation data |
 
 Each skill follows the [open Agent Skills format](https://agentskills.io/specification): a `SKILL.md` with name/description and optional bundled assets/references. Read it as a human, ask an agent to follow it, or copy selected directories into your harness' skill location. Skills are independently usable; full-checkout Python tools are optional and deliberately scoped.
 
@@ -53,7 +56,7 @@ npx --yes github:ronraisch/ron-raisch-data-science-skills serve /path/to/my-stud
 npx --yes github:ronraisch/ron-raisch-data-science-skills deploy /path/to/my-study
 ```
 
-For offline transfer, run `npm pack` in a connected checkout, transfer the `.tgz`, then `npm install --global --offline ./ron-raisch-data-science-skills-0.2.0.tgz`. Run `ron-raisch-data-science-skills install ...` locally. The tarball includes the skills, licenses and optional Python tools; no external packages need fetching. GitHub-based npx needs Git and network on first use.
+For offline transfer, run `npm pack` in a connected checkout, transfer the `.tgz`, then `npm install --global --offline ./ron-raisch-data-science-skills-0.4.0.tgz`. Run `ron-raisch-data-science-skills install ...` locally. The tarball includes the skills, licenses and optional Python tools; no external packages need fetching. GitHub-based npx needs Git and network on first use.
 
 From a source checkout, `npm test` tests the Node CLI and `npm start` opens the demo host (Python required). Existing Python commands remain supported.
 
@@ -116,6 +119,22 @@ Exit 0 means all implemented required checks verified; exit 1 means a failed, pa
 
 The supplied adapter checks CSV dataset/split identity and group isolation, live runtime observations versus intent, required artifact hashes, exact prediction coverage and targets, and recomputed binary accuracy or MAE. Runtime helpers observe torch-style parameters/optimizer groups without requiring torch. Integrate hooks after trainer overrides and checkpoint loading. Unsupported domains/metrics need explicit adapters; telemetry cannot prove honest execution or label correctness. See [verification scope and integration](docs/verification.md).
 
+## Controlled component experiments
+
+A scientific experiment changes an explicitly approved part of a stable component hierarchy. Define `components.json` with component-design, freeze a source baseline, and declare `allowed_changes` in the experiment spec. Before editing, identify shared-file owners and affected dependencies. Any additional scope needs explicit researcher approval **before** modification. Verification fails protected source/config/contract changes and rejects the result as a controlled ablation.
+
+Component identity follows purpose, not module layout. Multiple components may share files; components may span files. Same purpose retains ID with version evolution; a new purpose requires a new ID. Full-file hashing is conservative about shared utilities. See [the component contract](skills/component-design/references/component-contract.md) and [migration guidance](docs/migration.md).
+
+```bash
+python -m examples.component_study.demo --output /tmp/new-component-study
+python -m tools.experiment_verification records /tmp/new-component-study
+python -m dashboard.build /tmp/new-component-study --output /tmp/components.html
+```
+
+This additional CPU image example preserves the original sensor example. It runs actual inference, accepts a decoder-only edit, rejects extractor/shared-utility edits, extracts inference into one notebook, runs strict isolated parity and exercises standalone detection/segmentation validators. Its tiny synthetic fixtures are functional demonstrations, not model-quality claims. Large checkpoints belong on organizational NFS or an internal Hugging Face server; records hold immutable identities and hashes.
+
+Three separate guarantees: **experiment-verify** checks intended execution and authorized changes; **production-handoff** checks extraction parity and independence; **production-validator** checks production against separately approved behavioral/quality criteria. MLOps owns deployment. [Production tools and limits](docs/production.md).
+
 ## Preserve research between sessions
 
 Keep `project.json`, hypotheses, immutable specs, run folders, decisions, summaries and handoff notes together. The record validator checks references. Resume recomputes verification from present artifacts, discovers unregistered run directories, and derives best results **within evaluation cohorts**. Controlled ablations require additional budget/seed/factor review. No tracker is needed. See [records](docs/records.md), [templates](templates/README.md), and [five compositions](workflows/README.md).
@@ -123,6 +142,7 @@ Keep `project.json`, hypotheses, immutable specs, run folders, decisions, summar
 ## Optional tools
 
 - [ClearML](docs/clearml.md): SDK logging, parameter/metric/artifact tracking, dataset digests, comparison, and remote CPU task registration/execution. Existing ClearML experiment comparison is reused. SDK/Agent: Apache-2.0; Server: SSPL-1.0, source-available rather than OSI-approved open source. Nothing here requires a server.
+- [ZenML](docs/zenml.md): optional open-source local pipelines and artifact lineage around the same standalone scripts. Components and scope enforcement work without ZenML.
 - [Dashboard](dashboard/README.md): static offline research continuity views of questions, hypotheses, findings, failures, pause reasons and next steps. It reads file records and does not duplicate ClearML's monitoring UI.
 
 ## Sources, contribution and license
@@ -133,10 +153,10 @@ Keep `project.json`, hypotheses, immutable specs, run folders, decisions, summar
 | [Kalaris Research Agent Skills](https://github.com/KalarisLabs/research-agent-skills) | Experimental design and critical appraisal |
 | [Matt Pocock Skills](https://github.com/mattpocock/skills) | Questioning, decision-driven planning and retrospectives |
 
-Relevant skills link directly to the reviewed upstream file at its pinned revision. Original local skills are labeled as such. These are concept adaptations, not vendored upstream implementations.
+Relevant skills link directly to the reviewed upstream file at its pinned revision. Original local skills are labeled as such. Nine entry points bundle unchanged upstream methods and resources, with local output/offline adapters.
 
 
-Reviewed K-Dense Scientific Agent Skills, Kalaris Research Agent Skills and Matt Pocock's Skills. Adapted selected workflow concepts and referenced specialized tooling rather than copying their catalogs. [Curation decisions](docs/curation.md), [pinned sources](docs/upstream-sources.json), and [retained notices](THIRD_PARTY_NOTICES.md) explain provenance.
+Reviewed K-Dense Scientific Agent Skills, Kalaris Research Agent Skills and Matt Pocock's Skills. Bundled selected methods and resources without copying entire catalogs. [Curation decisions](docs/curation.md), [pinned sources](docs/upstream-sources.json), and [retained notices](THIRD_PARTY_NOTICES.md) explain provenance.
 
 MIT for this repository; upstream notices in `LICENSES/`. Contribute small skills, realistic evidence fixtures and deterministic checks; see [CONTRIBUTING.md](CONTRIBUTING.md). All contributions must preserve scientific uncertainty and failed outcomes.
 
