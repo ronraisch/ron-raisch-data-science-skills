@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-31",
+  "baseline_commit": "ffa15b1b94d38889acd7c2b2d760dcd0ec4ad084",
+  "python": "3.12.14",
+  "baseline": {
+    "python_passed": 63,
+    "node_passed": 8
+  },
+  "final": {
+    "python_passed": 121,
+    "node_passed": 9,
+    "skills_validated": 19,
+    "upstream_bundles_hash_verified": 9
+  },
+  "executed": [
+    {
+      "command": "python -m unittest discover -s tests -q",
+      "result": "passed",
+      "log_sha256": "48ffc3f7084863b9c222355d94c7a5b815fd668d7260e6ce74cf07e4d09b16dc"
+    },
+    {
+      "command": "npm test",
+      "result": "passed",
+      "log_sha256": "4053113ff3220a2d324b8c26190f1d0933a1894d2c85aca4e975e91ef46726aa"
+    },
+    {
+      "command": "python -m examples.demo --output NEW_PATH",
+      "result": "passed",
+      "scores": {
+        "majority_validation_accuracy": 0.625,
+        "logistic_validation_accuracy": 0.85
+      }
+    },
+    {
+      "command": "python -m examples.component_study.demo --output NEW_PATH",
+      "result": "passed",
+      "stages": [
+        "authorized decoder scope verified",
+        "protected extractor rejected",
+        "shared utility rejected",
+        "isolated notebook strict parity verified",
+        "detection hybrid validator passed",
+        "segmentation hybrid validator passed"
+      ]
+    },
+    {
+      "command": "ZENML_ANALYTICS_OPT_IN=false python -m tools.zenml.pipeline --output NEW_PATH",
+      "sdk": "0.98.0",
+      "result": "completed",
+      "run_id": "3030f395-5dfa-457f-8100-a351b3f0f215"
+    },
+    {
+      "command": "npm pack; npm install --offline --ignore-scripts PACKAGE; CLI install production-validator",
+      "result": "passed"
+    },
+    {
+      "command": "notebook nbformat.validate; 19 YAML frontmatter checks",
+      "result": "passed"
+    }
+  ],
+  "not_executed": [
+    "real OpenShift cluster/container build",
+    "live ClearML Server or remote Agent",
+    "organizational NFS mount",
+    "internal Hugging Face service",
+    "hosted CI matrix results",
+    "GPU inference parity",
+    "arbitrary Python source slicing"
+  ],
+  "pre_merge_review": {
+    "python_passed": 125,
+    "node_passed": 9,
+    "python_log_sha256": "609769295befdfeb4a88d6062502c32fe6a5112ed0a088f71983766789976326",
+    "fixes": [
+      "Exclude conventional root metadata from source scanning, retain nested configurations",
+      "Require explicit approval for input/config schema evolution",
+      "Separate Git provenance from source content comparison",
+      "Use complete bipartite reference detection matching"
+    ]
+  },
+  "concise_skill_review": {
+    "python_passed": 127,
+    "node_passed": 9,
+    "python_log_sha256": "fb3c76b06836d7352e00de30e97c19374ffe51cb251ee711528122ab14e5fab2",
+    "mandatory_long_method_links": 0,
+    "source_provenance_files": 9,
+    "decision": "Direct scientific procedures; task-specific shared references only. No local-model performance claim."
+  }
+}

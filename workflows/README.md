@@ -9,3 +9,5 @@ Skills can be used alone or chained by passing durable files. Do not force every
 - [Pausing/resuming](pausing-and-resuming.md): handoff → reconstructed current evidence → revised roadmap.
 
 The complete CPU example demonstrates these transitions with actual artifacts. Verification is an ongoing activity, not a ceremonial step before training. Read docs/records.md for state transitions and comparison eligibility.
+
+- [Production transfer](production-transfer.md): approved inference → isolated notebook parity → separately approved production validation.

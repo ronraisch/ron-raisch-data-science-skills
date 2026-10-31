@@ -57,7 +57,7 @@ function install(args) {
       const dest=path.join(target,name);
       fs.mkdirSync(dest); created.push(dest);
       for (const entry of fs.readdirSync(path.join(source,name))) {
-        fs.cpSync(path.join(source,name,entry),path.join(dest,entry),{recursive:true,force:false,errorOnExist:true});
+        fs.cpSync(path.join(source,name,entry),path.join(dest,entry),{recursive:true,force:false,errorOnExist:true,filter:src=>path.basename(src)!=='__pycache__' && !src.endsWith('.pyc')});
       }
     }
   } catch (e) {

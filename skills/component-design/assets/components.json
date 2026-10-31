@@ -1,0 +1,325 @@
+{
+  "components": [
+    {
+      "config": {},
+      "config_schema": {
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "contract_tests": [
+        "finite-shape"
+      ],
+      "dependencies": [],
+      "id": "model",
+      "inputs": {
+        "type": "object"
+      },
+      "invariants": [
+        "Finite inputs/outputs; preserve image dimensions"
+      ],
+      "outputs": {
+        "additionalProperties": false,
+        "properties": {
+          "detections": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "box": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "maxItems": 4,
+                  "minItems": 4,
+                  "type": "array"
+                },
+                "label": {
+                  "enum": [
+                    "object"
+                  ],
+                  "type": "string"
+                },
+                "score": {
+                  "maximum": 1,
+                  "minimum": 0,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "box",
+                "label",
+                "score"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "segmentation": {
+            "items": {
+              "items": {
+                "enum": [
+                  0,
+                  1
+                ],
+                "type": "integer"
+              },
+              "minItems": 1,
+              "type": "array"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "detections",
+          "segmentation"
+        ],
+        "type": "object"
+      },
+      "path": "model",
+      "purpose": "Image detector and segmenter",
+      "sources": [],
+      "version": "1.0.0"
+    },
+    {
+      "config": {},
+      "config_schema": {
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "contract_tests": [
+        "finite-shape"
+      ],
+      "dependencies": [],
+      "id": "features",
+      "inputs": {
+        "type": "array"
+      },
+      "invariants": [
+        "Finite inputs/outputs; preserve image dimensions"
+      ],
+      "outputs": {
+        "items": {
+          "items": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "minItems": 1,
+        "type": "array"
+      },
+      "path": "model.feature_extraction",
+      "purpose": "Normalize image pixels",
+      "sources": [
+        {
+          "path": "features.py",
+          "symbol": "extract"
+        },
+        {
+          "path": "common.py",
+          "symbol": "clip"
+        }
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "config": {},
+      "config_schema": {
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "contract_tests": [
+        "finite-shape"
+      ],
+      "dependencies": [
+        "features"
+      ],
+      "id": "decoder",
+      "inputs": {
+        "items": {
+          "items": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "minItems": 1,
+        "type": "array"
+      },
+      "invariants": [
+        "Finite inputs/outputs; preserve image dimensions"
+      ],
+      "outputs": {
+        "additionalProperties": false,
+        "properties": {
+          "detections": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "box": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "maxItems": 4,
+                  "minItems": 4,
+                  "type": "array"
+                },
+                "label": {
+                  "enum": [
+                    "object"
+                  ],
+                  "type": "string"
+                },
+                "score": {
+                  "maximum": 1,
+                  "minimum": 0,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "box",
+                "label",
+                "score"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "segmentation": {
+            "items": {
+              "items": {
+                "enum": [
+                  0,
+                  1
+                ],
+                "type": "integer"
+              },
+              "minItems": 1,
+              "type": "array"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "detections",
+          "segmentation"
+        ],
+        "type": "object"
+      },
+      "path": "model.decoder",
+      "purpose": "Decode foreground objects and masks",
+      "sources": [
+        {
+          "path": "decoder.py",
+          "symbol": "decode"
+        },
+        {
+          "path": "common.py",
+          "symbol": "clip"
+        }
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "config": {},
+      "config_schema": {
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "contract_tests": [
+        "finite-shape"
+      ],
+      "dependencies": [
+        "decoder"
+      ],
+      "id": "inference",
+      "inputs": {
+        "type": "object"
+      },
+      "invariants": [
+        "Finite inputs/outputs; preserve image dimensions"
+      ],
+      "outputs": {
+        "additionalProperties": false,
+        "properties": {
+          "detections": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "box": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "maxItems": 4,
+                  "minItems": 4,
+                  "type": "array"
+                },
+                "label": {
+                  "enum": [
+                    "object"
+                  ],
+                  "type": "string"
+                },
+                "score": {
+                  "maximum": 1,
+                  "minimum": 0,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "box",
+                "label",
+                "score"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "segmentation": {
+            "items": {
+              "items": {
+                "enum": [
+                  0,
+                  1
+                ],
+                "type": "integer"
+              },
+              "minItems": 1,
+              "type": "array"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "detections",
+          "segmentation"
+        ],
+        "type": "object"
+      },
+      "path": "inference",
+      "purpose": "Load checkpoint and predict",
+      "sources": [
+        {
+          "path": "inference.py",
+          "symbol": "predict"
+        }
+      ],
+      "version": "1.0.0"
+    }
+  ],
+  "record_roots": [
+    "runs",
+    "records"
+  ],
+  "schema_version": 1,
+  "watch": [
+    "*.py",
+    "*.lock"
+  ]
+}

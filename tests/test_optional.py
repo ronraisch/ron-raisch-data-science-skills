@@ -44,3 +44,14 @@ class OptionalTests(unittest.TestCase):
             self.assertTrue(FakeTask.instance.closed)
             self.assertTrue(all(kw['ignore_remote_overrides'] for _,kw in FakeTask.instance.connections))
             self.assertEqual(FakeTask.instance.logger.scalar['value'],.7)
+
+    def test_clearml_preserves_external_refs_without_uploading_large_bytes(self):
+        from unittest.mock import MagicMock
+        task=MagicMock();task.id='external-task';task_class=MagicMock();task_class.init.return_value=task
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);spec=root/'spec.json';run=root/'runtime.json'
+            save_json(spec,{'id':'s','dataset':{'sha256':'data'},'splits':{'sha256':'split'},'evaluation_protocol':'v1','expected':{'metric':{'name':'accuracy','split':'validation'}},'components':{'allowed_changes':['model.decoder']}})
+            save_json(run,{'run_id':'r','observations':{},'result':1.0,'artifacts':[{'identity':'checkpoint','uri':'nfs://org/model','sha256':'a'*64,'provenance':'run'}]})
+            self.assertEqual(log_run(root,spec,run,task_class),'external-task')
+            self.assertTrue(any(call.kwargs.get('name')=='ExternalArtifacts' for call in task.connect.call_args_list))
+            self.assertFalse(any('nfs:' in str(call) for call in task.upload_artifact.call_args_list))

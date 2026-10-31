@@ -23,6 +23,8 @@ Use [research-summary](../research-summary/SKILL.md): Reuse the current evidence
 
 Use [ablation-review](../ablation-review/SKILL.md) for comparable results.
 
+Use [component-design](../component-design/SKILL.md): Preserve component tree, versions, mappings, approvals, failed scope checks and NFS artifact identities. This continuity record is distinct from production notebook handoff.
+
 ## Deliver
 
 handoff.md, validated manifest, artifact/access inventory and cold-start result. [Template](assets/output.md).

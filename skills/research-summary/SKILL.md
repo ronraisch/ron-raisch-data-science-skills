@@ -21,6 +21,8 @@ Start with: Question, hypotheses, complete run inventory, reports and decisions.
 
 Use [ablation-review](../ablation-review/SKILL.md): Use its comparison table and conclusions; do not rerank runs.
 
+Use [component-design](../component-design/SKILL.md): Record the component IDs/versions and authorized modifications associated with each meaningful result; keep attribution bounded by the comparison.
+
 ## Deliver
 
 summary.md, evidence-linked findings, current status and next experiments. [Template](assets/output.md). [Record contract](references/record-contract.md).

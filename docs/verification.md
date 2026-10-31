@@ -40,3 +40,15 @@ Required categories: preprocessing, model, checkpoint, parameters, optimizer, sc
 Torch-style helpers are duck-typed and tested with minimal objects; no torch installation is required for tests. Real PyTorch/distributed trainers, arbitrary detection metrics, stochastic augmentation semantics, dataset labeling correctness, checkpoint fidelity and hardware reproducibility are **not** certified by the generic adapter. Add adapter tests using known bad experiments before relying on a new integration.
 
 The CPU example includes an unchanged spec with an actual optimizer override, and a reported score that disagrees with recomputed predictions. Unit tests also exercise leakage, freezing, steps, architecture, missing evidence, targets, paths and stale reports. See docs/validation.md for what was executed.
+
+## Component extension
+
+The existing verify/preflight functions and CLI now accept spec.components. Scope preflight hashes current source/config/dependency files, including untracked watched files and resolved local Python imports. It compares definitions and full-file ownership against a frozen baseline. Protected or unmapped edits fail; shared utility edits affect all owners. Code mappings remain many-to-many. Changed scan coverage cannot hide a diff. Explicit dependency boundaries identify downstream consumers for contract testing; those consumers need not produce identical predictions.
+
+Reports distinguish components.authorization/source/definition, compatibility, runtime identity/config, contracts and behavior. Contract samples and named semantic/regression tests are observed at runtime, never filled from expected config. Unknown component evidence blocks a new component run from all-verified status. Prose invariants and stable shapes alone establish no semantic guarantee. Static import analysis cannot establish hidden native/dynamic dependencies; enumerate them in mappings/watch policy and review coverage.
+
+Core data checks additionally support the CPU example's cv-json pixels/IDs/groups format; the metric adapter remains binary accuracy/MAE. Object-presence accuracy is a smoke check, not detection AP or segmentation IoU. Production CV acceptance uses separate approved protocols.
+
+Legacy specs remain accepted and have components.mode=legacy with unverifiable component scope. Their old verification status is unchanged; it must never be described as a component-controlled ablation. See migration.md and component-design's shared contract.
+
+Review corrections: default scanning excludes conventional component/project metadata while still watching arbitrary configuration JSON and all mapped sources. Automatic compatibility is output-only; changed input/config schemas require explicit breaking approval. Runtime source comparison uses content/definitions/ownership rather than requiring the current Git revision to equal the recorded revision; Git provenance stays recorded independently.

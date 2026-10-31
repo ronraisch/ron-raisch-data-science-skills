@@ -1,0 +1,24 @@
+{
+  "artifacts": {},
+  "component_ids": [
+    "REPLACE"
+  ],
+  "entry": {
+    "path": "inference.py",
+    "symbol": "predict"
+  },
+  "fixtures": [
+    {
+      "path": "fixtures/input.json",
+      "sha256": "REPLACE"
+    }
+  ],
+  "inference_approval": {
+    "by": "RESEARCHER",
+    "inference_sha256": "REPLACE_AFTER_SOURCE_REVIEW",
+    "reference": "decisions.md#inference"
+  },
+  "output_schema": {
+    "type": "object"
+  }
+}

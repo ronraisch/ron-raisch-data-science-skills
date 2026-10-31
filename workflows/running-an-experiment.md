@@ -10,3 +10,5 @@ experiment-design → experiment-verify → experiment-run → ablation-review
 Gate: unresolved missing evidence stays explicit. Scientific conclusions require valid comparable runs; a plan or preflight alone cannot verify execution. Offline use records local-corpus and tooling limits.
 
 Verification has three phases: preflight before execution, live hooks during execution, and postflight after artifacts exist. The arrow sequence is a workflow, not a claim that a completed run can be verified before it occurs. Failed preflight blocks training; failed postflight blocks promotion.
+
+For component-controlled work, freeze the baseline and researcher-approved scope before implementation. Preflight actual source/config/dependency ownership; capture live boundary and semantic-test evidence; reject protected edits. A process success cannot override scope failure.

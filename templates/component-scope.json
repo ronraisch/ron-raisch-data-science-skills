@@ -1,0 +1,19 @@
+{
+  "allowed_changes": [
+    "model.decoder"
+  ],
+  "approval": {
+    "by": "RESEARCHER",
+    "reference": "decisions.md#scope",
+    "scope_sha256": "REPLACE_AFTER_APPROVAL"
+  },
+  "baseline": {
+    "path": "records/baseline.json",
+    "sha256": "REPLACE"
+  },
+  "breaking_approvals": {},
+  "manifest": {
+    "path": "components.json",
+    "sha256": "REPLACE"
+  }
+}

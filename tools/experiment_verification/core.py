@@ -102,6 +102,19 @@ def aggregate(checks):
 
 
 def read_dataset(root, spec):
+    if spec['dataset'].get('format') == 'cv-json':
+        records = load_json(resolve(root,spec['dataset']['path']))
+        if not isinstance(records,list) or not records: raise ValueError('Empty CV dataset')
+        from .components import canonical, assert_contract
+        rows=[]
+        for item in records:
+            assert_contract(item['pixels'],{'type':'array','minItems':1,'items':{'type':'array','minItems':1,'items':{'type':'integer','minimum':0,'maximum':255}}})
+            if len({len(row) for row in item['pixels']}) != 1: raise ValueError('Ragged image')
+            rows.append({'id':item['id'],'group':item['group'],'x':canonical(item['pixels']),'target':str(item['target'])})
+        ids=[r['id'] for r in rows]
+        if any(not isinstance(i,str) or not i for i in ids) or len(set(ids))!=len(ids) or any(not r['group'] for r in rows):raise ValueError('Invalid CV IDs/groups')
+        if any(not math.isfinite(float(r['target'])) for r in rows):raise ValueError('Invalid CV targets')
+        return rows
     with resolve(root, spec["dataset"]["path"]).open(newline="") as f:
         reader = csv.DictReader(f)
         if not {"id", "group", "x", "target"}.issubset(reader.fieldnames or []):
@@ -118,7 +131,7 @@ def read_dataset(root, spec):
     return rows
 
 
-def preflight(spec, root):
+def preflight(spec, root, include_components=True):
     """Verify actual input bytes and split identity, group isolation and coverage."""
     validate_spec(spec)
     checks = []
@@ -156,8 +169,11 @@ def preflight(spec, root):
             raise ValueError("Splits do not cover the dataset exactly")
         checks.append(check("splits.isolation", "verified", source=spec["splits"]["path"],
                             detail="Checked IDs and declared groups; spatial/temporal/near-duplicate leakage requires adapters."))
-    except (OSError, ValueError, TypeError, KeyError) as exc:
+    except (OSError, ValueError, TypeError, KeyError, AssertionError) as exc:
         checks.append(check("splits.isolation", "failed", detail=str(exc)))
+    if include_components and spec.get('components') is not None:
+        from .components import scope_preflight
+        checks.extend(scope_preflight(spec, root))
     return checks
 
 
@@ -203,7 +219,7 @@ def _metric_check(spec, run, root):
 
 def verify(spec, run, root, spec_path=None):
     """Compare intent to instrumented observations plus independently read bytes."""
-    checks = preflight(spec, root)
+    checks = preflight(spec, root, include_components=False)
     if not isinstance(run, dict) or not isinstance(run.get("observations", {}), dict):
         raise ValueError("Runtime record and observations must be objects")
     if run.get("schema_version") != 1 or not run.get("run_id"):
@@ -236,19 +252,24 @@ def verify(spec, run, root, spec_path=None):
     if not isinstance(artifacts, list) or not artifacts:
         checks.append(check("artifacts", "unverifiable", detail="No artifacts recorded"))
     else:
-        names = {Path(a.get("path", "")).name for a in artifacts if isinstance(a, dict)}
+        names = {Path(a.get("path", a.get("uri", ""))).name for a in artifacts if isinstance(a, dict)}
         for required in spec["required_artifacts"]:
             checks.append(check(f"artifact.required.{required}", "verified" if required in names else "unverifiable",
                                 expected=required, observed=sorted(names), detail="Required artifact inventory"))
         for index, artifact in enumerate(artifacts):
             try:
-                actual = digest(resolve(root, artifact["path"]))
+                from .artifacts import artifact_path, validate_reference
+                if artifact.get('uri'): validate_reference(artifact)
+                actual = digest(artifact_path(root, artifact))
                 checks.append(check(f"artifact.{index}", "verified" if actual == artifact["sha256"] else "failed",
-                                    artifact["sha256"], actual, artifact["path"]))
+                                    artifact["sha256"], actual, artifact.get("path", artifact.get("uri"))))
             except (OSError, ValueError, KeyError, TypeError) as exc:
                 checks.append(check(f"artifact.{index}", "unverifiable", detail=str(exc)))
     checks.append(_metric_check(spec, run, root))
-    return {"schema_version": 1, "run_id": run.get("run_id"), "status": aggregate(checks), "checks": checks,
+    from .components import component_checks
+    extra, component_report = component_checks(spec, run, root)
+    checks.extend(extra)
+    return {"schema_version": 1, "run_id": run.get("run_id"), "status": aggregate(checks), "checks": checks, "components": component_report,
             "limitations": ["Instrumented runtime evidence is not independent attestation.",
                             "CSV adapter checks binary accuracy/MAE, IDs and declared groups only.",
                             "Data semantics, label quality, near duplicates, and uninstrumented behavior remain unproven."]}

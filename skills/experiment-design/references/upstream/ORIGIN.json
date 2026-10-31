@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/KalarisLabs/research-agent-skills",
+  "revision": "b0ee35abfd7e26428846fbd84f282114560a5fbd",
+  "license": "MIT",
+  "path": "skills/experimental-design/SKILL.md",
+  "url": "https://github.com/KalarisLabs/research-agent-skills/blob/b0ee35abfd7e26428846fbd84f282114560a5fbd/skills/experimental-design/SKILL.md",
+  "role": "Attribution and optional offline source archive; not required instructions"
+}
