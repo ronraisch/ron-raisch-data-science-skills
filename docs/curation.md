@@ -1,6 +1,6 @@
 # Source selection
 
-Nine skills use pinned upstream methods, bundled with supporting scripts, references and assets. Their short SKILL.md entry points select relevant sections and define local outputs. Read one method section at a time; do not load the whole collection. The seven original local skills own execution verification, failure investigation and durable research records. component-design, production-handoff and production-validator add local contract and transfer workflows without replacing the upstream science.
+Nine skills adapt trusted scientific procedures into concise, direct instructions. Their SKILL.md files contain the actionable procedure and do not send the agent to a long upstream method. Supporting utilities and original source bytes remain bundled for offline use and provenance. The other ten skills cover verification, continuity, component contracts and production transfer.
 
 | Entry points | Method authority | Local adaptation |
 | --- | --- | --- |
@@ -11,8 +11,8 @@ Nine skills use pinned upstream methods, bundled with supporting scripts, refere
 
 `upstream-sources.json` pins repositories and commits. `upstream-files.json` records every bundled source file and SHA-256. Bundles preserve file contents, with SKILL.md renamed METHOD.md to avoid duplicate discovery. MIT notices travel with each installed bundle. Updates require license review, hash regeneration and installation checks.
 
-Local entry points control execution: no paid service, external skill, delegation or tracker is required. Upstream methods supply scientific procedures; local deliverables and stop rules remain mandatory. Optional packages are installed only when the chosen operation needs them. Offline literature searches report local-corpus coverage and cutoff.
+Local procedures control execution: no paid service, external skill, delegation or tracker is required. Pinned sources inform the scientific procedures; local deliverables and stop rules are mandatory. Optional packages are installed only when the chosen operation needs them. Offline literature searches report local-corpus coverage and cutoff.
 
-This selection favors existing methods and keeps the entry points small. It is a deployment choice, not a measured performance claim for any local model.
+The instruction-loading choice follows the sources in skill-authoring.md. Concision means complete task-specific guidance without unnecessary indirection, not a claim that shortest prompts always win. Ornith/Qwen were not measured here. Each installed adapted skill carries ORIGIN.json with its exact source URL and revision; these are attribution records, not instructions to load the original method.
 
 The record contract lives once in research-summary/references/. Both installers include linked sibling skills. Bundled upstream resources stay inside each skill, so copied skills and npm installations work offline without symlinks.

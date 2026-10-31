@@ -1,7 +1,7 @@
 # Ron's Data Science Skills
 
 
-Nine skills now use bundled, pinned methods from K-Dense, Kalaris and Matt Pocock through concise local entry points. Seven original skills retain local verification and continuity workflows. Three new skills add component design and the two production handoff guarantees. See [source selection](docs/curation.md). Install once; the methods and supporting files remain available offline. For local models, invoke one skill and load only the method sections it names.
+Nineteen concise research skills with explicit inputs, procedures, deliverables and stop rules. Scientific workflows retain their K-Dense, Kalaris and Matt Pocock provenance. No skill requires loading a long upstream method. Optional offline utilities and source archives remain bundled; [source selection](docs/curation.md) records attribution.
 
 A small collection of practical, reusable research skills for data scientists, ML researchers, and coding agents. Use them to ask better questions, run the experiment you intended, understand failures, and leave enough evidence to resume a project months later.
 
@@ -153,7 +153,7 @@ Keep `project.json`, hypotheses, immutable specs, run folders, decisions, summar
 | [Kalaris Research Agent Skills](https://github.com/KalarisLabs/research-agent-skills) | Experimental design and critical appraisal |
 | [Matt Pocock Skills](https://github.com/mattpocock/skills) | Questioning, decision-driven planning and retrospectives |
 
-Relevant skills link directly to the reviewed upstream file at its pinned revision. Original local skills are labeled as such. Nine entry points bundle unchanged upstream methods and resources, with local output/offline adapters.
+Each adapted skill includes ORIGIN.json with the reviewed source URL and pinned revision; SKILL.md names its source without directing the agent to load the original. Original local skills are labeled as such. Nine skills adapt the pinned scientific procedures into direct instructions. Unchanged upstream resources remain an optional offline archive, not a required reading chain.
 
 
 Reviewed K-Dense Scientific Agent Skills, Kalaris Research Agent Skills and Matt Pocock's Skills. Bundled selected methods and resources without copying entire catalogs. [Curation decisions](docs/curation.md), [pinned sources](docs/upstream-sources.json), and [retained notices](THIRD_PARTY_NOTICES.md) explain provenance.

@@ -54,3 +54,7 @@ The suite now includes 60 passing tests, with local HTTP routing/security header
 ## Pre-merge review corrections
 
 Added regression tests for default manifest/project record scanning, restrictive input-contract evolution, metadata-only Git revisions and ambiguous overlapping reference-box pairing. Defaults now exclude conventional metadata, compatibility remains conservative on inputs/configs, source integrity compares content rather than current HEAD, and detection references use a complete threshold-compatible matching. No upstream bundles or acceptance thresholds changed. Final suite: **125 Python tests and 9 Node tests passed**.
+
+## Concise skills review
+
+Current guidance and its conflicting length recommendations are recorded in skill-authoring.md. Nine generic method-loading wrappers were replaced with direct, task-specific procedures from this collection's earlier concise workflows, retaining the component integration. No entrypoint loads METHOD.md or links to an original long skill; exact source URLs/pins travel in nine portable ORIGIN.json files. Original archive bytes/utilities/licenses are unchanged. Regression checks enforce direct instructions and portable provenance. Final local suite: **127 Python / 9 Node passed**. No Ornith/Qwen performance test is claimed.
