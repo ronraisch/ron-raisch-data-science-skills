@@ -66,5 +66,16 @@
     "hosted CI matrix results",
     "GPU inference parity",
     "arbitrary Python source slicing"
-  ]
+  ],
+  "pre_merge_review": {
+    "python_passed": 125,
+    "node_passed": 9,
+    "python_log_sha256": "609769295befdfeb4a88d6062502c32fe6a5112ed0a088f71983766789976326",
+    "fixes": [
+      "Exclude conventional root metadata from source scanning, retain nested configurations",
+      "Require explicit approval for input/config schema evolution",
+      "Separate Git provenance from source content comparison",
+      "Use complete bipartite reference detection matching"
+    ]
+  }
 }

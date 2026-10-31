@@ -50,3 +50,5 @@ Reports distinguish components.authorization/source/definition, compatibility, r
 Core data checks additionally support the CPU example's cv-json pixels/IDs/groups format; the metric adapter remains binary accuracy/MAE. Object-presence accuracy is a smoke check, not detection AP or segmentation IoU. Production CV acceptance uses separate approved protocols.
 
 Legacy specs remain accepted and have components.mode=legacy with unverifiable component scope. Their old verification status is unchanged; it must never be described as a component-controlled ablation. See migration.md and component-design's shared contract.
+
+Review corrections: default scanning excludes conventional component/project metadata while still watching arbitrary configuration JSON and all mapped sources. Automatic compatibility is output-only; changed input/config schemas require explicit breaking approval. Runtime source comparison uses content/definitions/ownership rather than requiring the current Git revision to equal the recorded revision; Git provenance stays recorded independently.

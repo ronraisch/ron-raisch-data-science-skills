@@ -104,7 +104,8 @@ def _tracked_files(root, manifest):
     for pattern in patterns:
         for p in Path(root).glob(pattern):
             rel=p.relative_to(root)
-            if p.is_file() and not any(part in ignored for part in rel.parts): files.add(rel.as_posix())
+            if (p.is_file() and rel.as_posix() not in ('components.json','project.json')
+                    and not any(part in ignored for part in rel.parts)): files.add(rel.as_posix())
     # Mapped files must never disappear behind exclusion patterns.
     files.update(s['path'] for c in manifest['components'] for s in c['sources'])
     return sorted(files)
@@ -211,7 +212,8 @@ def verify_scope(root, manifest, baseline, scope):
                 checks.append(check('components.identity.'+identity,'failed',detail='Purpose changed: create a new component identity'))
             if b['version']==a['version'] or tuple(map(int,b['version'].split('.')))<=tuple(map(int,a['version'].split('.'))):
                 checks.append(check('components.version.'+identity,'failed',detail='Changed definition requires increasing version'))
-            good=all(compatible(a[k],b[k]) for k in ('inputs','outputs','config_schema')) and a['invariants']==b['invariants']
+            good=(a['inputs']==b['inputs'] and a['config_schema']==b['config_schema'] and
+                  compatible(a['outputs'],b['outputs']) and a['invariants']==b['invariants'])
             approval=evolution.get(identity,{})
             approved=approval.get('by') and approval.get('reference') and approval.get('new_definition_sha256')==canonical(b)
             checks.append(check('components.compatibility.'+identity,'verified' if good or approved else 'failed',detail='Conservative contract compatibility; incompatible/unknown evolution requires approval bound to new definition plus downstream tests'))
@@ -257,8 +259,10 @@ def component_checks(spec, run, root):
         checks,current,owners=verify_scope(root,manifest,baseline,config)
         evidence=run.get('components',{})
         if not isinstance(evidence,dict):raise ValueError('Component runtime evidence must be an object')
-        checks.append(check('components.runtime.sources','verified' if evidence.get('snapshot')==current else 'failed',
-                            current,evidence.get('snapshot'),detail='Re-read bytes must match the snapshot observed at execution'))
+        recorded=evidence.get('snapshot')
+        content=lambda value: {k:v for k,v in value.items() if k!='git_revision'} if isinstance(value,dict) else None
+        checks.append(check('components.runtime.sources','verified' if content(recorded)==content(current) else 'failed',
+                            current,evidence.get('snapshot'),detail='Re-read source bytes, definitions and ownership must match execution. Git revision is retained as provenance; a metadata-only commit is not a source change.'))
         observed=evidence.get('observations',[])
         if not isinstance(observed,list) or any(not isinstance(x,dict) for x in observed):raise ValueError('Component observations must be objects')
         if any(x.get('id') not in {c['id'] for c in manifest['components']} for x in observed):raise ValueError('Unregistered component executed')

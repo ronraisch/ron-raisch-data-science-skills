@@ -107,6 +107,15 @@ class ProductionTests(unittest.TestCase):
         self.assertTrue(any(c['name']=='components.behavior.features' and c['status']=='failed' for c in report['checks']))
 
 
+    def test_git_revision_only_change_preserves_component_evidence(self):
+        from unittest.mock import patch
+        from tools.experiment_verification.components import component_checks
+        spec=load_json(self.project/'specs/decoder.json');run=load_json(self.project/'runs/decoder/runtime.json')
+        with patch('tools.experiment_verification.components.subprocess.check_output',return_value=b'new-metadata-commit\n'):
+            _,report=component_checks(spec,run,self.project)
+        self.assertEqual(report['status'],'verified',report)
+
+
 class ValidatorTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name)
@@ -226,3 +235,21 @@ class ValidatorTests(unittest.TestCase):
         self.assertIsNone(v.validate(pred,test))
         save_json(pred/'flipped/boxes.json',{'id':'flip','prediction':base})
         with self.assertRaises(AssertionError):v.validate(pred,test)
+
+    def test_overlapping_reference_boxes_use_complete_pairing(self):
+        p=policy('detection');p['strategy']='reference'
+        p['reference']={'min_box_iou':0.5,'score_atol':0.001}
+        p['approval']['policy_sha256']=canonical({k:v for k,v in p.items() if k!='approval'})
+        generate(p,self.root/'validator.py');self.validator=load_module(self.root/'validator.py')
+        self.pred=self.root/'pred';self.test=self.root/'test'
+        save_json(self.pred/'team-results/sample.json',{'id':'validation-1','prediction':[]})
+        # First prediction can match either reference; second can match only A.
+        # Choosing A greedily for the first would incorrectly reject the set.
+        a={'box':[0,0,10,10],'label':'object','score':0.9}
+        b={'box':[4,0,14,10],'label':'object','score':0.9}
+        shared={'box':[1,0,11,10],'label':'object','score':0.9}
+        self.change(prediction=[shared,a])
+        save_json(self.test/'approved/sample.json',{'id':'validation-1','reference':[a,b]})
+        self.assertIsNone(self.validator.validate(self.pred,self.test))
+        self.change(prediction=[a,a])
+        with self.assertRaises(AssertionError):self.validator.validate(self.pred,self.test)

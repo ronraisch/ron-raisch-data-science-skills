@@ -50,3 +50,7 @@ CI is configured for Python 3.11, 3.12 and 3.13 on GitHub Actions; only the loca
 ## Dashboard hosting update — 2026-10-30
 
 The suite now includes 60 passing tests, with local HTTP routing/security headers, traversal rejection, snapshot replacement, explicit launcher input, ConfigMap size preflight, and mocked OpenShift installation/build staging. Only the two hosting source files enter the image build context. A real local launcher HTTP smoke check was also performed. OpenShift templates and Containerfile are supplied, but no container runtime, oc CLI or cluster is available here; actual image build/SCC admission/Route rollout are untested.
+
+## Pre-merge review corrections
+
+Added regression tests for default manifest/project record scanning, restrictive input-contract evolution, metadata-only Git revisions and ambiguous overlapping reference-box pairing. Defaults now exclude conventional metadata, compatibility remains conservative on inputs/configs, source integrity compares content rather than current HEAD, and detection references use a complete threshold-compatible matching. No upstream bundles or acceptance thresholds changed. Final suite: **125 Python tests and 9 Node tests passed**.

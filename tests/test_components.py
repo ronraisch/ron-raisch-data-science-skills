@@ -108,3 +108,26 @@ class ComponentTests(unittest.TestCase):
     def test_dependency_definition_of_protected_component_fails(self):
         self.m['components'][3]['dependencies']=[];self.m['components'][3]['version']='1.0.1'
         self.assertEqual(self.status(),'failed')
+
+    def test_default_scan_excludes_manifest_and_project_records(self):
+        self.m.pop('watch');self.m.pop('record_roots')
+        save_json(self.root/'components.json',self.m)
+        save_json(self.root/'project.json',{'runs':[]})
+        self.base=snapshot(self.root,self.m)
+        save_json(self.root/'records/baseline.json',self.base)
+        self.m['components'][2]['version']='1.0.1'
+        save_json(self.root/'components.json',self.m)
+        save_json(self.root/'project.json',{'runs':['new-run']})
+        self.assertEqual(self.status(),'verified')
+        (self.root/'settings.json').write_text('{"normalization":250}')
+        self.assertEqual(self.status(),'failed') # arbitrary config remains watched.
+        (self.root/'settings.json').unlink()
+        save_json(self.root/'nested/project.json',{'decoder_config':'unexpected'})
+        self.assertEqual(self.status(),'failed') # only conventional ROOT metadata is excluded.
+
+    def test_input_contract_narrowing_requires_breaking_approval(self):
+        c=self.m['components'][2];c['version']='1.1.0'
+        c['inputs']={'type':'object','properties':{},'additionalProperties':True}
+        self.base=snapshot(self.root,self.m)
+        c['version']='1.2.0';c['inputs']['properties']['optional']={'type':'number'}
+        self.assertEqual(self.status(),'failed')

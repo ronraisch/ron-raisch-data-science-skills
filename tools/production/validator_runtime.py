@@ -93,12 +93,24 @@ def _reference(pred,ref,criteria=None):
         assert agreement>=criteria['min_pixel_agreement'], 'Reference pixel agreement below threshold'
     else:
         assert len(pred)==len(ref), 'Reference detection count differs'
-        used=set()
-        for d in sorted(pred,key=lambda d:-d['score']):
-            choices=[(_iou(d['box'],r['box']),j) for j,r in enumerate(ref) if j not in used and d['label']==r['label'] and abs(d['score']-r['score'])<=criteria['score_atol']]
-            best=max(choices,default=(0,None))
-            assert best[0]>=criteria['min_box_iou'] and best[1] is not None, 'Reference detections differ'
-            used.add(best[1])
+        # Find a complete threshold-compatible pairing. Greedy best-IoU pairing
+        # can reject valid reordered/overlapping detections when one box has
+        # two valid partners and another has only one.
+        edges=[[j for j,r in enumerate(ref) if d['label']==r['label'] and
+                abs(d['score']-r['score'])<=criteria['score_atol'] and
+                _iou(d['box'],r['box'])>=criteria['min_box_iou']] for d in pred]
+        matched={}
+        def augment(i,seen):
+            for j in edges[i]:
+                if j in seen:continue
+                seen.add(j)
+                if j not in matched or augment(matched[j],seen):
+                    matched[j]=i
+                    return True
+            return False
+        for i in sorted(range(len(pred)),key=lambda i:len(edges[i])):
+            assert augment(i,set()), 'Reference detections differ'
+
 
 
 def validate(output_pred, output_test):
