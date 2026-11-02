@@ -20,6 +20,8 @@ Start with: Source artifacts, intended claim, audience, metric definitions and u
 
 Use [ablation-review](../ablation-review/SKILL.md): Use its approved cohorts and uncertainty calculations for method comparisons.
 
+For implemented behavior, show representative inputs with prediction overlays and explicit edge cases. Record sample selection, expected/observed behavior, image hashes and failure cases; do not use attractive examples as proof of overall quality.
+
 ## Deliver
 
 figures/: script, source tables, exports, captions and input/method manifest. [Template](assets/output.md).

@@ -14,13 +14,15 @@ Start with: Research question, actual pipeline source, planned experimental vari
 ## Do
 
 1. Inspect actual source, configuration, dependencies and runtime boundaries. Choose only the nesting useful for planned experiments; include aggregate parents.
-2. Write `components.json` using [the contract](references/component-contract.md) and [template](assets/components.json). Map every relevant source/config/dependency file. Map shared utilities to all consumers; one component may span files.
+2. Author the hierarchy in trusted Python; export `components.json` as evidence using [the contract](references/component-contract.md) and [template](assets/components.json). Map every relevant source/config/dependency file. Map shared utilities to all consumers; one component may span files.
 3. Define inputs, outputs, configuration schemas, semantic invariants and named executable contract tests. Test content and semantics, not only shapes. Connect component dependencies by stable ID.
 4. Freeze a baseline before edits. Record authorized paths and the researcher's approval bound to that exact list. List direct owners and affected downstream dependencies. Run the scope preflight before implementation and again before execution.
 5. Keep identity when purpose stays the same. Increase version for compatible contract/config evolution. A new purpose needs a new ID; incompatible interfaces need explicit approval bound to the new definition and downstream contract tests.
 6. Run scope, runtime contract and regression checks through experiment-verify. Preserve unauthorized changes as failed evidence; request expanded approval before editing outside scope. Never auto-repair or self-approve deviations.
 
 Use [experiment-verify](../experiment-verify/SKILL.md) for execution evidence and acceptance.
+
+Author topology and component definitions in Python (native ZenML steps/pipelines where selected); export JSON only as frozen verification evidence. Reuse typed infrastructure contracts; keep scientific invariants and source ownership explicit.
 
 ## Deliver
 

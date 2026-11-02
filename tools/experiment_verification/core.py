@@ -269,6 +269,10 @@ def verify(spec, run, root, spec_path=None):
     from .components import component_checks
     extra, component_report = component_checks(spec, run, root)
     checks.extend(extra)
+    if spec.get('visual_evidence_required'):
+        from .visual import visual_evidence
+        evidence=visual_evidence(root,run)
+        checks.append(check('visual.evidence',evidence['status'],detail='; '.join(evidence['errors']) or evidence['limits']))
     return {"schema_version": 1, "run_id": run.get("run_id"), "status": aggregate(checks), "checks": checks, "components": component_report,
             "limitations": ["Instrumented runtime evidence is not independent attestation.",
                             "CSV adapter checks binary accuracy/MAE, IDs and declared groups only.",

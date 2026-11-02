@@ -24,6 +24,8 @@ Use [experiment-verify](../experiment-verify/SKILL.md): Revalidate runs before i
 
 Use [component-design](../component-design/SKILL.md): Require verified component scope before calling a comparison a controlled component ablation. Audit intended variables, protected sources/config/dependencies and contract/regression evidence.
 
+Compare all relevant verified experiments under matching evaluation conditions. Show pairwise deltas and Pareto tradeoffs across quality, latency and resources; reserve causal claims for controlled pairs. A frozen source snapshot is not a mandatory scientific comparator.
+
 ## Deliver
 
 ablation-review.md, comparison/cohort table, effect sizes/intervals and evidence-linked conclusions. [Template](assets/output.md).

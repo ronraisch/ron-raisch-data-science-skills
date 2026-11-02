@@ -23,6 +23,8 @@ Use [experiment-design](../experiment-design/SKILL.md): Resolve intent changes b
 
 Use [component-design](../component-design/SKILL.md): Run component source-scope preflight before edits/execution and postflight with runtime boundary evidence. Fail unauthorized changes; keep authorization, compatibility, runtime consistency and regression checks distinct.
 
+Audit linked visual evidence for representative and edge-case coverage and actual artifact hashes; require researcher inspection. Visual evidence complements executable checks and never overrides unauthorized source changes.
+
 ## Deliver
 
 verification.json/.md: expected, observed, source, status, limitations and remediation. [Template](assets/output.md).
