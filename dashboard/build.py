@@ -81,7 +81,7 @@ def render(roots):
             for name in project["documents"]:
                 from tools.experiment_verification.core import resolve
                 path=resolve(root,name)
-                if path.suffix==".md":
+                if path.suffix in (".md", ".json"):
                     docs.append(f"<details><summary>{e(name)}</summary><pre>{e(path.read_text())}</pre></details>")
             cards.append(f'''<article><h2>{e(project['title'])}</h2><p class="status">{e(project['status'])}</p>
 <p><strong>Objective:</strong> {e(project['objective'])}</p><p><strong>Question:</strong> {e(project['question'])}</p>
