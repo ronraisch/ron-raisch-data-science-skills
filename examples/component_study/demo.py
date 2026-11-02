@@ -18,7 +18,7 @@ from tools.production.handoff import build as handoff_build, parity, extract
 from tools.production.validator import generate
 
 
-def manifest():
+def pipeline():
     array={'type':'array','minItems':1,'items':{'type':'array','minItems':1,'items':{'type':'number','minimum':0,'maximum':1}}}
     output_schema={'type':'object','required':['detections','segmentation'],'additionalProperties':False,
        'properties':{'detections':{'type':'array','items':{'type':'object','required':['box','label','score'],'additionalProperties':False,
@@ -30,14 +30,19 @@ def manifest():
                 'invariants':['Finite inputs/outputs; preserve image dimensions'],
                 'config_schema':{'type':'object','additionalProperties':False},'config':{},
                 'dependencies':list(dependencies),'sources':sources,'contract_tests':['finite-shape']}
-    return {'schema_version':1,'watch':['*.py','*.lock'],'record_roots':['runs','records'],
-            'components':[c('model','model','Image detector and segmenter',[],outs=output_schema),
+    components=[c('model','model','Image detector and segmenter',[],outs=output_schema),
                 c('features','model.feature_extraction','Normalize image pixels',[
                     {'path':'features.py','symbol':'extract'},{'path':'common.py','symbol':'clip'}],ins={'type':'array'},outs=array),
                 c('decoder','model.decoder','Decode foreground objects and masks',[
                     {'path':'decoder.py','symbol':'decode'},{'path':'common.py','symbol':'clip'}],['features'],ins=array,outs=output_schema),
                 c('inference','inference','Load checkpoint and predict',[
-                    {'path':'inference.py','symbol':'predict'}],['decoder'],outs=output_schema)]}
+                    {'path':'inference.py','symbol':'predict'}],['decoder'],outs=output_schema)]
+
+    from tools.research_pipeline import Component,Pipeline
+    return Pipeline(tuple(Component(**c) for c in components),watch=('*.py','*.lock'),record_roots=('runs','records'))
+
+def manifest():
+    return pipeline().manifest()
 
 
 def approve_scope(allowed):
@@ -98,7 +103,7 @@ def build(output):
     expected={'preprocessing':{'scale':255.0},'model':{'decoder':'decode'},'checkpoint':{'sha256':checkpoint['sha256']},
               'parameters':{'trainable':0},'optimizer':None,'scheduler':None,'hyperparameters':{'threshold':0.6},
               'training':{'steps':0,'mode':'inference-only'},'metric':{'name':'accuracy','split':'validation','direction':'maximize'},'environment':env()}
-    spec={'schema_version':1,'id':'decoder-v1','hypothesis_id':'H1','decision_rule':'Functional smoke only; quality/generalization remain untested',
+    spec={'visual_evidence_required':True,'schema_version':1,'id':'decoder-v1','hypothesis_id':'H1','decision_rule':'Functional smoke only; quality/generalization remain untested',
           'evaluation_protocol':'binary object presence v1, sealed test; CV quality is independently checked at production validation',
           'dataset':{'path':'data/images.json','sha256':digest(root/'data/images.json'),'format':'cv-json'},
           'splits':{'path':'data/splits.json','sha256':digest(root/'data/splits.json')},'required_artifacts':['predictions.csv'],'expected':expected,
@@ -122,6 +127,17 @@ def build(output):
     predref={'path':'runs/decoder/predictions.csv','sha256':digest(run_dir/'predictions.csv')}
     run={'schema_version':1,'run_id':'decoder','spec_sha256':digest(root/'specs/decoder.json'),'observations':{k:observe(v,'CPU inference instrumented entry') for k,v in actual.items()},'artifacts':[predref,checkpoint],'predictions':predref,'evaluation_split':'validation','result':1.0,
          'components':{'snapshot':snapshot(root,m),'observations':observations}}
+    # Show input/prediction alignment and controlled edge cases, not cherry-picked scores.
+    visuals=[]
+    for name,pixels in [('representative',sample['pixels']),('edge-empty',[[0]*6 for _ in range(6)]),('edge-border',[[255]*6]+[[0]*6 for _ in range(5)])]:
+        fixture=root/f'data/{name}.json';save_json(fixture,{'pixels':pixels})
+        out=invoke(root,fixture,{'checkpoint':str(artifact_root/'checkpoint.json')})
+        width=len(pixels[0]);height=len(pixels)
+        cells=''.join(f'<rect x="{x*24}" y="{y*24}" width="24" height="24" fill="rgb({v},{v},{v})"/>' for y,row in enumerate(pixels) for x,v in enumerate(row))
+        overlay=''.join(f'<rect x="{b["box"][0]*24}" y="{b["box"][1]*24}" width="{(b["box"][2]-b["box"][0])*24}" height="{(b["box"][3]-b["box"][1])*24}" fill="none" stroke="red" stroke-width="2"/>' for b in out['detections'])
+        path=run_dir/(name+'.svg');path.write_text(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width*24} {height*24}">{cells}{overlay}</svg>')
+        visuals.append({'kind':'representative' if name=='representative' else 'edge-case','sample_id':name,'path':str(path.relative_to(root)),'sha256':digest(path),'caption':'Input pixels with predicted boxes','expected':'Foreground bounds follow threshold; empty image gives no box','observed':str(out['detections'])})
+    run['visual_evidence']=visuals
     save_json(run_dir/'runtime.json',run);report=verify(spec,run,root,root/'specs/decoder.json');write_report(run_dir/'verification.json',report)
     if report['status']!='verified':raise AssertionError(report)
     handoff={'entry':{'path':'inference.py','symbol':'predict'},'component_ids':['inference'],'artifacts':{'checkpoint':checkpoint},'fixtures':[{'path':'data/fixture.json','sha256':digest(root/'data/fixture.json')}],'output_schema':{'type':'object','required':['detections','segmentation']}}

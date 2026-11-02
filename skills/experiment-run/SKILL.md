@@ -24,6 +24,8 @@ Use [experiment-verify](../experiment-verify/SKILL.md): Delegate all input, runt
 
 Use [component-design](../component-design/SKILL.md): Capture component IDs/versions, live configurations, source snapshot and boundary/semantic-test evidence. Stop before any edit beyond approved scope.
 
+Use the Python pipeline and record ZenML pipeline/step/artifact identities as the primary execution lineage when available. Capture representative prediction overlays and edge-case examples with expected/observed behavior and input/artifact hashes.
+
 ## Deliver
 
 runs/<id>/ with spec, runtime evidence, predictions, artifacts, logs and verification; manifest entry. [Template](assets/output.md).

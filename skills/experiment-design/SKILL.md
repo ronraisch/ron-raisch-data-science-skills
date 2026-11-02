@@ -24,6 +24,8 @@ Use [experiment-verify](../experiment-verify/SKILL.md): Use its runtime evidence
 
 Use [component-design](../component-design/SKILL.md): Declare experimental variables, allowed_changes and approval, protected components, baseline hashes and evaluation controls. Freeze scope before implementation.
 
+Define the executable pipeline in Python. Prefer ZenML for run/artifact lineage; keep a compact intent snapshot rather than duplicating orchestration schemas. Include multiple comparator candidates and the quality/cost tradeoffs to measure; a single fixed reference is not mandatory.
+
 ## Deliver
 
 specs/<id>.json and design note with controls, replication and decision rules. [Template](assets/output.md).

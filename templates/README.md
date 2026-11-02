@@ -7,3 +7,5 @@ Each skill has a task-specific Markdown output template here and bundled in its 
 Use search-log.csv/evidence.csv for literature provenance; decisions.md is append-only in spirit. See docs/record-contract.md for IDs, statuses and path rules. Preserve unknowns as null/text explanations, not zeros. No paid tool, running server or model API is required to use these templates.
 
 For component projects, start with components.json plus component-scope.json; fill actual source mappings, versions, executable contracts and researcher approval before freezing baseline. component-design owns the detailed contract. external-artifact.json is a metadata-only NFS/HF reference. production-handoff.json describes the approved inference entry and fixtures; acceptance-policy.json proposes validator criteria for stakeholder approval, not runnable thresholds. The additional CPU CV example provides filled demonstration records.
+
+New projects author topology with pipeline.py (or native ZenML Python steps/pipelines). components.json and experiment.json remain legacy-compatible evidence formats, not the source of executable pipeline topology.

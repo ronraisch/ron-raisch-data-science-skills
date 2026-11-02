@@ -1,4 +1,4 @@
-"""Optional OSS local pipeline; standalone experiment code remains authoritative."""
+"""Recommended OSS research execution with native steps and artifact lineage."""
 from pathlib import Path
 from zenml import step, pipeline
 from zenml.client import Client
@@ -38,7 +38,12 @@ def run(output):
     metadata={'zenml_run_id':run_id,'status':str(result.status),'stack_id':str(Client().active_stack.id),
               'steps':{name:str(value.id) for name,value in result.steps.items()},
               'scope_note':'Research components need not be ZenML steps; this pipeline groups execution and verification.'}
+    metadata['artifacts']={name:{key:[str(a.id) for a in (value if isinstance(value,list) else [value])] for key,value in step.outputs.items()} for name,step in result.steps.items()}
     save_json(Path(output)/'records/zenml.json',metadata)
+    project=load_json(Path(output)/'project.json')
+    for entry in project['runs']:entry['lineage']='records/zenml.json'
+    if 'records/zenml.json' not in project['documents']:project['documents'].append('records/zenml.json')
+    save_json(Path(output)/'project.json',project)
     return metadata
 
 

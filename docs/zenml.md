@@ -1,6 +1,6 @@
-# Optional ZenML
+# ZenML research execution
 
-Standalone scripts remain the default. This adapter uses the open-source Python SDK and default local orchestrator/artifact store; it requires no paid feature, external AI service or cloud account. ZenML itself keeps local metadata; the research record remains ordinary files and does not require ZenML's database/server.
+Native Python ZenML pipelines are the recommended execution and lineage path; standalone scripts remain a supported offline fallback. This adapter uses the open-source Python SDK and default local orchestrator/artifact store; it requires no paid feature, external AI service or cloud account. ZenML itself keeps local metadata; the research record remains ordinary files and does not require ZenML's database/server.
 
 Tested with ZenML 0.98.0. Install only when selected:
 
@@ -16,3 +16,5 @@ Two cache-disabled steps execute the existing component CPU study and reverify i
 Caching is disabled because source/filesystem integrity must be rechecked, not inferred from a cached step. Both steps call the same standalone tools. ZenML is not needed for component enforcement.
 
 Primary sources reviewed: [pipeline/step API and caching](https://docs.zenml.io/concepts/steps_and_pipelines/advanced_features), [official source and license](https://github.com/zenml-io/zenml). The installed SDK declares Apache-2.0. This integration does not promise ZenML Cloud or commercial capabilities.
+
+Actual step output artifact IDs are written alongside pipeline/step IDs and linked from project runs. Use tools.research_pipeline for Python scientific component declarations; export JSON only for immutable verification. See python-pipelines.md for comparison and visual evidence.

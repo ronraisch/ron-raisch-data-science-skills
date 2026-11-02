@@ -7,6 +7,8 @@ A small collection of practical, reusable research skills for data scientists, M
 
 **The skills are the product.** Python utilities, file records, a CPU example, optional ZenML integration, and a small read-only dashboard support them. No database, server, paid model, or NVIDIA GPU is required.
 
+Author new pipelines in **Python** and prefer **ZenML** for native step/artifact lineage. JSON remains a frozen evidence format, not a second pipeline language. Compare many experiments and their Pareto tradeoffs; show representative predictions and edge cases. See [the workflow](docs/python-pipelines.md).
+
 ## Choose a skill
 
 | Stage | Skill | Durable output |
@@ -141,7 +143,7 @@ The supplied adapter checks CSV dataset/split identity and group isolation, live
 
 ## Controlled component experiments
 
-A scientific experiment changes an explicitly approved part of a stable component hierarchy. Define `components.json` with component-design, freeze a source baseline, and declare `allowed_changes` in the experiment spec. Before editing, identify shared-file owners and affected dependencies. Any additional scope needs explicit researcher approval **before** modification. Verification fails protected source/config/contract changes and rejects the result as a controlled ablation.
+A scientific experiment changes an explicitly approved part of a stable component hierarchy. Define the Python pipeline with component-design and export its component snapshot, freeze a source baseline, and declare `allowed_changes` in the experiment spec. Before editing, identify shared-file owners and affected dependencies. Any additional scope needs explicit researcher approval **before** modification. Verification fails protected source/config/contract changes and rejects the result as a controlled ablation.
 
 Component identity follows purpose, not module layout. Multiple components may share files; components may span files. Same purpose retains ID with version evolution; a new purpose requires a new ID. Full-file hashing is conservative about shared utilities. See [the component contract](skills/component-design/references/component-contract.md) and [migration guidance](docs/migration.md).
 
