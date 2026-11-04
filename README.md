@@ -33,6 +33,7 @@ Author new pipelines in **Python** and prefer **ZenML** for native step/artifact
 | Resume | [research-resume](skills/research-resume/SKILL.md) | Reconstructed history, best comparable results and evidence gaps |
 | Transfer | [production-handoff](skills/production-handoff/SKILL.md) | One standalone inference notebook and isolated parity evidence |
 | Accept | [production-validator](skills/production-validator/SKILL.md) | Standalone validator.py and approved production validation data |
+| Access | [agent-credentials](skills/agent-credentials/SKILL.md) | Fail-closed personal GitLab and team-shared OpenShift credentials; operator recovery instructions |
 | Deliver | [gitlab-cicd](skills/gitlab-cicd/SKILL.md) | Change-scoped monorepo CI, automatic integration, protected production, immutable package releases and commit provenance |
 
 Each skill follows the [open Agent Skills format](https://agentskills.io/specification): a `SKILL.md` with name/description and optional bundled assets/references. Read it as a human, ask an agent to follow it, or copy selected directories into your harness' skill location. Skills are independently usable; full-checkout Python tools are optional and deliberately scoped.
