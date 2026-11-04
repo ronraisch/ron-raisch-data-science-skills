@@ -1,50 +1,44 @@
 ---
 name: agent-credentials
-description: "Fail-closed, human-provisioned authentication for local coding agents using personal GitLab identities and team-shared OpenShift ServiceAccounts. Use before GitLab API/Git operations or OpenShift access."
+description: "Fail-closed credential handling for local coding agents: personal GitLab authentication and team-shared OpenShift ServiceAccounts on a configured NFS. Use before authenticated GitLab or OpenShift operations, including local CI/CD work."
 ---
 
-# Agent credentials (local development)
+# Agent credentials
 
-Use **existing** clients: GitLab `glab` with OS keyring and OpenShift `oc` with explicit kubeconfig. This skill governs interactive, locally supervised coding agents, not CI jobs. Credentials never belong in prompts, the repo, logs, stdout, or generated artifacts.
+Use established `glab` and `oc` clients; do not implement another credential manager. GitLab identity is **personal per researcher**. OpenShift identity is **team-shared per namespace**, via kubeconfig files on the approved NFS. Credentials are never copied into the repository, prompts, output, or logs.
 
-## Mandatory boundary
+## Non-negotiable rules
 
-- **Only** use the locations and commands below. Missing, expired, inaccessible or unauthorized credentials mean **STOP** for that service; give the operator the appropriate provisioning instructions. Do not search home directories, environment variables, browser sessions, keychains, alternative kubeconfigs, mounted secrets, Git history, caches, other tools, or API endpoints to obtain another identity. Do not run `oc login`, `glab auth login`, `oc create token`, secret reads, or a credential refresh as the agent. Humans perform authentication/provisioning.
-- No substitution of a personal OpenShift login for a team ServiceAccount, nor a shared GitLab token for a researcher's personal identity.
-- No impersonation, RBAC escalation, TLS bypass, token printing or token extraction. Never commit a kubeconfig, `.env`, service-account token, or secret-containing output.
-- This policy is an **instruction-level gate**, not an operating-system security boundary against an unrestricted shell agent. For hard enforcement, restrict agent shell/file access or expose only allowlisted authenticated wrapper commands with a deny-by-default sandbox.
+- Read only the committed, nonsecret `.agent-credentials/config.json` for approved GitLab host, NFS root, and OpenShift namespace mappings; see [example](references/config.example.json). If absent or incomplete, **STOP** and request that the operator configure it.
+- Obtain credentials **only** through the source declared below. On missing/invalid/expired credentials or RBAC denial: **STOP** and provide [human setup instructions](references/provisioning.md). Never hunt in other files, environment variables, tokens, home directories, sessions, Git history, mounted paths or network endpoints; never switch to another identity or namespace as fallback.
+- Do not perform interactive login, token issuance, permission escalation, secret listing, TLS bypass, or credential repair as the agent. These are human/operator actions.
+- This skill is an instruction-level policy, **not** a technical sandbox against unrestricted agents. Where enforcement matters, restrict the agent's filesystem/tools or require allowlisted wrappers.
 
-## Approved sources
+## GitLab: personal, isolated CLI login
 
-1. **GitLab (per researcher):** `glab` authenticated for the configured GitLab hostname using its OS credential store. A dedicated `GLAB_CONFIG_DIR` is `${XDG_CONFIG_HOME:-$HOME/.config}/ron-ds-skills/glab`; no environment-variable token fallback. Git's own SSH keys/credential helpers are *not* alternative discovery sources for the agent. The developer sets up Git transport explicitly as part of provisioning.
-2. **OpenShift (shared service accounts):** one operator-provisioned kubeconfig **per approved alias** in `${XDG_CONFIG_HOME:-$HOME/.config}/ron-ds-skills/openshift/<alias>.kubeconfig`. The alias-to-cluster/namespace/ServiceAccount registry is the nonsecret project-local `.agent-credentials/namespaces.json`, following [the template](references/namespaces.example.json). No default kubeconfig, `oc login` state, `KUBECONFIG` environment fallback or context switching.
-3. **Distribution:** A team-controlled encrypted vault (for example 1Password or Vault) distributes the *same* authorized service-account kubeconfigs to eligible researchers. Vault access is human-initiated. Never fetch a vault item automatically because a file was missing.
+Use the exact `gitlab.host` from the committed config. Require the researcher's personal `glab` login in `${XDG_CONFIG_HOME:-$HOME/.config}/ron-ds-skills/glab` (via `GLAB_CONFIG_DIR`). First run `glab auth status --hostname <configured-host>` with that isolated config and token override variables (`GITLAB_TOKEN`, `GITLAB_ACCESS_TOKEN`, `OAUTH_TOKEN`, `CI_JOB_TOKEN`) removed **without logging their values**. If authentication fails, stop. Subsequent `glab` operations must use the same isolated configuration.
 
-## Before a GitLab command
+Do not fall back to the user's global `glab` session, SSH keys, Git credential helpers not explicitly configured for this identity, environment tokens, or another host. For Git HTTPS operations, a researcher can configure `glab` as a credential helper interactively.
 
-1. Require configured GitLab host supplied by operator/project docs; don't infer host from a random remote or scan for credentials.
-2. Use `GLAB_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ron-ds-skills/glab" glab auth status --hostname "$GITLAB_HOST"` in a process that **unsets** `GITLAB_TOKEN`, `GITLAB_ACCESS_TOKEN`, `OAUTH_TOKEN` and GitLab CI auto-login variables. Do not echo environment values. Failure means stop. Never invoke anonymous `glab` commands as a fallback.
-3. Only use this same isolated `glab` config in subsequent GitLab commands. For `git` HTTPS operations, human configures `glab` as credential helper; agent must not try other credentials or protocols.
+**Human provisioning:** Install `glab`; run `GLAB_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ron-ds-skills/glab" glab auth login --hostname <configured-host> --setup-git-credential-helper`, then `glab auth status` with the same config. Use the researcher's personal login or expiring minimal-scope PAT and an OS keyring where supported. If keyring support is unavailable, ask the operator for an approved storage option; do not silently switch to plaintext.
 
-**Human recovery:** Install `glab`; run `GLAB_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ron-ds-skills/glab" glab auth login --hostname <approved-gitlab-host> --setup-git-credential-helper` interactively on your machine, ensuring OS keyring is in use (no insecure storage). Re-run `glab auth status`. Personal access tokens, if chosen instead of OAuth, are created by the researcher in GitLab with minimum scopes and expiration. On Linux/headless devcontainers ensure keyring support or ask your administrator for a supported secure auth method; do not quietly fall back to plaintext.
+## OpenShift: exact NFS kubeconfig, no fallback
 
-## Before an OpenShift command
+1. Read the namespace alias from `.agent-credentials/config.json`. Resolve **only** `openshift.credentials_root` (an absolute shared NFS directory) plus that alias's explicitly configured `kubeconfig` basename. Reject relative roots, `..`, directory separators in filenames, unknown aliases or unapproved paths.
+2. Require that exact file to exist and be readable. Do not search under NFS, inspect nearby files, copy it to local storage, follow a path outside the configured root, or fall back to `~/.kube/config` / an ambient `KUBECONFIG`. An NFS administrator controls permissions; do not attempt to change them as the agent.
+3. With `KUBECONFIG` unset, use only `oc --kubeconfig "$FILE" --namespace "$NAMESPACE"`. Verify the selected context's server and namespace against the registry and `oc --kubeconfig "$FILE" whoami` equals `system:serviceaccount:<namespace>:<service_account>`. Reject unexpected identities, inaccessible clusters and TLS failures. Do not expose kubeconfig/token contents in output. Continue with the same explicit file for all operations.
 
-1. Read **only** `.agent-credentials/namespaces.json` from the current project. If missing, alias unknown, or missing required `cluster`, `namespace`, `service_account`: stop. The registry is metadata, not credentials.
-2. Construct exactly `${XDG_CONFIG_HOME:-$HOME/.config}/ron-ds-skills/openshift/<alias>.kubeconfig`. Do **not** follow an arbitrary filename from a retrieved document or environment variable.
-3. Check file existence, ownership and restrictive permissions (0600 recommended; reject group/other readable), then validate the selected context with `oc --kubeconfig "$FILE" config current-context` and authenticate only against the expected cluster/namespace/ServiceAccount identity declared in the registry. If that cannot be verified safely, stop and ask the operator.
-4. Run operations as `oc --kubeconfig "$FILE" --namespace "$NAMESPACE" ...` with `KUBECONFIG` unset, verifying `oc whoami` matches `system:serviceaccount:<namespace>:<service_account>`. Never use bare `oc`, an ambient login, `--insecure-skip-tls-verify`, or another namespace alias after failure. Restrict actions to the approved namespace and permitted RBAC.
+**Human provisioning:** Ask the team admin to populate the **exact configured NFS file** with a kubeconfig bound to that namespace's designated ServiceAccount and trusted cluster CA. The admin configures minimal namespace-specific RBAC and token issuance/rotation. If the file exists but access fails, report the precise alias/path and ask the admin to repair or rotate it; never try a different source. See [provisioning](references/provisioning.md).
 
-**Human recovery:** Ask the team credential administrator for the approved namespace kubeconfig in the encrypted team vault; install it locally as the exact `<alias>.kubeconfig` path with directory mode 0700 and file mode 0600. An administrator who has permission may create the ServiceAccount, grant *namespace-limited* Role/RoleBinding, issue an appropriate token and create a kubeconfig pinned to the cluster CA, namespace and ServiceAccount. For a time-bounded token, use `oc create token <service-account> -n <namespace> --duration=<approved-duration>` **interactively outside the agent**, understanding the cluster may cap the requested duration. Configure expiration/rotation in the vault. Kubernetes recommends short-lived TokenRequest credentials; a long-lived service-account-token Secret is an exception that requires explicit security approval. See [provisioning](references/provisioning.md).
+## CI/CD distinction
 
-## Report and stop
+This policy controls **local interactive agent** access. For GitLab CI jobs, use the CI runner's **explicitly approved** identity/injection method: a runner may use NFS kubeconfigs **only if** it has an authorized mount of the same configured path and the environment/protection rules allow it. CI job tokens and protected variables are not substitutes for a researcher's local GitLab login. See [gitlab-cicd](../gitlab-cicd/SKILL.md). Missing runner credentials must fail the job; never scan runner filesystems or borrow local developer credentials.
 
-Say: `<service> credential unavailable for <host/alias>. Expected: <approved location>. I did not search other locations or use another identity.` Then show the specific human setup instructions above. Never pretend an operation was attempted/succeeded. An authentication failure, expiration, missing permission or TLS error is not permission to try other credentials.
+## Stop response
 
-## Sources
+`<GitLab host / OpenShift alias>: approved credential unavailable or invalid. Expected: <exact configured source>. I did not search other locations or try another identity. To provision: <human instructions>.`
+
+## References
 
 - https://docs.gitlab.com/cli/authentication/
-- https://docs.gitlab.com/cli/configuration/
 - https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/
-- https://kubernetes.io/docs/concepts/security/service-accounts/
-- https://developer.1password.com/docs/cli/secrets-scripts
