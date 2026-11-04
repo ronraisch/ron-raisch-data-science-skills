@@ -1,48 +1,37 @@
-# Team credential provisioning (human/operator runbook)
+# Human provisioning: personal GitLab + team OpenShift via shared NFS
 
-This procedure reuses **GitLab CLI**, **OpenShift native RBAC and kubeconfig**, and optionally an organization-approved **1Password/Vault** shared vault. It does not establish a new credential service. This is for *local supervised agents*. CI/CD identities are configured separately.
+The agent must not acquire/repair credentials itself. **No password-manager dependency, token discovery, or individual OpenShift distribution.** Use OpenShift native ServiceAccounts/RBAC and GitLab's `glab` CLI.
 
-## Public, versioned namespace registry
+## 1. Configure the consuming repository
 
-In each consuming project, commit `.agent-credentials/namespaces.json` with only public-internal metadata, using `namespaces.example.json` from this skill as a template. Maintain one named entry per namespace (typically 5–10). Never put tokens, client certificates, private keys, CA PEM blobs, passwords, or secret-vault access tokens in this registry. Confirm the expected API server URL and ServiceAccount identity from your cluster administrator.
+Copy [config.example.json](config.example.json) to the consuming project's `.agent-credentials/config.json`. Set `gitlab.host`, the **absolute** `openshift.credentials_root` on the team NFS, and the approved namespace aliases. Each alias includes its exact kubeconfig *basename*, expected API server, namespace and ServiceAccount. Commit **only this nonsecret registry**. Never commit kubeconfigs, passwords, tokens, certificate private keys or `.env` files.
 
-## OpenShift: team administrator actions
+Expected layout (example, customize to your actual NFS mount):
 
-For each namespace, an authorized administrator should:
+```text
+/mnt/team-nfs/credentials/openshift/
+    research-dev.kubeconfig
+    research-staging.kubeconfig
+```
 
-1. Create or choose a dedicated ServiceAccount, e.g. `research-agent-deployer` (one per namespace, never the `default` ServiceAccount). Use `oc -n <namespace> create serviceaccount research-agent-deployer` if absent.
-2. Grant a **minimal namespaced Role and RoleBinding**, restricting verbs/resources needed for research deployment (get/list/watch/update or create/patch where justified). Avoid the cluster-admin role and permissions to read Secrets unless explicitly required. Review `oc auth can-i` for expected actions.
-3. Issue a token with `oc -n <namespace> create token research-agent-deployer --duration=8h` **only from the administrator's interactive terminal**. This is a short-lived TokenRequest example, not a promise the server grants eight hours. Establish a renewal process; Kubernetes may issue significantly shorter tokens.
-4. Build a named kubeconfig using an approved tool/workflow that sets the **trusted cluster CA**, API endpoint, target namespace and ServiceAccount bearer token. Do this in a trusted admin workspace; avoid writing token values into shell history or terminal logs. Use `oc config --kubeconfig <output> set-cluster`, `set-credentials`, `set-context` and `use-context` as appropriate; review the resulting file *privately* without posting its content. Ensure TLS validation is active. Do not embed an insecure skip-TLS flag.
-5. Store that kubeconfig as an encrypted vault attachment, one vault item per approved alias, with access limited to the research team. Record owner, cluster, namespace, SA name, expiration, rotation procedure and revocation plan as *metadata*, not in the repo.
+The path must resolve identically in each researcher's development environment, including devcontainers. Mount the existing NFS at the configured path; do not add local credential fallback paths. NFS ACLs/modes should authorize only the intended team; agents never widen permissions.
 
-**Token lifetime tradeoff:** GitLab/OpenShift cannot make one static token both conveniently persistent and short-lived. Prefer short-lived credentials and explicit human refresh, or a centrally managed trusted issuance mechanism (e.g. Vault) if refresh frequency becomes painful. A long-lived Secret-backed Kubernetes ServiceAccount token is possible but discouraged and must be consciously approved; shared tokens also reduce per-person audit attribution. Rotating a shared token requires redistributing/replacing it for all researchers.
+## 2. OpenShift: administrator provisions one ServiceAccount per namespace
 
-**Alternative for production-scale credential lifecycle:** use an organization-approved secrets manager with dynamic Kubernetes credentials or an existing OpenShift/Kubernetes auth integration. Don't write your own token issuer. For a small interactive team, human-managed vault distribution is sufficient.
+For each namespace, a human administrator with appropriate access:
 
-## Researcher: local installation
+1. Creates or selects the designated ServiceAccount (e.g. `oc -n <namespace> create sa research-agent-deployer` if missing).
+2. Assigns a namespace-scoped Role and RoleBinding with only the verbs/resources required for deployment. Avoid `cluster-admin`, broad secret listing or unrelated namespaces.
+3. Obtains a token **outside the agent**, e.g. `oc -n <namespace> create token research-agent-deployer --duration=8h`. TokenRequest tokens expire (the API server may cap the duration). For persistent shared NFS workflows, plan renewal **before expiry**. If the organization explicitly accepts a longer-lived, Secret-backed ServiceAccount token, document/authorize that decision and rotation; do not silently use it as a default.
+4. Creates a kubeconfig for **that** service account, API server and trusted cluster CA, with a context targeting the expected namespace. Use `oc config --kubeconfig <file> set-cluster`, `set-credentials`, `set-context`, `use-context` in a controlled admin terminal or the organization's normal kubeconfig provisioning tool. Avoid typing token contents into logged commands or shell history; ensure TLS verification is enabled.
+5. Stores the result at the exact `credentials_root/<alias kubeconfig basename>` configured in the repo. Restrict read access to authorized team members; write/rotation access to administrators. Replace the NFS file atomically during rotation so no reader sees a partially written config. Do not expose its contents in CI logs or commits.
+6. Privately verifies `oc --kubeconfig "<NFS-file>" --namespace <namespace> whoami` is `system:serviceaccount:<namespace>:<service_account>` and checks intended RBAC with `oc auth can-i` using that file.
 
-The team admin shares *access to the vault*, not the token over chat or a Git repository. Each researcher:
+A shared service-account identity is not a per-researcher audit identity. The team administrator owns token lifecycle, expiration, and revocation. A single short-lived token per namespace will require frequent NFS refresh; document ownership and cadence rather than assuming it never expires.
 
-1. Checks out the project and its `.agent-credentials/namespaces.json` registry.
-2. Authenticates to the team vault personally and downloads only the approved kubeconfigs for relevant aliases. (Do not ask the coding agent to browse the vault.)
-3. On macOS/Linux, make the private directory:
+## 3. Researcher: GitLab remains personal
 
-   ```sh
-   install -d -m 700 "${XDG_CONFIG_HOME:-$HOME/.config}/ron-ds-skills/openshift"
-   ```
-
-4. Save each kubeconfig as `${XDG_CONFIG_HOME:-$HOME/.config}/ron-ds-skills/openshift/<alias>.kubeconfig`; set `chmod 600` for each. On Windows, use an equivalently ACL-protected developer directory and document it for the team; the POSIX instructions above do not port verbatim.
-5. With `KUBECONFIG` unset, confirm each *specific* identity without revealing tokens:
-
-   ```sh
-   oc --kubeconfig "${XDG_CONFIG_HOME:-$HOME/.config}/ron-ds-skills/openshift/<alias>.kubeconfig" --namespace <namespace> whoami
-   # Expected: system:serviceaccount:<namespace>:research-agent-deployer
-   ```
-
-6. If a file is missing/expired, retrieve a new approved kubeconfig from the vault or ask its administrator. Never use a different user's kubeconfig as a workaround.
-
-## Researcher: personal GitLab credentials
+Each researcher installs `glab` and authenticates **interactively** to the approved GitLab host:
 
 ```sh
 install -d -m 700 "${XDG_CONFIG_HOME:-$HOME/.config}/ron-ds-skills/glab"
@@ -52,10 +41,16 @@ GLAB_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ron-ds-skills/glab" \
   glab auth status --hostname <approved-gitlab-host>
 ```
 
-Login is **per researcher**, preferably through OAuth/browser/device login and OS keyring. If local GitLab only allows PATs, each person creates their own limited-scope expiring PAT. `glab` may fall back to plaintext without a keyring: inspect `glab auth status`; fix local credential store rather than accepting plaintext silently. Do not copy your existing global `glab` config or Git SSH keys into the agent's configured path.
+Use OAuth where supported or an expiring personal access token with minimum required scopes. Prefer OS keyring storage. If OS keyring support is unavailable (e.g. headless devcontainer), stop and ask for a team-approved personal authentication method rather than silently saving a plaintext token. Never use a shared GitLab identity.
 
-## Agent control and limits
+## 4. Missing or invalid credentials
 
-The agent only reads the nonsecret alias registry and verifies the *specified* local credential sources. If absent/invalid, it stops and gives the human the above instructions. It must never auto-run issuance/login, use `~/.kube/config`, retry with another context, or inspect unknown credential locations.
+The coding agent reports the **exact** configured path/host and gives the researcher these steps. It must not search NFS directories, try `~/.kube/config`, read an alternate environment token, ask OpenShift to create a new token, use personal `oc login`, or switch namespace/identity.
 
-**Security limitation:** Markdown/AGENTS instructions alone cannot prevent an agent with unrestricted terminal and filesystem capabilities from ignoring them. To make this technically enforceable, use an agent sandbox with inaccessible ambient secrets, an allowlisted `oc`/`glab` tool wrapper, or a pre-execution policy hook that blocks direct credential access and bare `oc`. Verify against your actual agent harness before claiming enforcement.
+For missing OpenShift file, contact the team administrator to create/restore the **configured NFS kubeconfig**. For access denied, check NFS mount/ACL with the admin; for token expiry, ask the admin to rotate it centrally. For missing GitLab login, the **researcher** runs the login above.
+
+## 5. GitLab CI jobs versus local agents
+
+Local agent GitLab authentication is personal and **never copied into CI**. CI pipelines use their designated runner/job identities and GitLab protected variables or permissions. A CI runner can use a team NFS kubeconfig only if that mount and identity are deliberately authorized for the job and protected environment; otherwise configure a CI-specific credential source. Absence must stop deployment, not trigger credential discovery. See [gitlab-cicd](../../gitlab-cicd/SKILL.md).
+
+**Limit:** These markdown instructions are behavioral, not a sandbox boundary. Enforce with shell/tool allowlists and filesystem restrictions if your agent has unrestricted command execution.
